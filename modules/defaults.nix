@@ -1,18 +1,17 @@
 { lib, den, ... }:
 {
-  den.default.nixos.system.stateVersion = "25.11";
-  den.default.homeManager.home.stateVersion = "25.11";
-
-  # enable hm by default
-  den.schema.user.classes = lib.mkDefault [ "homeManager" ];
-
-  # host<->user provides
-  den.ctx.user.includes = [ den.provides.mutual-provider ];
-
-  # User TODO: REMOVE THIS
-  den.aspects.tux.nixos = {
-    boot.loader.grub.enable = false;
-    fileSystems."/".device = "/dev/fake";
-    fileSystems."/".fsType = "auto";
+  den.default = {
+    includes = [
+      den._.define-user
+      den._.hostname
+    ];
+    nixos = {
+      system.stateVersion = "25.11";
+      time.timeZone = lib.mkDefault "Asia/Riyadh";
+      i18n.defaultLocale = lib.mkDefault "en_GB.UTF-8";
+    };
+    homeManager.home.stateVersion = "25.11";
   };
+
+  den.ctx.user.includes = [ den._.mutual-provider ];
 }
