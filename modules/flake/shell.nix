@@ -18,10 +18,13 @@
               ${lib.getExe formatter} "$@"
             '';
           };
+
+          allfollow = inputs.nix-auto-follow.packages.${system}.default;
         in
         pkgs.mkShell {
           buildInputs = [
             fmtt
+            allfollow
             pkgs.just
           ];
         };
