@@ -1,0 +1,9 @@
+key:
+  - &agn age183zrj83jz03anx6xn7ewkefh8l2m3jqm45w63pdahcp6u3ja0d5qh5dxal
+  - &alkaid age13kqq5k9y5ehmwwvu79vxr2ulu2t62gw2jner0kqkrpkylxx2tvcqt6f9sj
+creation_rules:
+  - path_regex: modules/secrets/[^/]+\.(yaml|json|env|ini|sops)$
+    key_groups:
+      - age:
+        - *agn
+        - *alkaid

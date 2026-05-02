@@ -12,3 +12,5 @@ update:
   nix flake update
 vm:
   nix run .#vm
+add-secret:
+  sops modules/secrets/secrets.yaml
