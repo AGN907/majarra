@@ -22,6 +22,7 @@
         pkgs.mkShell {
           buildInputs = [
             fmtt
+            pkgs.just
           ];
         };
     };
