@@ -20,6 +20,7 @@
     nixpkgs-lib.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
     treefmt-nix.url = "github:numtide/treefmt-nix";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake/beta";
   };
 
 }
