@@ -16,6 +16,10 @@
       url = "github:nix-community/home-manager";
     };
     import-tree.url = "github:vic/import-tree";
+    kdeconnect-yazi = {
+      flake = false;
+      url = "github:Deepak22903/kdeconnect-send.yazi";
+    };
     nix-auto-follow = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:fzakaria/nix-auto-follow";
@@ -26,6 +30,7 @@
     treefmt-nix.url = "github:numtide/treefmt-nix";
     vicinae.url = "github:vicinaehq/vicinae";
     vicinae-extensions.url = "github:vicinaehq/extensions";
+    yazi.url = "github:sxyazi/yazi";
     zen-browser.url = "github:0xc000022070/zen-browser-flake/beta";
   };
 
