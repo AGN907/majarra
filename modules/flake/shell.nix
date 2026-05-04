@@ -19,12 +19,12 @@
             '';
           };
 
-          allfollow = inputs.nix-auto-follow.packages.${system}.default;
+          autoFollow = inputs.nix-auto-follow.packages.${system}.default;
         in
         pkgs.mkShell {
           buildInputs = [
             fmtt
-            allfollow
+            autoFollow
             pkgs.just
           ];
         };
