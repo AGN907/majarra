@@ -20,6 +20,7 @@
       flake = false;
       url = "github:Deepak22903/kdeconnect-send.yazi";
     };
+    niri.url = "github:sodiboo/niri-flake";
     nix-auto-follow = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:fzakaria/nix-auto-follow";
