@@ -1,5 +1,5 @@
 {
-  nawa.kanata = {
+  nawa.services._.kanata = {
     nixos = {
       services.kanata = {
         enable = true;

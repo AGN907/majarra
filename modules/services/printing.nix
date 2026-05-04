@@ -1,5 +1,5 @@
 {
-  nawa.printing.nixos =
+  nawa.services._.printing.nixos =
     { pkgs, ... }:
     {
       services.printing = {

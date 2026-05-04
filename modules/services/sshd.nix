@@ -1,5 +1,5 @@
 {
-  nawa.ssh.provides = {
+  nawa.services._.ssh.provides = {
     server.nixos =
       { ... }:
       {
