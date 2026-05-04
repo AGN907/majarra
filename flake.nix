@@ -34,7 +34,12 @@
     vicinae.url = "github:vicinaehq/vicinae";
     vicinae-extensions.url = "github:vicinaehq/extensions";
     yazi.url = "github:sxyazi/yazi";
+    zellij-autolock = {
+      flake = false;
+      url = "https://github.com/fresh2dev/zellij-autolock/releases/latest/download/zellij-autolock.wasm";
+    };
     zen-browser.url = "github:0xc000022070/zen-browser-flake/beta";
+    zjstatus.url = "github:dj95/zjstatus";
   };
 
 }
