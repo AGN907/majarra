@@ -10,5 +10,25 @@
         efi.canTouchEfiVariables = true;
       };
     };
+    provides.to-users = {
+      nixos = {
+        environment.pathsToLink = [
+          "/share/applications"
+          "/share/xdg-desktop-portal"
+        ];
+      };
+      homeManager = {
+        xdg = {
+          enable = true;
+          userDirs = {
+            enable = true;
+            createDirectories = true;
+            desktop = null;
+            templates = null;
+            publicShare = null;
+          };
+        };
+      };
+    };
   };
 }
