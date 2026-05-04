@@ -1,9 +1,15 @@
 {
   inputs,
+  nawa,
   ...
 }:
 {
   flake-file.inputs.niri.url = "github:sodiboo/niri-flake";
+
+  nawa.apps._.niri.includes = [
+    nawa.apps._.noctalia
+    nawa.apps._.vicinae
+  ];
 
   nawa.apps._.niri = {
     nixos = {
