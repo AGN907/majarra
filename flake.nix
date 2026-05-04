@@ -27,6 +27,7 @@
     };
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
     nixpkgs-lib.follows = "nixpkgs";
+    noctalia.url = "github:noctalia-dev/noctalia-shell";
     sops-nix.url = "github:Mic92/sops-nix";
     stylix.url = "github:NixOS/nixpkgs/nixos-unstable";
     treefmt-nix.url = "github:numtide/treefmt-nix";
