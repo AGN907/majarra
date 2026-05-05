@@ -1,0 +1,29 @@
+{ inputs, ... }:
+{
+  flake-file.inputs.nix-index-database.url = "github:nix-community/nix-index-database";
+
+  den.default = {
+    nixos = {
+      nix = {
+	optimise.automatic = true;
+        gc = {
+	  automatic = true;
+	  options = "--delete-older-than 7d";
+	};
+        settings = {
+          experimental-features = [
+            "nix-command"
+            "flakes"
+          ];
+          auto-optimise-store = true;
+        };
+      };
+    };
+    homeManager = {
+      imports = [ inputs.nix-index-database.homeModules.nix-index ];
+      programs.nix-index.enable = true;
+      programs.nix-index.enableFishIntegration = true;
+      programs.nix-index-database.comma.enable = true;
+    };
+  };
+}
