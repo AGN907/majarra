@@ -37,9 +37,6 @@
           enable = true;
           imports = [ (import ./_nix inputs) ];
         };
-        home.packages = [
-          inputs.self.packages.${system}.neovim
-        ];
         xdg.configFile = {
           "nvim" = {
             source = mkOutOfStoreSymlink nvimConfig;
