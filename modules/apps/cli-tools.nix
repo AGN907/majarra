@@ -3,6 +3,18 @@
     homeManager =
       { pkgs, config, ... }:
       {
+        home.packages = with pkgs; [
+          aria2
+          fd
+          jq
+          ripgrep
+          wget
+          imagemagick
+          ffmpeg
+          age
+          xh
+          yt-dlp
+        ];
         sops.secrets.atuin_key = { };
 
         programs = {
