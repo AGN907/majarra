@@ -1,6 +1,6 @@
 { inputs, nawa, ... }:
 {
-  flake-file.inputs.stylix.url = "github:NixOS/nixpkgs/nixos-unstable";
+  flake-file.inputs.stylix.url = "github:nix-community/stylix";
 
   nawa.core.includes = [ nawa.core._.theme ];
 

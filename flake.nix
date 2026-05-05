@@ -45,7 +45,7 @@
       url = "github:fresh2dev/zellij.vim";
     };
     sops-nix.url = "github:Mic92/sops-nix";
-    stylix.url = "github:NixOS/nixpkgs/nixos-unstable";
+    stylix.url = "github:nix-community/stylix";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     vicinae.url = "github:vicinaehq/vicinae";
     vicinae-extensions.url = "github:vicinaehq/extensions";

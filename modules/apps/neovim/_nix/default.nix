@@ -11,7 +11,7 @@ inputs:
   ];
 
   config.settings.config_directory = "/home/agn/.config/nvim";
-  config.setttings.aliases = [
+  config.settings.aliases = [
     "vi"
     "vim"
   ];
