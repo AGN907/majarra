@@ -332,6 +332,19 @@
         "url": "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz"
       }
     },
+    "nixpkgs_13": {
+      "locked": {
+        "lastModified": 1777548390,
+        "narHash": "sha256-d98DFUUUUqRBs5etNBc06hg2BluQ8aIukRMBJop7nUE=",
+        "rev": "7aaa00e7cc9be6c316cb5f6617bd740dd435c59d",
+        "type": "tarball",
+        "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre989763.7aaa00e7cc9b/nixexprs.tar.xz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1777548390,
@@ -478,6 +491,70 @@
         "type": "github"
       }
     },
+    "plugins-kanso": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1769874452,
+        "narHash": "sha256-gvPVYFhF5pHVB+Wq7UdmMwOYQtByNNGUu8Owo4tIJGY=",
+        "owner": "webhooked",
+        "repo": "kanso.nvim",
+        "rev": "1afbbb449aa0254823dbe1932e3cbb51886ff9fe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "webhooked",
+        "repo": "kanso.nvim",
+        "type": "github"
+      }
+    },
+    "plugins-lze": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777965288,
+        "narHash": "sha256-9SuyTwi5VTItMZOODyk9GFN/+U40gye/p152cZ+W5qk=",
+        "owner": "BirdeeHub",
+        "repo": "lze",
+        "rev": "3893146bd80705512cd4d8109c144645aee75497",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "lze",
+        "type": "github"
+      }
+    },
+    "plugins-lzextras": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777932976,
+        "narHash": "sha256-yM+GQLUicuPHRwSI9VF8BfQyahYq1H/9cdwQpwwp4xA=",
+        "owner": "BirdeeHub",
+        "repo": "lzextras",
+        "rev": "0d4e65278af04a79e4182af555e759621442a17d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "lzextras",
+        "type": "github"
+      }
+    },
+    "plugins-zellij-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1736208000,
+        "narHash": "sha256-R4BYJNYwg4IpP06UcMN7ZbxbpiF711scuOZKBCDYwcs=",
+        "owner": "fresh2dev",
+        "repo": "zellij.vim",
+        "rev": "6b80425dc93963a65aef7e9518deaa4dadf6865e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fresh2dev",
+        "repo": "zellij.vim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "den": "den",
@@ -493,11 +570,16 @@
           "nixpkgs"
         ],
         "noctalia": "noctalia",
+        "plugins-kanso": "plugins-kanso",
+        "plugins-lze": "plugins-lze",
+        "plugins-lzextras": "plugins-lzextras",
+        "plugins-zellij-vim": "plugins-zellij-vim",
         "sops-nix": "sops-nix",
         "stylix": "stylix",
         "treefmt-nix": "treefmt-nix_2",
         "vicinae": "vicinae",
         "vicinae-extensions": "vicinae-extensions",
+        "wrappers": "wrappers",
         "yazi": "yazi",
         "zellij-autolock": "zellij-autolock",
         "zen-browser": "zen-browser",
@@ -765,6 +847,24 @@
         "type": "github"
       }
     },
+    "wrappers": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_10"
+      },
+      "locked": {
+        "lastModified": 1777991014,
+        "narHash": "sha256-0DS24OW9d9iz+w0LCz6KpS2IpE2z2gHxeBdMZg9xpDY=",
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
+        "rev": "dc5184095ad488e937ec308b52c9c0b218959d8b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
+        "type": "github"
+      }
+    },
     "xwayland-satellite-stable": {
       "flake": false,
       "locked": {
@@ -801,7 +901,7 @@
     "yazi": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs_10",
+        "nixpkgs": "nixpkgs_11",
         "rust-overlay": "rust-overlay"
       },
       "locked": {
@@ -833,7 +933,7 @@
     "zen-browser": {
       "inputs": {
         "home-manager": "home-manager_2",
-        "nixpkgs": "nixpkgs_11"
+        "nixpkgs": "nixpkgs_12"
       },
       "locked": {
         "lastModified": 1777564084,
@@ -854,7 +954,7 @@
       "inputs": {
         "crane": "crane",
         "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs_12",
+        "nixpkgs": "nixpkgs_13",
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {

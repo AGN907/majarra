@@ -28,11 +28,28 @@
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
     nixpkgs-lib.follows = "nixpkgs";
     noctalia.url = "github:noctalia-dev/noctalia-shell";
+    plugins-kanso = {
+      flake = false;
+      url = "github:webhooked/kanso.nvim";
+    };
+    plugins-lze = {
+      flake = false;
+      url = "github:BirdeeHub/lze";
+    };
+    plugins-lzextras = {
+      flake = false;
+      url = "github:BirdeeHub/lzextras";
+    };
+    plugins-zellij-vim = {
+      flake = false;
+      url = "github:fresh2dev/zellij.vim";
+    };
     sops-nix.url = "github:Mic92/sops-nix";
     stylix.url = "github:NixOS/nixpkgs/nixos-unstable";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     vicinae.url = "github:vicinaehq/vicinae";
     vicinae-extensions.url = "github:vicinaehq/extensions";
+    wrappers.url = "github:BirdeeHub/nix-wrapper-modules";
     yazi.url = "github:sxyazi/yazi";
     zellij-autolock = {
       flake = false;
