@@ -1,11 +1,17 @@
 {
   den,
+  __findFile,
   ...
 }:
 {
   den.aspects.agn = {
     includes = [
-      den._.primary-user
+      <den/primary-user>
+      
+      <nawa/secrets>
+      <nawa/apps/neovim>
+      <nawa/apps/yazi>
+      <nawa/apps/zellij>
     ];
   };
 }
