@@ -14,4 +14,5 @@
   };
 
   den.ctx.user.includes = [ den._.mutual-provider ];
+  _module.args.__findFile = den.lib.__findFile;
 }
