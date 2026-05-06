@@ -3,9 +3,9 @@ hostname := `hostname -s`
 fmt *args:
   fmtt {{args}}
 build host=hostname *args:
-  nix run .#{{hostname}} -- build
+  {{hostname}} build {{args}}
 switch host=hostname *args:
-  nix run .#{{hostname}} -- switch
+  {{hostname}} switch --ask {{args}}
 write:
   nix run .#write-flake
 update:
