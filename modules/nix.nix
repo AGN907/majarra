@@ -5,15 +5,19 @@
   den.default = {
     nixos = {
       nix = {
-	optimise.automatic = true;
+        optimise.automatic = true;
         gc = {
-	  automatic = true;
-	  options = "--delete-older-than 7d";
-	};
+          automatic = true;
+          options = "--delete-older-than 7d";
+        };
         settings = {
           experimental-features = [
             "nix-command"
             "flakes"
+          ];
+          trusted-users = [
+            "@wheel"
+            "root"
           ];
           auto-optimise-store = true;
         };

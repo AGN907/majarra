@@ -23,9 +23,8 @@
 
   nawa.apps._.neovim = {
     homeManager =
-      { config, pkgs, ... }:
+      { config, ... }:
       let
-        inherit (pkgs.stdenv.hostPlatform) system;
         inherit (config.lib.file) mkOutOfStoreSymlink;
 
         homeDirectory = config.home.homeDirectory;

@@ -2,7 +2,6 @@
   config,
   wlib,
   lib,
-  pkgs,
   inputs,
   ...
 }:
