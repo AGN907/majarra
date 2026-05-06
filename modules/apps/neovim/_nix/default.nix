@@ -4,6 +4,10 @@ inputs:
   ...
 }:
 {
+  _file = ./default.nix;
+  key = ./default.nix;
+  config._module.args.inputs = inputs;
+
   imports = [
     wlib.wrapperModules.neovim
     ./nvim-lib.nix
