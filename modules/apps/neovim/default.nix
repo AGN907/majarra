@@ -28,7 +28,7 @@
         inherit (config.lib.file) mkOutOfStoreSymlink;
 
         homeDirectory = config.home.homeDirectory;
-        nvimConfig = "${homeDirectory}/majarra/config/nvim";
+        nvimConfig = "${homeDirectory}/majarra/config/neovim";
       in
       {
         imports = [ inputs.wrappers.homeModules.neovim ];

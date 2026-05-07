@@ -200,7 +200,7 @@ nixInfo.lze.load({
 		end,
 	},
 	{
-		"zellij",
+		"zellij-vim",
 		lazy = false,
 		after = function()
 			vim.g.zellij_navigator_no_default_mappings = 1
@@ -254,8 +254,7 @@ nixInfo.lze.load({
 	{
 		"trigger_statusline",
 		load = function()
-
-      vim.opt.statusline = "%{%v:lua.require'modules.packages.neovim.config.plugin.35_statusline'.render()%}"
+			vim.opt.statusline = "%{%v:lua.require'config.neovim.plugin.35_statusline'.render()%}"
 		end,
 	},
 	{
