@@ -67,10 +67,6 @@
               ];
             };
           };
-          colorSchemes = {
-            useWallpaperColors = true;
-            generationMethod = "tonal-spot";
-          };
           general = {
             radiusRatio = 0.2;
           };
