@@ -6,11 +6,11 @@
       den._.hostname
     ];
     nixos = {
-      system.stateVersion = "25.11";
+      system.stateVersion = "26.05";
       time.timeZone = lib.mkDefault "Asia/Riyadh";
       i18n.defaultLocale = lib.mkDefault "en_GB.UTF-8";
     };
-    homeManager.home.stateVersion = "25.11";
+    homeManager.home.stateVersion = "26.05";
   };
 
   den.ctx.user.includes = [ den._.mutual-provider ];
