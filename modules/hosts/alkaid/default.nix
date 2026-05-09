@@ -1,4 +1,4 @@
-{ nawa, ... }:
+{ inputs, nawa, ... }:
 {
   den.hosts.x86_64-linux.alkaid = {
     users.agn.classes = [ "homeManager" ];
@@ -9,6 +9,9 @@
     ];
 
     nixos = {
+      imports = [
+        inputs.disko.nixosModules.disko
+      ];
       hardware.facter.reportPath = ./facter.json;
       boot.loader = {
         systemd-boot.enable = true;
