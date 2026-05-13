@@ -23,9 +23,12 @@
       hardware.nvidia.modesetting.enable = true;
     };
     homeManager =
-      { pkgs, ... }:
+      { config, pkgs, ... }:
       {
-        imports = [ inputs.niri.homeModules.niri ];
+        imports = [
+          inputs.niri.homeModules.niri
+          inputs.niri.homeModules.stylix
+        ];
         programs.niri = {
           enable = true;
           settings = {
@@ -44,6 +47,7 @@
             spawn-at-startup = [
               { command = [ "noctalia-shell" ]; }
             ];
+            cursor.theme = config.stylix.cursor.name;
             prefer-no-csd = true;
             input.keyboard.xkb = {
               layout = "us,ara";

@@ -52,6 +52,18 @@ in
               name = "Noto Color Emoji";
             };
           };
+          cursor = {
+            package = pkgs.bibata-cursors;
+            name = "Bibata-Modern-Ice";
+            size = 32;
+          };
+          icons = {
+            enable = true;
+            package = pkgs.papirus-icon-theme;
+            dark = "Papirus-Dark";
+            light = "Papirus-Light";
+          };
+
           targets = {
             gtk.enable = true;
             qt.enable = true;
@@ -68,15 +80,15 @@ in
         mkEnable = cond: lib.mkIf cond { enable = true; };
       in
       {
-        # stylix.targets.fish = mkEnable config.programs.fish.enable;
-        # stylix.targets.zellij = mkEnable config.programs.zellij.enable;
-        # stylix.targets.yazi = mkEnable config.programs.yazi.enable;
-        # stylix.targets.starship = mkEnable config.programs.starship.enable;
-        # stylix.targets.kitty = mkEnable config.programs.kitty.enable;
-        # stylix.targets.bat = mkEnable config.programs.bat.enable;
-        # stylix.targets.lazygit = mkEnable config.programs.lazygit.enable;
-        # stylix.targets.vicinae = mkEnable config.services.vicinae.enable;
-        # stylix.targets.noctalia-shell = mkEnable config.programs.noctalia-shell.enable;
+        stylix.targets.fish = mkEnable config.programs.fish.enable;
+        stylix.targets.zellij = mkEnable config.programs.zellij.enable;
+        stylix.targets.yazi = mkEnable config.programs.yazi.enable;
+        stylix.targets.starship = mkEnable config.programs.starship.enable;
+        stylix.targets.kitty = mkEnable config.programs.kitty.enable;
+        stylix.targets.bat = mkEnable config.programs.bat.enable;
+        stylix.targets.lazygit = mkEnable config.programs.lazygit.enable;
+        stylix.targets.vicinae = mkEnable config.services.vicinae.enable;
+        stylix.targets.noctalia-shell = mkEnable config.programs.noctalia-shell.enable;
       };
   };
 }
