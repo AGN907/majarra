@@ -32,12 +32,21 @@
           auto-optimise-store = true;
         };
       };
+      programs.nh = {
+        enable = true;
+        flake = "/home/agn/majarra";
+      };
     };
-    homeManager = {
-      imports = [ inputs.nix-index-database.homeModules.nix-index ];
-      programs.nix-index.enable = true;
-      programs.nix-index.enableFishIntegration = true;
-      programs.nix-index-database.comma.enable = true;
-    };
+    homeManager =
+      { pkgs, ... }:
+      {
+        imports = [ inputs.nix-index-database.homeModules.nix-index ];
+        programs.nix-index.enable = true;
+        programs.nix-index.enableFishIntegration = true;
+        programs.nix-index-database.comma.enable = true;
+        home.packages = [
+          pkgs.nix-output-monitor
+        ];
+      };
   };
 }
