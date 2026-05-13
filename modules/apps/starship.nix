@@ -5,7 +5,7 @@
         enable = true;
         enableFishIntegration = true;
         settings = {
-          format = "$username\$hostname\$director\$git_branch\$git_state\$git_status\$cmd_duration\$line_break\$character";
+          format = "$username\$hostname\$directory\$git_branch\$git_state\$git_status\$cmd_duration\$line_break\$character";
           add_newline = true;
           character = {
             success_symbol = "[➜](bold green)";
