@@ -75,6 +75,7 @@ nixInfo.lze.load({
 				},
 				cmdline = {
 					enabled = true,
+					keymap = { preset = "inherit" },
 					completion = {
 						list = {
 							selection = { preselect = false },
@@ -92,16 +93,11 @@ nixInfo.lze.load({
 						if type == "/" or type == "?" then
 							return { "buffer" }
 						end
+						if type == ":" then
+							return { "cmdline", "buffer" }
+						end
 						return {}
 					end,
-				},
-				fuzzy = {
-					sorts = {
-						"exact",
-						-- defaults
-						"score",
-						"sort_text",
-					},
 				},
 				signature = {
 					enabled = true,
@@ -112,8 +108,18 @@ nixInfo.lze.load({
 				completion = {
 					menu = {
 						draw = {
-							treesitter = { "lsp" },
+							columns = { { "kind_icon" }, { "label", gap = 1 } },
 							components = {
+								kind_icon = {
+									text = function(ctx)
+										local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
+										return kind_icon
+									end,
+									highlight = function(ctx)
+										local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
+										return hl
+									end,
+								},
 								label = {
 									text = function(ctx)
 										return require("colorful-menu").blink_components_text(ctx)
