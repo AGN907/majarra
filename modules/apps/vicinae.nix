@@ -12,13 +12,15 @@
   };
 
   nawa.apps._.vicinae = {
+    nixos = {
+      nix.settings = {
+        substituters = [ "https://vicinae.cachix.org" ];
+        trusted-public-keys = [ "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc=" ];
+      };
+    };
     homeManager =
       { pkgs, ... }:
       {
-        nix.settings = {
-          substituters = [ "https://vicinae.cachix.org" ];
-          trusted-public-keys = [ "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc=" ];
-        };
         imports = [ inputs.vicinae.homeManagerModules.default ];
         services.vicinae = {
           enable = true;
@@ -38,7 +40,6 @@
             };
             extensions = with inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}; [
               nix
-              noctalia-shell-wallpaper-selector
               aria2-manager
             ];
           };

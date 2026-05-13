@@ -24,8 +24,27 @@
               ${lib.getExe formatter} "$@"
             '';
           };
+          nix_conf = {
+            inherit (inputs.self.nixosConfigurations.alkaid.config.nix.settings)
+              experimental-features
+              substituters
+              trusted-public-keys
+              ;
+          };
+
+          nix_conf_file = pkgs.writeTextFile {
+            name = "nix.conf";
+            text = lib.concatStringsSep "\n" (
+              lib.mapAttrsToList (name: value: "extra-${name} = ${lib.concatStringsSep " " value}") nix_conf
+            );
+          };
+
+          shellHook = ''
+            expor NIX_USER_CONF_FILES="${nix_conf_file}"
+          '';
         in
         pkgs.mkShell {
+          shellHook = shellHook;
           buildInputs = denApps ++ [
             fmtt
             pkgs.just

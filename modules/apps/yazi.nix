@@ -13,16 +13,18 @@
   };
 
   nawa.apps._.yazi = {
+    nixos = {
+      nix.settings = {
+        substituters = [ "https://yazi.cachix.org" ];
+        trusted-public-keys = [ "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k=" ];
+      };
+
     homeManager =
       { pkgs, ... }:
       let
         system = pkgs.stdenv.hostPlatform.system;
       in
       {
-        nix.settings = {
-          substituters = [ "https://yazi.cachix.org" ];
-          trusted-public-keys = [ "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k=" ];
-        };
         home.packages = with pkgs; [
           trash-cli
           ouch
