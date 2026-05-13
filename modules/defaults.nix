@@ -13,6 +13,6 @@
     homeManager.home.stateVersion = "26.05";
   };
 
-  den.ctx.user.includes = [ den._.mutual-provider ];
+  den.schema.user.includes = [ den._.mutual-provider ];
   _module.args.__findFile = den.lib.__findFile;
 }
