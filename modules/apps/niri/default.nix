@@ -30,6 +30,9 @@
           inputs.niri.homeModules.stylix
         ];
         nixpkgs.overlays = [ inputs.niri.overlays.niri ];
+        home.packages = with pkgs; [
+          wl-clipboard-rs
+        ];
         programs.niri = {
           enable = true;
           package = pkgs.niri-unstable;
