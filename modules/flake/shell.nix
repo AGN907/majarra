@@ -24,13 +24,10 @@
               ${lib.getExe formatter} "$@"
             '';
           };
-
-          autoFollow = inputs.nix-auto-follow.packages.${system}.default;
         in
         pkgs.mkShell {
           buildInputs = denApps ++ [
             fmtt
-            autoFollow
             pkgs.just
             pkgs.nh
           ];

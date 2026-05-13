@@ -3,7 +3,6 @@
   imports = [
     (inputs.flake-file.flakeModules.dendritic or { })
     (inputs.den.flakeModules.dendritic or { })
-    inputs.flake-file.flakeModules.nix-auto-follow
   ];
 
   # other inputs may be defined at a module using them.
@@ -14,6 +13,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    disko.url = "github:nix-community/disko";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }

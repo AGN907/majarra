@@ -3,7 +3,10 @@
   ...
 }:
 {
-  flake-file.inputs.noctalia.url = "github:noctalia-dev/noctalia-shell";
+  flake-file.inputs.noctalia = {
+    url = "github:noctalia-dev/noctalia-shell";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 
   nawa.apps._.noctalia = {
     homeManager = {

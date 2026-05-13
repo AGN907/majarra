@@ -1,63 +1,75 @@
 # DO-NOT-EDIT. This file was auto-generated using github:vic/flake-file.
 # Use `nix run .#write-flake` to regenerate it.
 {
-
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   inputs = {
     den.url = "github:vic/den";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-file.url = "github:vic/flake-file";
     flake-parts = {
-      inputs.nixpkgs-lib.follows = "nixpkgs-lib";
       url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
     };
     home-manager = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     import-tree.url = "github:vic/import-tree";
     kdeconnect-yazi = {
-      flake = false;
       url = "github:Deepak22903/kdeconnect-send.yazi";
+      flake = false;
     };
     niri.url = "github:sodiboo/niri-flake";
-    nix-auto-follow = {
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:fzakaria/nix-auto-follow";
     };
-    nix-index-database.url = "github:nix-community/nix-index-database";
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
-    nixpkgs-lib.follows = "nixpkgs";
-    noctalia.url = "github:noctalia-dev/noctalia-shell";
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     plugins-kanso = {
-      flake = false;
       url = "github:webhooked/kanso.nvim";
+      flake = false;
     };
     plugins-lze = {
-      flake = false;
       url = "github:BirdeeHub/lze";
+      flake = false;
     };
     plugins-lzextras = {
-      flake = false;
       url = "github:BirdeeHub/lzextras";
+      flake = false;
     };
     plugins-zellij-vim = {
-      flake = false;
       url = "github:fresh2dev/zellij.vim";
+      flake = false;
     };
-    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     stylix.url = "github:nix-community/stylix";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     vicinae.url = "github:vicinaehq/vicinae";
-    vicinae-extensions.url = "github:vicinaehq/extensions";
+    vicinae-extensions = {
+      url = "github:vicinaehq/extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     wrappers.url = "github:BirdeeHub/nix-wrapper-modules";
     yazi.url = "github:sxyazi/yazi";
     zellij-autolock = {
-      flake = false;
       url = "https://github.com/fresh2dev/zellij-autolock/releases/latest/download/zellij-autolock.wasm";
+      flake = false;
     };
-    zen-browser.url = "github:0xc000022070/zen-browser-flake/beta";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake/beta";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     zjstatus.url = "github:dj95/zjstatus";
   };
-
 }
