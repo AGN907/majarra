@@ -1,24 +1,4 @@
 { inputs, nawa, ... }:
-let
-  kanso = {
-    base00 = "#090E13";
-    base01 = "#22262D";
-    base02 = "#22262D";
-    base03 = "#5C6066";
-    base04 = "#a4a7a4";
-    base05 = "#c5c9c7";
-    base06 = "#c5c9c7";
-    base07 = "#c5c9c7";
-    base08 = "#c4746e";
-    base09 = "#b98d7b";
-    base0A = "#c4b28a";
-    base0B = "#8a9a7b";
-    base0C = "#8ea4a2";
-    base0D = "#8ba4b0";
-    base0E = "#a292a3";
-    base0F = "#b98d7b";
-  };
-in
 {
   flake-file.inputs.stylix.url = "github:nix-community/stylix";
 
@@ -33,7 +13,7 @@ in
         stylix = {
           enable = true;
           autoEnable = false;
-          base16Scheme = kanso;
+          base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa-dragon.yaml";
           fonts = {
             serif = {
               package = pkgs.dejavu_fonts;

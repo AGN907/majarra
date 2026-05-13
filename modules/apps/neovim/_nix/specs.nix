@@ -3,17 +3,14 @@
   wlib,
   lib,
   pkgs,
+  stylixColors ? { },
   ...
 }:
 {
 
-  config.specs.colorscheme = {
-    lazy = true;
-    data = builtins.getAttr config.settings.colorscheme {
-      "kanso-zen" = config.nvim-lib.neovimPlugins.kanso;
-      "kanso-ink" = config.nvim-lib.neovimPlugins.kanso;
-      "kanso-mist" = config.nvim-lib.neovimPlugins.kanso;
-    };
+  config.info = {
+    colorscheme = "stylix";
+    colors = stylixColors;
   };
 
   config.specs.lze = [
@@ -88,6 +85,7 @@
       mini-align
       mini-animate
       mini-basics
+      mini-base16
       mini-bracketed
       mini-bufremove
       mini-comment

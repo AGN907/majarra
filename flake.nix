@@ -33,10 +33,6 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    plugins-kanso = {
-      url = "github:webhooked/kanso.nvim";
-      flake = false;
-    };
     plugins-lze = {
       url = "github:BirdeeHub/lze";
       flake = false;

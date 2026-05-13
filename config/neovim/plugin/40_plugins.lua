@@ -218,14 +218,9 @@ nixInfo.lze.load({
 		event = "VimEnter",
 		load = function()
 			vim.schedule(function()
-				vim.cmd.colorscheme(nixInfo("kanos-zen", "settings", "colorscheme"))
+				vim.cmd.colorscheme(nixInfo("default", "info", "colorscheme"))
 			end)
 		end,
-	},
-	{
-		"kanso",
-		auto_enable = true,
-		colorscheme = { "kanso-zen", "kanso-ink", "kanso-mist" },
 	},
 	{
 		"trigger_diagnositc",

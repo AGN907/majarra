@@ -11,10 +11,6 @@
       url = "github:BirdeeHub/lzextras";
       flake = false;
     };
-    plugins-kanso = {
-      url = "github:webhooked/kanso.nvim";
-      flake = false;
-    };
     plugins-zellij-vim = {
       url = "github:fresh2dev/zellij.vim";
       flake = false;
@@ -23,7 +19,7 @@
 
   nawa.apps._.neovim = {
     homeManager =
-      { config, ... }:
+      { config, lib, ... }:
       let
         inherit (config.lib.file) mkOutOfStoreSymlink;
 
@@ -35,6 +31,11 @@
         wrappers.neovim = {
           enable = true;
           imports = [ (import ./_nix inputs) ];
+          _module.args.stylixColors =
+            let
+              raw = config.lib.stylix.colors.withHashtag or { };
+            in
+            lib.filterAttrs (_: v: builtins.isString v) raw;
         };
         xdg.configFile = {
           "nvim" = {

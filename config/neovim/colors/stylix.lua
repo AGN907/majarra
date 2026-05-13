@@ -1,0 +1,85 @@
+---@type { base00 : string, base01: string, base02: string, base03: string, base04: string, base05: string, base06: string, base07: string, base08:string, base09:string, base0A:string, base0B: string, base0C: string, base0D: string, base0E: string, base0F: string }
+local colors = nixInfo({}, "info", "colors")
+
+require("mini.base16").setup({
+	palette = colors,
+	plugins = {
+		default = true,
+	},
+})
+
+local hl = function(group)
+	return vim.api.nvim_get_hl(0, {
+		name = group,
+		link = false,
+		create = false,
+	})
+end
+
+for group, opts in pairs({
+	NormalFloat = { fg = hl("NormalFloat").fg, bg = colors.base00 },
+	FloatBorder = { fg = colors.base02, bg = colors.base00 },
+	Pmenu = { fg = hl("Pmenu").fg, bg = colors.base00 },
+	PmenuSel = { fg = "NONE", bg = colors.base01 },
+	SignColumn = { fg = hl("SignColumn").fg, bg = colors.base00 },
+	LineNr = { fg = hl("LineNr").fg, bg = colors.base00 },
+	LineNrAbove = { fg = hl("LineNrAbove").fg, bg = colors.base00 },
+	LineNrBelow = { fg = hl("LineNrBelow").fg, bg = colors.base00 },
+	MiniDiffSignAdd = { fg = hl("MiniDiffSignAdd").fg, bg = colors.base00 },
+	MiniDiffSignChange = { fg = hl("MiniDiffSignChange").fg, bg = colors.base00 },
+	MiniDiffSignDelete = { fg = hl("MiniDiffSignDelete").fg, bg = colors.base00 },
+	MiniPickMatchCurrent = { bg = colors.base01 },
+	MiniPickPrompt = { fg = hl("MiniPickPrompt").fg, bg = colors.base01 },
+	MiniPickPromptCaret = { fg = hl("MiniPickPromptCaret").fg, bg = colors.base00 },
+	MiniPickPromptPrefix = { fg = hl("MiniPickPromptPrefix").fg, bg = colors.base00 },
+  MiniFilesCursorLine = { fg = hl("MiniFilesCursorLine").fg, bg = colors.base01 },
+	DiagnosticSignError = { fg = hl("DiagnosticSignError").fg, bg = colors.base00 },
+	DiagnosticSignHint = { fg = hl("DiagnosticSignHint").fg, bg = colors.base00 },
+	DiagnosticSignInfo = { fg = hl("DiagnosticSignInfo").fg, bg = colors.base00 },
+	DiagnosticSignOk = { fg = hl("DiagnosticSignOk").fg, bg = colors.base00 },
+	DiagnosticSignWarn = { fg = hl("DiagnosticSignWarn").fg, bg = colors.base00 },
+	WhichKeySeparator = { fg = hl("WhichKeySeparator").fg, bg = colors.base00 },
+	BlinkCmpMenu = { link = "Pmenu" },
+	BlinkCmpMenuSelection = { link = "PmenuSel" },
+	BlinkCmpMenuBorder = { fg = colors.base02 },
+	BlinkCmpScrollBarThumb = { link = "PmenuThumb" },
+	BlinkCmpScrollBarGutter = { link = "PmenuSbar" },
+	BlinkCmpLabel = { fg = colors.base05 },
+	BlinkCmpLabelMatch = { bold = true },
+	BlinkCmpLabelDetails = { fg = colors.base03 },
+	BlinkCmpLabelDeprecated = { fg = colors.base03, strikethrough = true },
+	BlinkCmpGhostText = { fg = colors.base03 },
+	BlinkCmpDoc = { link = "NormalFloat" },
+	BlinkCmpDocBorder = { link = "FloatBorder" },
+	BlinkCmpDocCursorLine = { link = "Visual" },
+	BlinkCmpSignatureHelp = { link = "NormalFloat" },
+	BlinkCmpSignatureHelpBorder = { link = "FloatBorder" },
+	BlinkCmpKind = { fg = colors.base02 },
+	BlinkCmpKindText = { fg = colors.base05 },
+	BlinkCmpKindMethod = { link = "@function.method" },
+	BlinkCmpKindFunction = { link = "Function" },
+	BlinkCmpKindConstructor = { link = "@constructor" },
+	BlinkCmpKindField = { link = "@variable.member" },
+	BlinkCmpKindVariable = { fg = colors.base02 },
+	BlinkCmpKindClass = { link = "Type" },
+	BlinkCmpKindInterface = { link = "Type" },
+	BlinkCmpKindModule = { link = "@module" },
+	BlinkCmpKindProperty = { link = "@property" },
+	BlinkCmpKindUnit = { link = "Number" },
+	BlinkCmpKindValue = { link = "String" },
+	BlinkCmpKindEnum = { link = "Type" },
+	BlinkCmpKindKeyword = { link = "Keyword" },
+	BlinkCmpKindSnippet = { link = "Special" },
+	BlinkCmpKindColor = { link = "Special" },
+	BlinkCmpKindFile = { link = "Directory" },
+	BlinkCmpKindReference = { link = "Special" },
+	BlinkCmpKindFolder = { link = "Directory" },
+	BlinkCmpKindEnumMember = { link = "Constant" },
+	BlinkCmpKindConstant = { link = "Constant" },
+	BlinkCmpKindStruct = { link = "Type" },
+	BlinkCmpKindEvent = { link = "Type" },
+	BlinkCmpKindOperator = { link = "Operator" },
+	BlinkCmpKindTypeParameter = { link = "Type" },
+}) do
+	vim.api.nvim_set_hl(0, group, opts)
+end

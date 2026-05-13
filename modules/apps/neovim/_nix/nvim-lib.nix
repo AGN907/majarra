@@ -6,11 +6,6 @@
   ...
 }:
 {
-  options.settings.colorscheme = lib.mkOption {
-    type = lib.types.str;
-    default = "kanso-zen";
-  };
-
   # Inform our lua of which top level specs are enabled
   options.settings.enabled_specs = lib.mkOption {
     readOnly = true;
