@@ -14,9 +14,15 @@
       imports = [
         inputs.zen-browser.homeModules.beta
       ];
+      nixpkgs.overlays = [
+        (final: prev: {
+          zen-browser = inputs.zen-browser.packages.x86_64-linux.default;
+        })
+      ];
       home.sessionVariables.BROWSER = "zen-beta";
       programs.zen-browser = {
         enable = true;
+        package = pkgs.zen-browser;
         setAsDefaultBrowser = true;
         enablePrivateDesktopEntry = true;
         nativeMessagingHosts = [

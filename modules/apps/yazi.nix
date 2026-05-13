@@ -14,16 +14,15 @@
 
   nawa.apps._.yazi = {
     nixos = {
+      nixpkgs.overlays = [ inputs.yazi.overlays.default ];
       nix.settings = {
         substituters = [ "https://yazi.cachix.org" ];
         trusted-public-keys = [ "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k=" ];
       };
+    };
 
     homeManager =
       { pkgs, ... }:
-      let
-        system = pkgs.stdenv.hostPlatform.system;
-      in
       {
         home.packages = with pkgs; [
           trash-cli
@@ -33,7 +32,7 @@
 
         programs.yazi = {
           enable = true;
-          package = inputs.yazi.packages.${system}.default;
+          package = pkgs.yazi;
           enableFishIntegration = true;
           shellWrapperName = "y";
           initLua = ''

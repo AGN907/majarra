@@ -29,8 +29,10 @@
           inputs.niri.homeModules.niri
           inputs.niri.homeModules.stylix
         ];
+        nixpkgs.overlays = [ inputs.niri.overlays.niri ];
         programs.niri = {
           enable = true;
+          package = pkgs.niri-unstable;
           settings = {
             outputs."HDMI-A-1" = {
               mode = {

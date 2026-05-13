@@ -17,11 +17,16 @@
         zjstatusPackage = inputs.zjstatus.packages.${system}.default;
 
         # Plugins
-        zjstatusPath = "file:${zjstatusPackage}/bin/zjstatus.wasm";
-        zjframesPath = "file:${zjstatusPackage}/bin/zjframes.wasm";
+        zjstatusPath = "file:${pkgs.zjstatus}/bin/zjstatus.wasm";
+        zjframesPath = "file:${pkgs.zjstatus}/bin/zjframes.wasm";
         autolockPath = "file:${inputs.zellij-autolock}";
       in
       {
+        nixpkgs.overlays = [
+          (final: prev: {
+            zjstatus = zjstatusPackage;
+          })
+        ];
         programs.zellij = {
           enable = true;
           settings = {
