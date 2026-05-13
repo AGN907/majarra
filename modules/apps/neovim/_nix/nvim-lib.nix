@@ -42,4 +42,24 @@
         builtins.listToAttrs
       ];
   };
+
+  # This submodule modifies both levels of your specs
+  config.specMods =
+    {
+      # When this module is ran in an inner list,
+      # this will contain `config` of the parent spec
+      # and this will contain `options`
+      # otherwise they will be `null`
+      # and then config from this one, as normal
+      # and the other module arguments.
+      ...
+    }:
+    {
+      options.extraPackages = lib.mkOption {
+        type = lib.types.listOf wlib.types.stringable;
+        default = [ ];
+        description = "a extraPackages spec field to put packages to suffix to the PATH";
+      };
+    };
+  config.extraPackages = config.specCollect (acc: v: acc ++ (v.extraPackages or [ ])) [ ];
 }
