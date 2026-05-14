@@ -108,9 +108,9 @@ local diff_component = function()
 	local add, change, delete = summary.add, summary.change, summary.delete
 
 	return table.concat({
-		"%#StatusLineDiffAdd#" .. "+" .. add .. " ",
-		"%#StatusLineDiffChange#" .. "~" .. change .. " ",
-		"%#StatusLineDiffDelete#" .. "-" .. delete .. " ",
+		"%#StatusLineDiffAdd#" .. (add > 0 and "+" .. add or "") .. " ",
+		"%#StatusLineDiffChange#" .. (change > 0 and "~" .. change or "") .. " ",
+		"%#StatusLineDiffDelete#" .. (delete > 0 and "-" .. delete or "") .. " ",
 		"%#StatusLineToNorm# ",
 	})
 end
