@@ -92,27 +92,22 @@
               {
                 action = "lock";
                 enabled = true;
-                keybind = "l";
+                keybind = "1";
               }
               {
                 action = "suspend";
                 enabled = true;
-                keybind = "s";
-              }
-              {
-                action = "hibernate";
-                enabled = false;
-                keybind = "h";
+                keybind = "2";
               }
               {
                 action = "reboot";
                 enabled = true;
-                keybind = "r";
+                keybind = "3";
               }
               {
                 action = "logout";
                 enabled = true;
-                keybind = "e";
+                keybind = "4";
               }
               {
                 action = "shutdown";
