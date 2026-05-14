@@ -14,6 +14,7 @@
           enable = true;
           autoEnable = false;
           base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa-dragon.yaml";
+          polarity = "dark";
           fonts = {
             serif = {
               package = pkgs.dejavu_fonts;
