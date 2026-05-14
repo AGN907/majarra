@@ -14,6 +14,8 @@
           age
           xh
           yt-dlp
+          dysk
+          dust
           pinentry-qt
         ];
         sops.secrets.atuin_key = { };
