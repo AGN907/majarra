@@ -255,7 +255,7 @@ nixInfo.lze.load({
 	{
 		"trigger_statusline",
 		load = function()
-			vim.opt.statusline = "%{%v:lua.require'config.neovim.plugin.35_statusline'.render()%}"
+			vim.opt.statusline = "%{%v:lua.statusline()%}"
 		end,
 	},
 	{

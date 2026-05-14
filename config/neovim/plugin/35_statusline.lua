@@ -1,5 +1,3 @@
-local M = {}
-
 local colors = nixInfo({}, "info", "colors")
 local hl = function(group)
 	return vim.api.nvim_get_hl(0, {
@@ -9,7 +7,7 @@ local hl = function(group)
 	})
 end
 
-function M.set_hl_groups()
+local set_hl_groups = function()
 	local base = hl("StatusLine")
 
 	for group, opts in pairs({
@@ -37,7 +35,7 @@ function M.set_hl_groups()
 	vim.api.nvim_set_hl(0, "StatusLineToNorm", { fg = colors.base05, bg = colors.base00 })
 end
 
-Config.new_autocmd("ColorScheme", nil, M.set_hl_groups, "Re-apply statusline highlights on colorscheme change")
+Config.new_autocmd("ColorScheme", nil, set_hl_groups, "Re-apply statusline highlights on colorscheme change")
 
 local mode_component = function()
 	local mode_settings = {
@@ -115,7 +113,7 @@ local diff_component = function()
 	})
 end
 
-function M.render()
+_G.statusline = function()
 	local active_win = vim.fn.win_getid()
 	local status_win = tonumber(vim.g.actual_curwin)
 
@@ -131,5 +129,3 @@ function M.render()
 		diff_component(),
 	})
 end
-
-return M
