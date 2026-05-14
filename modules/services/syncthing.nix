@@ -4,16 +4,21 @@
       # Don't create default ~/Sync folder.  See https://wiki.nixos.org/wiki/Syncthing
       nixos.systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true";
       homeManager =
-        { config, ... }:
+        { host, config, ... }:
+        let
+          syncthingCertSecret = "syncthing/${host.hostName}/cert.pem";
+          syncthingKeySecret = "syncthing/${host.hostName}/key.pem";
+        in
         {
-          sops.secrets."syncthing/cert.pem" = { };
-          sops.secrets."syncthing/key.pem" = { };
+          sops.secrets.${syncthingCertSecret} = { };
+          sops.secrets.${syncthingKeySecret} = { };
+
           services.syncthing = {
             enable = true;
             overrideDevices = true;
             overrideFolders = true;
-            key = config.sops.secrets."syncthing/key.pem".path;
-            cert = config.sops.secrets."syncthing/cert.pem".path;
+            cert = config.sops.secrets.${syncthingCertSecret}.path;
+            key = config.sops.secrets.${syncthingKeySecret}.path;
             settings = {
               devices = {
                 alioth = {
