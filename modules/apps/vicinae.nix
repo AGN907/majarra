@@ -41,11 +41,11 @@
                 family = "Maple Mono NF";
               };
             };
-            extensions = with inputs.vicinae-extensions.packages.${system}; [
-              nix
-              aria2-manager
-            ];
           };
+          extensions = with inputs.vicinae-extensions.packages.${system}; [
+            nix
+            aria2-manager
+          ];
         };
       };
   };
