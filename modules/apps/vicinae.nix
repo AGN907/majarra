@@ -20,6 +20,9 @@
     };
     homeManager =
       { pkgs, ... }:
+      let
+        system = pkgs.stdenv.hostPlatform.system;
+      in
       {
         imports = [ inputs.vicinae.homeManagerModules.default ];
         services.vicinae = {
@@ -38,7 +41,7 @@
                 family = "Maple Mono NF";
               };
             };
-            extensions = with inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}; [
+            extensions = with inputs.vicinae-extensions.packages.${system}; [
               nix
               aria2-manager
             ];
