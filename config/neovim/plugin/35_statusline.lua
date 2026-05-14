@@ -123,7 +123,7 @@ _G.statusline = function()
 
 	return table.concat({
 		mode_component(),
-		-- git_branch_component(),
+		git_branch_component(),
 		file_name_component(),
 		"%=",
 		diff_component(),
