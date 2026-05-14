@@ -14,6 +14,7 @@
           age
           xh
           yt-dlp
+          pinentry-qt
         ];
         sops.secrets.atuin_key = { };
 
@@ -86,6 +87,9 @@
           tealdeer = {
             enable = true;
             settings.updates.auto_update = true;
+          };
+          rbw = {
+            enable = true;
           };
         };
       };
