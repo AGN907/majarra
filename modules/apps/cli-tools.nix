@@ -16,7 +16,7 @@
           yt-dlp
           dysk
           dust
-          pinentry-qt
+          pinentry-gnome3
         ];
         sops.secrets.atuin_key = { };
 
