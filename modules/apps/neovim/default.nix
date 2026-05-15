@@ -18,6 +18,9 @@
   };
 
   nawa.apps._.neovim = {
+    nixos = {
+      environment.variables.EDITOR = "vim";
+    };
     homeManager =
       { config, lib, ... }:
       let
