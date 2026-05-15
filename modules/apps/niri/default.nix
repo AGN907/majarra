@@ -12,87 +12,168 @@
   ];
 
   nawa.apps._.niri = {
-    nixos = {
-      nix.settings = {
-        substituters = [ "https://niri.cachix.org" ];
-        trusted-public-keys = [ "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964=" ];
-      };
-      hardware.graphics = {
-        enable = true;
-      };
-      hardware.nvidia.modesetting.enable = true;
-    };
-    homeManager =
-      { config, pkgs, ... }:
+    nixos =
+      { pkgs, ... }:
       {
         imports = [
-          inputs.niri.homeModules.niri
-          inputs.niri.homeModules.stylix
+          # Enable binary cache, home module, stylix, and etc.
+          inputs.niri.nixosModules.niri
         ];
-        nixpkgs.overlays = [ inputs.niri.overlays.niri ];
-        home.packages = with pkgs; [
-          wl-clipboard-rs
+        nixpkgs.overlays = [
+          inputs.niri.overlays.niri
         ];
+
         programs.niri = {
           enable = true;
           package = pkgs.niri-unstable;
-          settings = {
-            outputs."HDMI-A-1" = {
-              mode = {
-                width = 1920;
-                height = 1080;
-                refresh = 60.000;
-              };
-              scale = 1.0;
-              position = {
-                x = 1280;
-                y = 0;
-              };
-            };
-            spawn-at-startup = [
-              { command = [ "noctalia-shell" ]; }
-            ];
-            cursor.theme = config.stylix.cursor.name;
-            prefer-no-csd = true;
-            input.keyboard.xkb = {
-              layout = "us,ara";
-            };
-            layout = {
-              border = {
-                enable = true;
-                width = 2;
-              };
-              focus-ring.width = 2;
-              shadow = {
-                softness = 30;
-                spread = 5;
-                color = "#0007";
-                offset = {
-                  x = 0;
-                  y = 5;
-                };
-              };
-              preset-column-widths = [
-                { proportion = 0.33333; }
-                { proportion = 0.5; }
-                { proportion = 0.66667; }
-              ];
-              default-column-width = {
-                proportion = 0.5;
-              };
-              background-color = "transparent";
-              gaps = 8;
-            };
-            input.keyboard.xkb = {
-              options = "grp:alt_shift_toggle";
-            };
-          };
         };
+
         xdg.portal = {
           enable = true;
           xdgOpenUsePortal = true;
           config.common.default = "*";
-          extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+          extraPortals = with pkgs; [
+            xdg-desktop-portal-gtk
+            xdg-desktop-portal-gnome
+          ];
+          config.niri = {
+            default = [
+              "gtk"
+              "gnome"
+            ];
+            "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+            "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+          };
+        };
+      };
+    homeManager =
+      { pkgs, ... }:
+      {
+        home.packages =
+          with pkgs;
+          [
+            wl-clipboard-rs
+          ]
+          ++ [
+            inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.xwayland-satellite-unstable
+          ];
+
+        programs.niri.settings = {
+          outputs."HDMI-A-1" = {
+            mode = {
+              width = 1920;
+              height = 1080;
+              refresh = 60.000;
+            };
+            scale = 1.0;
+            position = {
+              x = 1280;
+              y = 0;
+            };
+          };
+          spawn-at-startup = [
+            { command = [ "noctalia-shell" ]; }
+          ];
+          prefer-no-csd = true;
+          input.keyboard.xkb = {
+            layout = "us,ara";
+            options = "grp:alt_shift_toggle";
+          };
+          layout = {
+            border = {
+              enable = true;
+              width = 2;
+            };
+            shadow = {
+              softness = 30;
+              spread = 5;
+              color = "#0007";
+              offset = {
+                x = 0;
+                y = 5;
+              };
+            };
+            preset-column-widths = [
+              { proportion = 0.33333; }
+              { proportion = 0.5; }
+              { proportion = 0.66667; }
+            ];
+            default-column-width = {
+              proportion = 0.5;
+            };
+            background-color = "transparent";
+            gaps = 8;
+          };
+          window-rules = [
+            {
+              geometry-corner-radius = {
+                bottom-left = 10.0;
+                bottom-right = 10.0;
+                top-left = 10.0;
+                top-right = 10.0;
+              };
+              clip-to-geometry = true;
+              tiled-state = true;
+              draw-border-with-background = false;
+            }
+            {
+              matches = [
+                {
+                  app-id = "zen.*";
+                }
+              ];
+              default-column-width = {
+                proportion = 1.0;
+              };
+            }
+            # Floating windows
+            {
+              matches = [
+                {
+                  app-id = "zen.*";
+                  title = "^Picture-in-Picture$";
+                }
+                {
+                  app-id = "zen.*";
+                  title = "^Library$";
+                }
+
+                {
+                  app-id = "zen.*";
+                  title = ".*popup.*";
+                }
+                {
+                  app-id = "zen.*";
+                  title = ".*Authentication.*";
+                }
+                {
+                  app-id = "zen.*";
+                  title = ".*Login.*";
+                }
+                {
+                  app-id = "zen.*";
+                  title = ".*Security.*";
+                }
+                {
+                  app-id = "^xdg-desktop-portal$";
+                }
+                {
+                  app-id = "zen.*";
+                  title = "Sign In - Google Accounts — Zen Browser";
+                }
+                {
+                  title = "Yazi.*";
+                }
+              ];
+              open-floating = true;
+            }
+          ];
+          layer-rules = [
+            {
+              matches = [ { namespace = "^noctalia-overview.*"; } ];
+              place-within-backdrop = true;
+            }
+          ];
         };
       };
   };
