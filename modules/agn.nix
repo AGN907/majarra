@@ -13,7 +13,7 @@
 
       <nawa/apps/zen>
       <nawa/apps/kitty>
-      <nawa/apps/cliTools>
+      <nawa/apps/cli/full>
       <nawa/apps/niri>
       <nawa/apps/neovim>
       <nawa/apps/starship>
