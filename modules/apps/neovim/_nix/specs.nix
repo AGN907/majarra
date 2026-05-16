@@ -1,7 +1,5 @@
 {
   config,
-  wlib,
-  lib,
   pkgs,
   stylixColors ? { },
   ...
@@ -13,6 +11,7 @@
     colors = stylixColors;
   };
 
+  # {{{ Plugin Manager
   config.specs.lze = [
     config.nvim-lib.neovimPlugins.lze
     {
@@ -20,44 +19,21 @@
       name = "lzextras";
     }
   ];
+  # }}}
 
-  config.specs.nix = {
-    data = null;
-    extraPackages = with pkgs; [
-      nixd
-      nixfmt
-    ];
-  };
-  config.specs.lua = {
-    after = [ "general" ];
-    lazy = true;
-    data = with pkgs.vimPlugins; [
-      lazydev-nvim
-    ];
-    extraPackages = with pkgs; [
-      lua-language-server
-      stylua
-    ];
-  };
-
-  config.specs.general = {
-    after = [ "lze" ];
-    extraPackages = with pkgs; [
-      lazygit
-      tree-sitter
-    ];
+  # {{{ LSP, Linting, and Formatting
+  config.specs.lsp = {
     lazy = true;
     data = with pkgs.vimPlugins; [
       nvim-lspconfig
       blink-cmp
       colorful-menu-nvim
-      which-key-nvim
-      nvim-lint
-      conform-nvim
-      {
-        name = "zellij-vim";
-        data = config.nvim-lib.neovimPlugins.zellij-vim;
-      }
+    ];
+  };
+
+  config.specs.treesitter = {
+    extraPackages = [ pkgs.tree-sitter ];
+    data = with pkgs.vimPlugins; [
       (nvim-treesitter.withPlugins (
         plugins: with plugins; [
           nix
@@ -78,6 +54,17 @@
     ];
   };
 
+  config.specs.lint = {
+    data = with pkgs.vimPlugins; [
+      nvim-lint
+      tiny-inline-diagnostic-nvim
+    ];
+  };
+
+  config.specs.format = pkgs.vimPlugins.conform-nvim;
+  # }}}
+
+  # {{{ Mini
   config.specs.mini = {
     before = [ "general" ];
     data = with pkgs.vimPlugins; [
@@ -109,4 +96,45 @@
       mini-tabline
     ];
   };
+  # }}}
+
+  # {{{ Language Support
+  config.specs.nix = {
+    data = null;
+    extraPackages = with pkgs; [
+      nixd
+      nixfmt
+    ];
+  };
+  config.specs.lua = {
+    after = [ "general" ];
+    lazy = true;
+    data = with pkgs.vimPlugins; [
+      lazydev-nvim
+    ];
+    extraPackages = with pkgs; [
+      lua-language-server
+      stylua
+    ];
+  };
+  # }}}
+
+  # {{{ Utils
+  config.specs.utils = {
+    extraPackages = with pkgs; [
+      lazygit
+    ];
+    data = with pkgs.vimPlugins; [
+      snacks-nvim
+      which-key-nvim
+      {
+        name = "zellij-vim";
+        data = config.nvim-lib.neovimPlugins.zellij-vim;
+      }
+    ];
+  };
+  # }}}
+
 }
+
+# vim: foldmarker={{{,}}} foldlevel=0 foldmethod=marker:
