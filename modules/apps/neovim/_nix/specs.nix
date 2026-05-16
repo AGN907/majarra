@@ -9,6 +9,12 @@
   config.info = {
     colorscheme = "stylix";
     colors = stylixColors;
+    nixd = rec {
+      flake = "builtins.getFlake (toString /home/agn/majarra)";
+      nixpkgs = "import (${flake}).inputs.nixpkgs { }";
+      nixos = "(${flake}).nixosConfigurations.alkaid.options";
+      homeManager = "(${flake}).nixosConfigurations.alkaid.options.home-manager.users.type.getSubOptions []";
+    };
   };
 
   # {{{ Plugin Manager

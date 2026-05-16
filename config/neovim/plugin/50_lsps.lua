@@ -24,15 +24,15 @@ nixInfo.lze.load({
 			settings = {
 				nixd = {
 					nixpkgs = {
-						expr = "import (builtins.getFlake(toString /home/agn/agnix)).inputs.nixpkgs {}",
+						expr = nixInfo(nil, "nixd", "nixpkgs"),
 					},
 					options = {
 
 						nixos = {
-							expr = "(builtins.getFlake(toString /home/agn/agnix)).nixosConfigurations.alkaid.options",
+							expr = nixInfo(nil, "nixd", "nixos"),
 						},
 						home_manager = {
-							expr = "(builtins.getFlake(toString /home/agn/agnix)).nixosConfigurations.alkaid.options.home-manager.users.type.getSubOptions []",
+							expr = nixInfo(nil, "nixd", "homeManaer"),
 						},
 					},
 					formatting = {
