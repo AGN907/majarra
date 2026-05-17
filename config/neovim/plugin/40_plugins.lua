@@ -312,4 +312,13 @@ nixInfo.lze.load({
 			})
 		end,
 	},
+	{
+		"trigger_statusline",
+		load = function()
+			vim.o.showmode = false
+			vim.o.laststatus = 3
+			vim.opt.statusline =
+				"%{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.Statusline.active() : v:lua.Statusline.inactive()%}"
+		end,
+	},
 })
