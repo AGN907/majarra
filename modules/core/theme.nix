@@ -6,7 +6,7 @@
 
   nawa.core._.theme = {
     nixos =
-      { pkgs, ... }:
+      { pkgs, lib, ... }:
       {
         imports = [ inputs.stylix.nixosModules.stylix ];
 
@@ -47,7 +47,10 @@
 
           targets = {
             gtk.enable = true;
-            qt.enable = true;
+            qt = {
+              enable = true;
+              platform = lib.mkForce "gnome";
+            };
           };
         };
         fonts = {
