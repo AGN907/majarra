@@ -6,6 +6,7 @@
   den.aspects.alkaid = {
     includes = with nawa; [
       desktop
+      services._.paperless-ngx
     ];
 
     nixos = {
