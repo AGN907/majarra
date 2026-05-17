@@ -264,33 +264,14 @@ nixInfo.lze.load({
 		end,
 	},
 	{
-		"trigger_diagnositc",
-		event = "VimEnter",
-		load = function()
-			local diagnostic_opts = {
-				-- Show signs on top of any other sign, but only for warnings and errors
-				signs = {
-					priority = 9999,
-					severity = { min = "WARN", max = "ERROR" },
-				},
-
-				-- Show all diagnostics as underline (for their messages type `<Leader>ld`)
-				underline = { severity = { min = "HINT", max = "ERROR" } },
-
-				-- Show more details immediately for errors on the current line
-				virtual_lines = true,
-				-- Don't update diagnostics when typing
-				update_in_insert = false,
-			}
-			vim.schedule(function()
-				vim.diagnostic.config(diagnostic_opts)
-			end)
-		end,
-	},
-	{
-		"trigger_statusline",
-		load = function()
-			vim.opt.statusline = "%{%v:lua.statusline()%}"
+		"tiny-inline-diagnostic.nvim",
+		after = function()
+			require("tiny-inline-diagnostic").setup({
+				preset = "minimal",
+			})
+			vim.diagnostic.config({
+				virtual_text = false,
+			})
 		end,
 	},
 	{
