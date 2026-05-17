@@ -32,6 +32,7 @@ nmap_leader("bD", "<Cmd>lua MiniBufremove.delete(0, true)<CR>", "Delete!")
 nmap_leader("bs", new_scratch_buffer, "Scratch")
 nmap_leader("bw", "<Cmd>lua MiniBufremove.wipeout()<CR>", "Wipeout")
 nmap_leader("bW", "<Cmd>lua MiniBufremove.wipeout(0, true)<CR>", "Wipeout!")
+nmap_leader("br", "<Cmd>lua Snacks.rename.rename_file()<CR>", "Rename current file")
 
 local explore_at_file = '<Cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>'
 local explore_quickfix = function()
@@ -85,6 +86,7 @@ nmap_leader("gl", "<Cmd>" .. git_log_cmd .. "<CR>", "Log")
 nmap_leader("gL", "<Cmd>" .. git_log_buf_cmd .. "<CR>", "Log buffer")
 nmap_leader("go", "<Cmd>lua MiniDiff.toggle_overlay()<CR>", "Toggle overlay")
 nmap_leader("gs", "<Cmd>lua MiniGit.show_at_cursor()<CR>", "Show at cursor")
+nmap_leader("gg", "<Cmd>lua Snacks.lazygit()<CR>", "Open lazygit")
 
 xmap_leader("gs", "<Cmd>lua MiniGit.show_at_cursor()<CR>", "Show at selection")
 
@@ -111,8 +113,12 @@ nmap_leader("sr", '<Cmd>lua MiniSessions.select("read")<CR>', "Read")
 nmap_leader("sR", '<Cmd>lua MiniSessions.restart()<CR>', "Restart")
 nmap_leader("sw", "<Cmd>lua MiniSessions.write()<CR>", "Write current")
 
-nmap_leader("tT", "<Cmd>horizontal term<CR>", "Terminal (horizontal)")
-nmap_leader("tt", "<Cmd>vertical term<CR>", "Terminal (vertical)")
+-- function ()
+--   Snacks.input.input({}, function(cmd) if cmd == nil then Snacks.terminal(cmd) end return end)
+-- end
+local input_cmd_terminal = "Snacks.input.input({}, function(cmd) if cmd ~= nil then Snacks.terminal(cmd) end return end)"
+nmap_leader(",", "<Cmd>lua Snacks.terminal()<CR>", "Open terminal")
+nmap_leader(".", "<Cmd>lua " .. input_cmd_terminal .. "<CR>", "Run command in terminal")
 
 -- Tests
 nmap_leader("tf", "<Cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "Run file")

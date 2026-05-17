@@ -1,5 +1,40 @@
 nixInfo.lze.load({
 	{
+		"snacks.nvim",
+		lazy = false,
+		after = function()
+			require("snacks").setup({
+				terminal = {
+					enabled = true,
+				},
+				input = { enabled = true },
+				rename = { enabled = true },
+				lazygit = {
+					configure = false,
+				},
+			})
+
+			Config.new_autocmd("User", "MiniFilesActionRename", function(event)
+				Snacks.rename.on_rename_file(event.data.from, event.data.to)
+			end)
+
+			Config.new_autocmd("User", "DeferredUIEnter", function()
+				_G.dd = function(...)
+					Snacks.debug.inspect(...)
+				end
+
+				if vim.fn.has("nvim-0.11") == 1 then
+					---@diagnostic disable-next-line: duplicate-set-field
+					vim._print = function(_, ...)
+						dd(...)
+					end
+				else
+					vim.print = _G.dd
+				end
+			end)
+		end,
+	},
+	{
 		"nvim-treesitter",
 		lazy = false,
 		auto_enable = true,
@@ -200,7 +235,7 @@ nixInfo.lze.load({
 				{ "<leader>l", group = "+Language", mode = { "n", "x" } },
 				{ "<leader>s", group = "+Session" },
 				{ "<leader>f", group = "+Find" },
-				{ "<leader>t", group = "+Terminal" },
+				{ "<leader>t", group = "+Test" },
 				{ "<leader>o", group = "+Other" },
 			})
 		end,
