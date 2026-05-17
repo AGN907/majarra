@@ -253,16 +253,6 @@ nixInfo.lze.load({
 			end
 		end,
 	},
-
-	{
-		"trigger_colorscheme",
-		event = "VimEnter",
-		load = function()
-			vim.schedule(function()
-				vim.cmd.colorscheme(nixInfo("default", "info", "colorscheme"))
-			end)
-		end,
-	},
 	{
 		"tiny-inline-diagnostic.nvim",
 		after = function()
@@ -291,6 +281,15 @@ nixInfo.lze.load({
 					{ path = "nvim-lspconfig", words = { "lspconfig.settings" } },
 				},
 			})
+		end,
+	},
+	{
+		"trigger_colorscheme",
+		event = "VimEnter",
+		load = function()
+			vim.schedule(function()
+				vim.cmd.colorscheme(nixInfo("default", "info", "colorscheme"))
+			end)
 		end,
 	},
 	{
