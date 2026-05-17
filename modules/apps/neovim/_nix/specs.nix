@@ -17,130 +17,136 @@
     };
   };
 
-  # {{{ Plugin Manager
-  config.specs.lze = [
-    config.nvim-lib.neovimPlugins.lze
-    {
-      data = config.nvim-lib.neovimPlugins.lzextras;
-      name = "lzextras";
-    }
-  ];
-  # }}}
-
-  # {{{ LSP, Linting, and Formatting
-  config.specs.lsp = {
-    lazy = true;
+  config.specs.general = {
     data = with pkgs.vimPlugins; [
-      nvim-lspconfig
-      blink-cmp
-      colorful-menu-nvim
+      config.nvim-lib.neovimPlugins.lze
+      mini-base16
+      mini-basics
+      mini-comment
+      mini-extra
+      mini-notify
+      mini-icons
+      mini-misc
+      snacks-nvim
+      which-key-nvim
+      {
+        data = config.nvim-lib.neovimPlugins.lzextras;
+        name = "lzextras";
+      }
     ];
   };
 
-  config.specs.treesitter = {
-    extraPackages = [ pkgs.tree-sitter ];
+  config.specs.lsp = {
+    lazy = true;
+    data = pkgs.vimPlugins.nvim-lspconfig;
+  };
+
+  config.specs.cmp = {
+    lazy = true;
     data = with pkgs.vimPlugins; [
-      (nvim-treesitter.withPlugins (
-        plugins: with plugins; [
-          nix
-          lua
-          yaml
-          markdown
-          json
-          go
-          gosum
-          gomod
-          rust
-          php
-          php_only
-          blade
-          just
-        ]
-      ))
+      blink-cmp
+      colorful-menu-nvim
+      mini-snippets
+      friendly-snippets
     ];
   };
 
   config.specs.lint = {
+    lazy = true;
     data = with pkgs.vimPlugins; [
       nvim-lint
+    ];
+  };
+
+  config.specs.format = {
+    lazy = true;
+    data = pkgs.vimPlugins.conform-nvim;
+  };
+
+  config.specs.treesitter = {
+    data = null;
+    extraPackages = [ pkgs.tree-sitter ];
+  };
+
+  config.specs.editor = {
+    lazy = true;
+    data = with pkgs.vimPlugins; [
+      mini-bufremove
+      mini-files
+      mini-sessions
+      mini-pick
+      mini-tabline
       tiny-inline-diagnostic-nvim
     ];
   };
 
-  config.specs.format = pkgs.vimPlugins.conform-nvim;
-  # }}}
-
-  # {{{ Mini
-  config.specs.mini = {
-    before = [ "general" ];
+  config.specs.coding = {
+    lazy = true;
     data = with pkgs.vimPlugins; [
       mini-ai
       mini-align
-      mini-animate
-      mini-basics
-      mini-base16
       mini-bracketed
-      mini-bufremove
-      mini-comment
-      mini-diff
-      mini-extra
-      mini-files
-      mini-git
-      mini-hipatterns
-      mini-icons
-      mini-indentscope
       mini-jump
-      mini-misc
-      mini-move
-      mini-notify
       mini-operators
-      mini-pick
-      mini-sessions
-      mini-snippets
       mini-splitjoin
       mini-surround
-      mini-tabline
+      mini-move
     ];
   };
-  # }}}
 
-  # {{{ Language Support
+  config.specs.ui = {
+    lazy = true;
+    data = with pkgs.vimPlugins; [
+      mini-animate
+      mini-hipatterns
+      mini-indentscope
+    ];
+  };
+
+  config.specs.git = {
+    lazy = true;
+    data = with pkgs.vimPlugins; [
+      mini-git
+      mini-diff
+    ];
+    extraPackages = [
+      pkgs.lazygit
+    ];
+  };
+
+  # Languages Support
   config.specs.nix = {
-    data = null;
+    data = with pkgs.vimPlugins; [
+      (nvim-treesitter.withPlugins (p: [
+        p.nix
+      ]))
+    ];
     extraPackages = with pkgs; [
       nixd
       nixfmt
     ];
   };
   config.specs.lua = {
-    after = [ "general" ];
     lazy = true;
     data = with pkgs.vimPlugins; [
       lazydev-nvim
+      (nvim-treesitter.withPlugins (p: [
+        p.lua
+      ]))
     ];
     extraPackages = with pkgs; [
       lua-language-server
       stylua
     ];
   };
-  # }}}
 
-  # {{{ Utils
   config.specs.utils = {
-    extraPackages = with pkgs; [
-      lazygit
-    ];
-    data = with pkgs.vimPlugins; [
-      snacks-nvim
-      which-key-nvim
+    data = [
       {
         name = "zellij-vim";
         data = config.nvim-lib.neovimPlugins.zellij-vim;
       }
     ];
   };
-  # }}}
 
 }
-
-# vim: foldmarker={{{,}}} foldlevel=0 foldmethod=marker:
