@@ -290,7 +290,7 @@ nixInfo.lze.load({
 		after = function()
 			require("mini.misc").setup()
 
-			MiniMisc.setup_auto_root({ ".git", "justfile", "Cargo.toml", "package.json", "mise.toml" })
+			MiniMisc.setup_auto_root({ ".git", "justfile", "Cargo.toml", "package.json", "mise.toml", "flake.nix" })
 			MiniMisc.setup_restore_cursor()
 			MiniMisc.setup_termbg_sync()
 		end,
