@@ -205,11 +205,13 @@ nixInfo.lze.load({
 		event = "BufEnter",
 		after = function()
 			require("mini.diff").setup({
-				style = "sign",
-				signs = {
-					add = "▎",
-					change = "▎",
-					delete = "",
+				view = {
+					style = "sign",
+					signs = {
+						add = "▎",
+						change = "▎",
+						delete = "",
+					},
 				},
 			})
 		end,
