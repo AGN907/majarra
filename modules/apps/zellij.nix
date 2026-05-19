@@ -23,7 +23,7 @@
       in
       {
         nixpkgs.overlays = [
-          (final: prev: {
+          (_final: _prev: {
             zjstatus = zjstatusPackage;
           })
         ];

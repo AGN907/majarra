@@ -15,7 +15,7 @@
         inputs.zen-browser.homeModules.beta
       ];
       nixpkgs.overlays = [
-        (final: prev: {
+        (_final: _prev: {
           zen-browser = inputs.zen-browser.packages.x86_64-linux.default;
         })
       ];
