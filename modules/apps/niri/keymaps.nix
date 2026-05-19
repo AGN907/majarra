@@ -21,7 +21,7 @@ in
         "Mod+Space".action.spawn = vicinae "toggle";
         "Mod+V".action.spawn = vicinae "vicinae://launch/clipboard/history";
         "Mod+Return".action.spawn = [
-          "kitty"
+          "wezterm"
         ];
         "Mod+B".action.spawn = [
           "zen-beta"

@@ -12,7 +12,7 @@
       <nawa/secrets>
 
       <nawa/apps/zen>
-      <nawa/apps/kitty>
+      <nawa/apps/wezterm>
       <nawa/apps/cli/full>
       <nawa/apps/niri>
       <nawa/apps/neovim>
