@@ -93,6 +93,9 @@
                 y = 5;
               };
             };
+            focus-ring = {
+              enable = false;
+            };
             preset-column-widths = [
               { proportion = 0.33333; }
               { proportion = 0.5; }
@@ -107,10 +110,10 @@
           window-rules = [
             {
               geometry-corner-radius = {
-                bottom-left = 10.0;
-                bottom-right = 10.0;
-                top-left = 10.0;
-                top-right = 10.0;
+                bottom-left = 4.0;
+                bottom-right = 4.0;
+                top-left = 4.0;
+                top-right = 4.0;
               };
               clip-to-geometry = true;
               tiled-state = true;
