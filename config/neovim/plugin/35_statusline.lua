@@ -83,7 +83,7 @@ end
 local git_branch_component = function()
 	local summary = vim.b.minigit_summary_string
 	if summary == nil then
-		return ""
+		return " "
 	end
 
 	local branch = vim.split(summary, " ")[1]
