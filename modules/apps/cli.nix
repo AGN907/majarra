@@ -24,6 +24,7 @@
           dysk
           dust
           pinentry-gnome3
+          devenv
         ];
 
         programs = {
