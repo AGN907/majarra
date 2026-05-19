@@ -71,7 +71,6 @@
           zellij = mkEnable config.programs.zellij.enable;
           yazi = mkEnable config.programs.yazi.enable;
           starship = mkEnable config.programs.starship.enable;
-          wezterm = mkEnable config.programs.wezterm.enable;
           bat = mkEnable config.programs.bat.enable;
           lazygit = mkEnable config.programs.lazygit.enable;
           vicinae = mkEnable config.services.vicinae.enable;
