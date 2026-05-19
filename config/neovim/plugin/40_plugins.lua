@@ -190,10 +190,13 @@ nixInfo.lze.load({
 		after = function()
 			local conform = require("conform")
 
+			local biome_fmt = nixInfo(nil, "settings", "enabled_specs", "typescript") and { "biome-check" } or nil
 			conform.setup({
 				formatters_by_ft = {
 					lua = nixInfo(nil, "settings", "enabled_specs", "lua") and { "stylua" } or nil,
 					nix = nixInfo(nil, "settings", "enabled_specs", "nix") and { "nixfmt" } or nil,
+					typescript = biome_fmt,
+					typescriptreact = biome_fmt,
 				},
 			})
 		end,

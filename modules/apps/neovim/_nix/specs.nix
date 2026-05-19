@@ -139,6 +139,14 @@
       stylua
     ];
   };
+  config.specs.typescript = {
+    lazy = false;
+    data = null;
+    extraPackages = with pkgs; [
+      vtsls
+      biome
+    ];
+  };
 
   config.specs.utils = {
     data = [
