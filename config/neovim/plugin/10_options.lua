@@ -42,13 +42,13 @@ vim.o.pummaxwidth = 100
 vim.o.cursorlineopt = "screenline,number" -- Show cursor line per screen line
 
 -- Special UI symbols. More is set via 'mini.basics' later.
-vim.o.fillchars = "eob: ,fold:╌"
+vim.o.fillchars = "eob: ,fold: ,"
 vim.o.listchars = "extends:…,nbsp:␣,precedes:…,tab:> "
-
 -- Folds
-vim.o.foldlevel = 10        -- Fold nothing by default; set to 0 or 1 to fold
-vim.o.foldmethod = "indent" -- Fold based on indent level
-vim.o.foldnestmax = 10      -- Limit number of fold levels
+vim.o.foldlevel = 99        -- Fold nothing by default; set to 0 or 1 to fold
+vim.o.foldmethod = "expr" -- Fold based on indent level
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.o.foldnestmax = 4      -- Limit number of fold levels
 vim.o.foldtext = ""         -- Show text under fold with its highlighting
 
 -- Editing
