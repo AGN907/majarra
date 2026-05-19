@@ -52,15 +52,21 @@ end
 Config.new_autocmd("ColorScheme", nil, set_hl_groups, "Re-apply statusline highlights on colorscheme change")
 
 local mode_component = function()
+	local CTRL_S = vim.api.nvim_replace_termcodes("<C-S>", true, true, true)
+	local CTRL_V = vim.api.nvim_replace_termcodes("<C-V>", true, true, true)
 	local mode_settings = {
 		["n"] = { name = "n", hl = "Normal" },
 		["v"] = { name = "v", hl = "Visual" },
 		["V"] = { name = "v", hl = "Visual" },
-		[""] = { name = "v", hl = "Visual" },
+		[CTRL_V] = { name = "v", hl = "Visual" },
+		["s"] = { name = "s", hl = "Visual" },
+		["S"] = { name = "s", hl = "Visual" },
+		[CTRL_S] = { name = "s", hl = "Visual" },
 		["i"] = { name = "i", hl = "Insert" },
 		["R"] = { name = "r", hl = "Replace" },
 		["r"] = { name = "r", hl = "Replace" },
 		["c"] = { name = "c", hl = "Command" },
+		["!"] = { name = "sh", hl = "Command" },
 		["t"] = { name = "t", hl = "Command" },
 	}
 
@@ -180,7 +186,23 @@ local diagnostic_status = function()
 end
 
 local scroll_position_component = function()
-	return "[%l:%c]"
+	return "[%l:%c] "
+end
+
+local searchcount_component = function()
+	local ok, s_count = pcall(vim.fn.searchcount, (args or {}).options or { recompute = true })
+	if not ok or s_count.current == nil or s_count.total == 0 then
+		return ""
+	end
+
+	if s_count.incomplete == 1 then
+		return "?/?"
+	end
+
+	local too_many = ">" .. s_count.maxcount
+	local current = s_count.current > s_count.maxcount and too_many or s_count.current
+	local total = s_count.total > s_count.maxcount and too_many or s_count.total
+	return current .. "/" .. total
 end
 
 function Statusline.active()
@@ -195,6 +217,7 @@ function Statusline.active()
 		lsp_component(),
 		fmt_component(),
 		scroll_position_component(),
+		searchcount_component(),
 	})
 end
 
