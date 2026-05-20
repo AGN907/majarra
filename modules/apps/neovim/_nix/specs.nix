@@ -29,6 +29,7 @@
       mini-misc
       snacks-nvim
       which-key-nvim
+      quicker-nvim
       {
         data = config.nvim-lib.neovimPlugins.lzextras;
         name = "lzextras";

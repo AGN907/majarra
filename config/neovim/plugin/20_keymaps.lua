@@ -23,6 +23,7 @@ _G.Config.leader_group_spec = {
 	{ "<leader>f", group = "+Find" },
 	{ "<leader>t", group = "+Test" },
 	{ "<leader>o", group = "+Other" },
+  { "<leader>q", group = "+Quickfix" },
 }
 
 -- Helpers for a more concise `<Leader>` mappings.
@@ -142,3 +143,7 @@ nmap_leader("ts", "<Cmd>lua require('neotest').summary.toggle()<CR>", "Summary")
 nmap_leader("to", "<Cmd>lua require('neotest').output.open({ enter = true, auto_close = true })<CR>", "Output")
 nmap_leader("tO", "<Cmd>lua require('neotest').output_panel.toggle()<CR>", "Output panel (toggle)")
 nmap_leader("tt", "<Cmd>lua require('neotest').run.stop()<CR>", "Terminate")
+
+-- Quickfix
+nmap_leader("qq", "<Cmd>lua require('quicker').toggle()<CR>", "Toggle quickfix")
+nmap_leader("ql", "<Cmd>lua require('quicker').toggle({ loclist = true })<CR>", "Toggle loclist")
