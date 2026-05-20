@@ -56,6 +56,10 @@
         fonts = {
           enableDefaultPackages = true;
           fontDir.enable = true;
+          # Force install as stylix does not install it depending if a target does not use the font package
+          packages = with pkgs; [
+            maple-mono.NF
+          ];
         };
       };
     homeManager =
