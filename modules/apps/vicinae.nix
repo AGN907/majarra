@@ -19,9 +19,10 @@
       };
     };
     homeManager =
-      { pkgs, ... }:
+      { config, pkgs, ... }:
       let
         system = pkgs.stdenv.hostPlatform.system;
+        inherit (config.stylix) fonts;
       in
       {
         imports = [ inputs.vicinae.homeManagerModules.default ];
@@ -38,7 +39,7 @@
             font = {
               normal = {
                 size = 12;
-                family = "Maple Mono NF";
+                family = fonts.monospace.name;
               };
             };
           };
