@@ -16,6 +16,10 @@
   perSystem.treefmt.settings.global.excludes = [
     "flake.lock"
     ".envrc"
+    # Ignore cause of removing __findFile cause nixd complaining its not used
+    "*/agn.nix"
+    "*/profiles.nix"
+
     "**/.gitignore"
     "*/secrets/*"
   ];
