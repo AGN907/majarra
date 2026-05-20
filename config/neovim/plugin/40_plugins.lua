@@ -231,16 +231,7 @@ nixInfo.lze.load({
 					},
 				},
 			})
-			require("which-key").add({
-				{ "<leader>b", group = "+Buffer" },
-				{ "<leader>e", group = "+Explore/Edit" },
-				{ "<leader>g", group = "+Git", mode = { "n", "x" } },
-				{ "<leader>l", group = "+Language", mode = { "n", "x" } },
-				{ "<leader>s", group = "+Session" },
-				{ "<leader>f", group = "+Find" },
-				{ "<leader>t", group = "+Test" },
-				{ "<leader>o", group = "+Other" },
-			})
+			require("which-key").add(Config.leader_group_spec)
 		end,
 	},
 	{

@@ -14,6 +14,17 @@ nmap("]p", '<Cmd>exe "iput "  . v:register<CR>', "Paste Below")
 -- Clear highlights on search when pressing <Esc> in normal mode
 nmap("<Esc>", "<cmd>nohlsearch<CR>")
 
+_G.Config.leader_group_spec = {
+	{ "<leader>b", group = "+Buffer" },
+	{ "<leader>e", group = "+Explore/Edit" },
+	{ "<leader>g", group = "+Git", mode = { "n", "x" } },
+	{ "<leader>l", group = "+Language", mode = { "n", "x" } },
+	{ "<leader>s", group = "+Session" },
+	{ "<leader>f", group = "+Find" },
+	{ "<leader>t", group = "+Test" },
+	{ "<leader>o", group = "+Other" },
+}
+
 -- Helpers for a more concise `<Leader>` mappings.
 local nmap_leader = function(suffix, rhs, desc)
   vim.keymap.set("n", "<Leader>" .. suffix, rhs, { desc = desc })
