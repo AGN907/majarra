@@ -127,9 +127,10 @@ nmap_leader("sw", "<Cmd>lua MiniSessions.write()<CR>", "Write current")
 -- function ()
 --   Snacks.input.input({}, function(cmd) if cmd == nil then Snacks.terminal(cmd) end return end)
 -- end
-local input_cmd_terminal = "Snacks.input.input({}, function(cmd) if cmd ~= nil then Snacks.terminal(cmd) end return end)"
-nmap_leader(",", "<Cmd>lua Snacks.terminal()<CR>", "Open terminal")
-nmap_leader(".", "<Cmd>lua " .. input_cmd_terminal .. "<CR>", "Run command in terminal")
+local input_cmd_terminal =
+	"Snacks.input.input({}, function(cmd) if cmd ~= nil then Snacks.terminal(cmd) end return end)"
+nmap_leader(".", "<Cmd>lua Snacks.terminal()<CR>", "Open terminal")
+nmap_leader(",", "<Cmd>lua " .. input_cmd_terminal .. "<CR>", "Run command in terminal")
 
 -- Tests
 nmap_leader("tf", "<Cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "Run file")
