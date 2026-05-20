@@ -7,6 +7,7 @@
   den.aspects.agn = {
     includes = [
       <den/primary-user>
+      (<den/tty-autologin> "agn")
 
       <nawa/core>
       <nawa/secrets>
