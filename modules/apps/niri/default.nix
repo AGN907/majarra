@@ -13,7 +13,7 @@
 
   nawa.apps._.niri = {
     nixos =
-      { pkgs, ... }:
+      { pkgs, lib, ... }:
       {
         imports = [
           # Enable binary cache, home module, stylix, and etc.
@@ -27,6 +27,7 @@
           enable = true;
           package = pkgs.niri-unstable;
         };
+        services.gnome.gnome-keyring.enable = lib.mkForce false;
 
         xdg.portal = {
           enable = true;
@@ -57,7 +58,6 @@
           ++ [
             inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.xwayland-satellite-unstable
           ];
-
         programs.niri.settings = {
           outputs."HDMI-A-1" = {
             mode = {
