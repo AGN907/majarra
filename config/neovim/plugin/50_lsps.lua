@@ -32,7 +32,7 @@ nixInfo.lze.load({
 							expr = nixInfo(nil, "nixd", "nixos"),
 						},
 						home_manager = {
-							expr = nixInfo(nil, "nixd", "homeManaer"),
+							expr = nixInfo(nil, "nixd", "homeManager"),
 						},
 					},
 					formatting = {
