@@ -62,6 +62,15 @@ nixInfo.lze.load({
 			settings = {
 				complete_function_calls = true,
 				vtsls = {
+					tsserver = {
+						globalPlugins = {
+							{
+								name = "typescript-svelte-plugin",
+								location = nixInfo(nil, "svelteTypescriptPlugin"),
+								enableForWorkspaceTypeScriptVersions = true,
+							},
+						},
+					},
 					enableMoveToFileCodeAction = true,
 					autoUseWorkspaceTsdk = true,
 					experimental = {
@@ -86,6 +95,13 @@ nixInfo.lze.load({
 					},
 				},
 			},
+		},
+	},
+	{
+		name = "svelte",
+		enabled_if = "typescript",
+		lsp = {
+			filetypes = { "svelte" },
 		},
 	},
 })

@@ -197,6 +197,7 @@ nixInfo.lze.load({
 					nix = nixInfo(nil, "settings", "enabled_specs", "nix") and { "nixfmt" } or nil,
 					typescript = biome_fmt,
 					typescriptreact = biome_fmt,
+          svelte = biome_fmt
 				},
 			})
 		end,

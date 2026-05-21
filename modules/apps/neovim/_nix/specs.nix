@@ -15,6 +15,7 @@
       nixos = "(${flake}).nixosConfigurations.alkaid.options";
       homeManager = "(${flake}).nixosConfigurations.alkaid.options.home-manager.users.type.getSubOptions []";
     };
+    svelteTypescriptPlugin = "${pkgs.svelte-language-server}/node_modules/typescript-svelte-plugin";
   };
 
   config.specs.general = {
@@ -146,6 +147,7 @@
     extraPackages = with pkgs; [
       vtsls
       biome
+      svelte-language-server
     ];
   };
 
