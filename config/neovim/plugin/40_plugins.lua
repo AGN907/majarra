@@ -302,6 +302,28 @@ nixInfo.lze.load({
 		end,
 	},
 	{
+		"zk-nvim",
+		after = function()
+			require("zk").setup({
+				picker = "minipick",
+				lsp = {},
+			})
+		end,
+	},
+	{
+		"render-markdown.nvim",
+		after = function()
+			require("render-markdown").setup({
+				render_modes = { "n", "c", "t" },
+				preset = "obsidian",
+				checkbox = { checked = { scope_highlight = "@markup.strikethrough" } },
+				sign = {
+					enabled = false,
+				},
+			})
+		end,
+	},
+	{
 		"trigger_colorscheme",
 		event = "VimEnter",
 		load = function()

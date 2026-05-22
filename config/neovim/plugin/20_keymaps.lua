@@ -147,3 +147,9 @@ nmap_leader("tt", "<Cmd>lua require('neotest').run.stop()<CR>", "Terminate")
 -- Quickfix
 nmap_leader("qq", "<Cmd>lua require('quicker').toggle()<CR>", "Toggle quickfix")
 nmap_leader("ql", "<Cmd>lua require('quicker').toggle({ loclist = true })<CR>", "Toggle loclist")
+
+-- ZK
+nmap_leader("zn", "<Cmd<ZkNew<CR>", "Create new note")
+nmap_leader("zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", "Find notes")
+nmap_leader("zf", "<Cmd<ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>", "Find notes with query")
+nmap_leader("zt", "<Cmd>ZkTags<CR>", "Open notes associated with tags")

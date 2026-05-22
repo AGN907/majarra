@@ -17,6 +17,7 @@
       <nawa/apps/cli/full>
       <nawa/apps/niri>
       <nawa/apps/neovim>
+      <nawa/apps/zk>
       <nawa/apps/starship>
       <nawa/apps/yazi>
       <nawa/apps/zellij>

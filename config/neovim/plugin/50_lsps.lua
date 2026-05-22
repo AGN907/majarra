@@ -104,4 +104,11 @@ nixInfo.lze.load({
 			filetypes = { "svelte" },
 		},
 	},
+  {
+    name = "zk",
+    enabled_if = "markdown";
+    lsp = {
+      filetypes = { "markdown" },
+    },
+  },
 })

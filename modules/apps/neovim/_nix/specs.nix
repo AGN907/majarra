@@ -151,6 +151,19 @@
     ];
   };
 
+  config.specs.markdown = {
+    lazy = false;
+    data = with pkgs.vimPlugins; [
+      render-markdown-nvim
+      zk-nvim
+      (nvim-treesitter.withPlugins (p: [
+        p.markdown
+        p.markdown_inline
+        p.comment
+      ]))
+    ];
+  };
+
   config.specs.utils = {
     data = [
       {
