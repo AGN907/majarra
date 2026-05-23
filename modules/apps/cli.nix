@@ -23,7 +23,6 @@
           yt-dlp
           dysk
           dust
-          pinentry-gnome3
           devenv
         ];
 
@@ -157,14 +156,18 @@
           };
         };
       };
-    rbw.homeManager = {
-      home.sessionVariables = {
-        SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/rbw/ssh-agent-socket";
-      };
+    rbw.homeManager =
+      { pkgs, ... }:
+      {
+        home.sessionVariables = {
+          SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/rbw/ssh-agent-socket";
+        };
 
-      programs.rbw = {
-        enable = true;
+        home.packages = [ pkgs.pinentry-qt ];
+
+        programs.rbw = {
+          enable = true;
+        };
       };
-    };
   };
 }
