@@ -32,7 +32,7 @@ for group, opts in pairs({
 	MiniPickPrompt = { fg = hl("MiniPickPrompt").fg, bg = colors.base01 },
 	MiniPickPromptCaret = { fg = hl("MiniPickPromptCaret").fg, bg = colors.base00 },
 	MiniPickPromptPrefix = { fg = hl("MiniPickPromptPrefix").fg, bg = colors.base00 },
-  MiniFilesCursorLine = { fg = hl("MiniFilesCursorLine").fg, bg = colors.base01 },
+	MiniFilesCursorLine = { fg = hl("MiniFilesCursorLine").fg, bg = colors.base01 },
 	DiagnosticSignError = { fg = hl("DiagnosticSignError").fg, bg = colors.base00 },
 	DiagnosticSignHint = { fg = hl("DiagnosticSignHint").fg, bg = colors.base00 },
 	DiagnosticSignInfo = { fg = hl("DiagnosticSignInfo").fg, bg = colors.base00 },

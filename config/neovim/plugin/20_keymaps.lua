@@ -2,8 +2,8 @@
 
 -- A helper to create a Normal mode mapping
 local nmap = function(lhs, rhs, desc)
-  -- See `:h vim.keymap.set()`
-  vim.keymap.set("n", lhs, rhs, { desc = desc })
+	-- See `:h vim.keymap.set()`
+	vim.keymap.set("n", lhs, rhs, { desc = desc })
 end
 
 -- Paste linewise before/after current line
@@ -23,19 +23,19 @@ _G.Config.leader_group_spec = {
 	{ "<leader>f", group = "+Find" },
 	{ "<leader>t", group = "+Test" },
 	{ "<leader>o", group = "+Other" },
-  { "<leader>q", group = "+Quickfix" },
+	{ "<leader>q", group = "+Quickfix" },
 }
 
 -- Helpers for a more concise `<Leader>` mappings.
 local nmap_leader = function(suffix, rhs, desc)
-  vim.keymap.set("n", "<Leader>" .. suffix, rhs, { desc = desc })
+	vim.keymap.set("n", "<Leader>" .. suffix, rhs, { desc = desc })
 end
 local xmap_leader = function(suffix, rhs, desc)
-  vim.keymap.set("x", "<Leader>" .. suffix, rhs, { desc = desc })
+	vim.keymap.set("x", "<Leader>" .. suffix, rhs, { desc = desc })
 end
 
 local new_scratch_buffer = function()
-  vim.api.nvim_win_set_buf(0, vim.api.nvim_create_buf(true, true))
+	vim.api.nvim_win_set_buf(0, vim.api.nvim_create_buf(true, true))
 end
 
 nmap_leader("ba", "<Cmd>b#<CR>", "Alternate")
@@ -46,12 +46,12 @@ nmap_leader("bw", "<Cmd>lua MiniBufremove.wipeout()<CR>", "Wipeout")
 nmap_leader("bW", "<Cmd>lua MiniBufremove.wipeout(0, true)<CR>", "Wipeout!")
 nmap_leader("br", "<Cmd>lua Snacks.rename.rename_file()<CR>", "Rename current file")
 
-local explore_at_file = '<Cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>'
+local explore_at_file = "<Cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>"
 local explore_quickfix = function()
-  vim.cmd(vim.fn.getqflist({ winid = true }).winid ~= 0 and 'cclose' or 'copen')
+	vim.cmd(vim.fn.getqflist({ winid = true }).winid ~= 0 and "cclose" or "copen")
 end
 local explore_locations = function()
-  vim.cmd(vim.fn.getloclist(0, { winid = true }).winid ~= 0 and 'lclose' or 'lopen')
+	vim.cmd(vim.fn.getloclist(0, { winid = true }).winid ~= 0 and "lclose" or "lopen")
 end
 
 nmap_leader("ed", "<Cmd>lua MiniFiles.open()<CR>", "Directory")
@@ -122,7 +122,7 @@ local session_new = 'MiniSessions.write(vim.fn.input("Session name: "))'
 nmap_leader("sd", '<Cmd>lua MiniSessions.select("delete")<CR>', "Delete")
 nmap_leader("sn", "<Cmd>lua " .. session_new .. "<CR>", "New")
 nmap_leader("sr", '<Cmd>lua MiniSessions.select("read")<CR>', "Read")
-nmap_leader("sR", '<Cmd>lua MiniSessions.restart()<CR>', "Restart")
+nmap_leader("sR", "<Cmd>lua MiniSessions.restart()<CR>", "Restart")
 nmap_leader("sw", "<Cmd>lua MiniSessions.write()<CR>", "Write current")
 
 -- function ()
@@ -151,5 +151,9 @@ nmap_leader("ql", "<Cmd>lua require('quicker').toggle({ loclist = true })<CR>", 
 -- ZK
 nmap_leader("zn", "<Cmd<ZkNew<CR>", "Create new note")
 nmap_leader("zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", "Find notes")
-nmap_leader("zf", "<Cmd<ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>", "Find notes with query")
+nmap_leader(
+	"zf",
+	"<Cmd<ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>",
+	"Find notes with query"
+)
 nmap_leader("zt", "<Cmd>ZkTags<CR>", "Open notes associated with tags")
