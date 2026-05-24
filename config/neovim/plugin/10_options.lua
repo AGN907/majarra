@@ -39,6 +39,8 @@ vim.o.cmdheight = 0
 vim.o.pumborder = "single"
 vim.o.pummaxwidth = 100
 
+vim.o.laststatus = 3
+
 vim.o.cursorlineopt = "screenline,number" -- Show cursor line per screen line
 
 -- Special UI symbols. More is set via 'mini.basics' later.
