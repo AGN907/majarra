@@ -90,7 +90,7 @@ nixInfo.lze.load({
 	{
 		"blink.cmp",
 		auto_enable = true,
-		event = { "InsertEnter", "CmdlineEnter" },
+		event = "DeferredUIEnter",
 		after = function(_)
 			require("blink.cmp").setup({
 				keymap = {
