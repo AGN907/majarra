@@ -177,6 +177,19 @@
     ];
   };
 
+  config.specs.json = {
+    lazy = false;
+    data = with pkgs.vimPlugins; [
+      SchemaStore-nvim
+      (nvim-treesitter.withPlugins (p: [
+        p.json
+      ]))
+    ];
+    extraPackages = with pkgs; [
+      vscode-json-languageserver
+    ];
+  };
+
   config.specs.utils = {
     data = [
       {
