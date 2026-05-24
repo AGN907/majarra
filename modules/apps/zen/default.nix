@@ -25,9 +25,6 @@
         package = pkgs.zen-browser;
         setAsDefaultBrowser = true;
         enablePrivateDesktopEntry = true;
-        nativeMessagingHosts = [
-          pkgs.kdePackages.plasma-browser-integration
-        ];
         profiles.default = {
           settings = {
             "zen.workspaces.continue-where-left-off" = true;
