@@ -272,6 +272,7 @@ nixInfo.lze.load({
 					},
 					{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 					{ path = "nvim-lspconfig", words = { "lspconfig.settings" } },
+					{ path = "snacks.nvim", words = { "Snacks" } },
 				},
 			})
 		end,
