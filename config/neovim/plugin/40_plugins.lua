@@ -37,41 +37,41 @@ nixInfo.lze.load({
 		lazy = false,
 		auto_enable = true,
 		after = function()
-			local languages = {
-				"lua",
-				"vimdoc",
-				"markdown",
-				"go",
-				"gomod",
-				"gosum",
-				"yaml",
-				"json",
-				"html",
-				"rust",
-				"php",
-				"php_only",
-				"blade",
-				"just",
-			}
-			local isnt_installed = function(lang)
-				return #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".*", false) == 0
-			end
-			local to_install = vim.tbl_filter(isnt_installed, languages)
-			if #to_install > 0 then
-				require("nvim-treesitter").install(to_install)
+			---@param buf integer
+			---@param language string
+			local function treesitter_try_attach(buf, language)
+				-- check if parser exists and load it
+				if not vim.treesitter.language.add(language) then
+					return false
+				end
+				-- enables syntax highlighting and other treesitter features
+				vim.treesitter.start(buf, language)
+
+				-- enables treesitter based indentation
+				vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+				return true
 			end
 
-			-- Enable tree-sitter after opening a file for a target language
-			local filetypes = {}
-			for _, lang in ipairs(languages) do
-				for _, ft in ipairs(vim.treesitter.language.get_filetypes(lang)) do
-					table.insert(filetypes, ft)
-				end
-			end
-			local ts_start = function(ev)
-				vim.treesitter.start(ev.buf)
-			end
-			Config.new_autocmd("FileType", filetypes, ts_start, "Start tree-sitter")
+			local installable_parsers = require("nvim-treesitter").get_available()
+			vim.api.nvim_create_autocmd("FileType", {
+				callback = function(args)
+					local buf, filetype = args.buf, args.match
+					local language = vim.treesitter.language.get_lang(filetype)
+					if not language then
+						return
+					end
+
+					if not treesitter_try_attach(buf, language) then
+						if vim.tbl_contains(installable_parsers, language) then
+							-- not already installed, so try to install them via nvim-treesitter if possible
+							require("nvim-treesitter").install(language):await(function()
+								treesitter_try_attach(buf, language)
+							end)
+						end
+					end
+				end,
+			})
 		end,
 	},
 	{
