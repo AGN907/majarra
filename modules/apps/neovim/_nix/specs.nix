@@ -164,6 +164,19 @@
     ];
   };
 
+  config.specs.yaml = {
+    lazy = false;
+    data = with pkgs.vimPlugins; [
+      SchemaStore-nvim
+      (nvim-treesitter.withPlugins (p: [
+        p.yaml
+      ]))
+    ];
+    extraPackages = [
+      pkgs.yaml-language-server
+    ];
+  };
+
   config.specs.utils = {
     data = [
       {

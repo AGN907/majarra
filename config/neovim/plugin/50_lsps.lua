@@ -111,4 +111,26 @@ nixInfo.lze.load({
 			filetypes = { "markdown" },
 		},
 	},
+	{
+		name = "yamlls",
+		enabled_if = "yaml",
+		lsp = {
+			filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.helm-values" },
+			---@type lspconfig.settings.yamlls
+			settings = {
+				yaml = {
+					schemaStore = {
+						enable = false,
+						url = "",
+					},
+					schemas = require("schemastore").yaml.schemas({
+						select = {
+							"docker-compose.yml",
+							"GitHub Action",
+						},
+					}),
+				},
+			},
+		},
+	},
 })
