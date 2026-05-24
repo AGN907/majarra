@@ -4,11 +4,9 @@ nixInfo.lze.load({
 		lazy = false,
 		after = function()
 			require("snacks").setup({
-				terminal = {
-					enabled = true,
-				},
-				input = { enabled = true },
-				rename = { enabled = true },
+				terminal = {},
+				input = {},
+				rename = {},
 				lazygit = {
 					configure = false,
 				},
