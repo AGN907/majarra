@@ -9,6 +9,8 @@
         sops.secrets."restic/paperless" = { };
         sops.secrets.rclone = { };
 
+        networking.firewall.allowedTCPPorts = [ 28981 ];
+
         systemd.services.paperless-exporter.postStart = ''
           echo "Paperless export finished. Triggering Restic backup..."
           systemctl start restic-backups-paperless-gdrive.service
@@ -33,6 +35,8 @@
 
         services.paperless = {
           enable = true;
+          address = "0.0.0.0";
+          port = 28981;
           passwordFile = config.sops.secrets."paperless/admin_password".path;
           consumptionDirIsPublic = true;
           exporter = {
