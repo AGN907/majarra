@@ -190,6 +190,14 @@
     ];
   };
 
+  config.specs.toml = {
+    lazy = false;
+    data = null;
+    extraPackages = [
+      pkgs.tombi
+    ];
+  };
+
   config.specs.utils = {
     data = [
       {

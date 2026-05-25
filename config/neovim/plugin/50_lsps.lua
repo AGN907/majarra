@@ -163,4 +163,11 @@ nixInfo.lze.load({
 			},
 		},
 	},
+	{
+		name = "tombi",
+		enabled_if = "toml",
+		lsp = {
+			filetypes = { "toml" },
+		},
+	},
 })
