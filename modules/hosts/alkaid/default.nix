@@ -7,6 +7,7 @@
     includes = with nawa; [
       desktop
       services._.paperless-ngx
+      services._.immich
     ];
 
     nixos = {
