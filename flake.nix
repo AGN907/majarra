@@ -29,10 +29,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    noctalia.url = "github:noctalia-dev/noctalia-shell/v5";
     plugins-lze = {
       url = "github:BirdeeHub/lze";
       flake = false;
@@ -58,10 +55,6 @@
     };
     wrappers.url = "github:BirdeeHub/nix-wrapper-modules";
     yazi.url = "github:sxyazi/yazi";
-    zellij-autolock = {
-      url = "https://github.com/fresh2dev/zellij-autolock/releases/latest/download/zellij-autolock.wasm";
-      flake = false;
-    };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake/beta";
       inputs.nixpkgs.follows = "nixpkgs";

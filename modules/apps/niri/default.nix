@@ -28,6 +28,7 @@
           package = pkgs.niri-unstable;
         };
         services.gnome.gnome-keyring.enable = lib.mkForce false;
+        systemd.user.services.niri-flake-polkit.enable = lib.mkForce false;
 
         xdg.portal = {
           enable = true;
@@ -72,7 +73,7 @@
             };
           };
           spawn-at-startup = [
-            { command = [ "noctalia-shell" ]; }
+            { command = [ "noctalia" ]; }
           ];
           prefer-no-csd = true;
           input.keyboard.xkb = {

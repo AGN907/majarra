@@ -3,9 +3,8 @@ let
   noctalia =
     cmd:
     [
-      "noctalia-shell"
-      "ipc"
-      "call"
+      "noctalia"
+      "msg"
     ]
     ++ (lib.splitString " " cmd);
   vicinae = cmd: [ "vicinae" ] ++ (lib.splitString " " cmd);
@@ -26,12 +25,12 @@ in
         "Mod+B".action.spawn = [
           "zen-beta"
         ];
-        "Mod+S".action.spawn = noctalia "settings toggle";
-        "Mod+Comma".action.spawn = noctalia "controlCenter toggle";
-        "Mod+M".action.spawn = noctalia "systemMonitor toggle";
-        "Mod+P".action.spawn = noctalia "sessionMenu toggle";
-        "Mod+Alt+L".action.spawn = noctalia "lockScreen lock";
-        "Mod+Alt+S".action.spawn = noctalia "sessionMenu lockAndSuspend";
+        "Mod+S".action.spawn = noctalia "settings-toggle";
+        "Mod+Comma".action.spawn = noctalia "panel-toggle control-center";
+        "Mod+M".action.spawn = noctalia "panel-toggle control-center system";
+        "Mod+P".action.spawn = noctalia "panel-toggle session";
+        "Mod+Alt+L".action.spawn = noctalia "session lock";
+        "Mod+Alt+S".action.spawn = noctalia "session lock-and-suspend";
         "Mod+Q".action.close-window = { };
         "Mod+F".action.maximize-column = { };
         "Mod+Shift+F".action.fullscreen-window = { };
