@@ -43,7 +43,7 @@
 
         statusbar = ''
           default_tab_template {
-              pane size=2 borderless=true {
+              pane size=1 borderless=true {
                   plugin location="file://${pkgs.zjstatus}/bin/zjstatus.wasm" {
                       format_left   "{mode}#[bg=#${colors.base00}] {tabs}"
                       format_center ""
