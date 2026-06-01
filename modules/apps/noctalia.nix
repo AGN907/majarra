@@ -59,7 +59,7 @@
               enabled = true;
               position = "top";
               background_opacity = 0.80;
-              widget_spacing = 8;
+              widget_spacing = 6;
               margin_ends = 120;
               start = [
                 "launcher"
@@ -67,6 +67,7 @@
                 "wallpaper"
                 "spacer"
                 "workspaces"
+                "spacer"
                 "active_window"
               ];
               center = [ "clock" ];
@@ -74,9 +75,6 @@
                 "media"
                 "spacer"
                 "tray"
-                "spacer"
-                "cpu"
-                "ram"
                 "spacer"
                 "notifications"
                 "volume"
@@ -101,15 +99,11 @@
             clock = {
               format = "{:%H:%M} - {:%b %e %a}";
             };
-            cpu = {
-              type = "sysmon";
-              stat = "cpu_usage";
+            volume = {
               show_label = false;
             };
-            ram = {
-              type = "sysmon";
-              stat = "ram_used";
-              show_label = false;
+            media = {
+              hide_when_no_media = true;
             };
           };
         };
