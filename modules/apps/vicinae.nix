@@ -46,6 +46,7 @@
           extensions = with inputs.vicinae-extensions.packages.${system}; [
             nix
             aria2-manager
+            github
           ];
         };
       };
