@@ -9,9 +9,6 @@
     flake = false;
   };
 
-  flake-file.nixConfig = {
-  };
-
   nawa.apps._.yazi = {
     nixos = {
       nixpkgs.overlays = [ inputs.yazi.overlays.default ];
