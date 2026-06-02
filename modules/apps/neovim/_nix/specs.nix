@@ -118,6 +118,7 @@
       mini-splitjoin
       mini-surround
       mini-move
+      SchemaStore-nvim
     ];
   };
 
@@ -179,9 +180,7 @@
 
   config.specs.yaml = {
     lazy = false;
-    data = with pkgs.vimPlugins; [
-      SchemaStore-nvim
-    ];
+    data = null;
     extraPackages = [
       pkgs.yaml-language-server
     ];
@@ -189,9 +188,7 @@
 
   config.specs.json = {
     lazy = false;
-    data = with pkgs.vimPlugins; [
-      SchemaStore-nvim
-    ];
+    data = null;
     extraPackages = with pkgs; [
       vscode-json-languageserver
     ];
