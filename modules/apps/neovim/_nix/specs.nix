@@ -66,7 +66,32 @@
   };
 
   config.specs.treesitter = {
-    data = null;
+    data = pkgs.vimPlugins.nvim-treesitter.withPlugins (
+      p: with p; [
+        lua
+        nix
+        markdown
+        markdown_inline
+        comment
+        json
+        yaml
+        toml
+        typescript
+        svelte
+        go
+        gomod
+        gosum
+        gotmpl
+        gitcommit
+        gitignore
+        kdl
+        just
+        php
+        php_only
+        blade
+        sql
+      ]
+    );
     extraPackages = [ pkgs.tree-sitter ];
   };
 
@@ -118,11 +143,7 @@
 
   # Languages Support
   config.specs.nix = {
-    data = with pkgs.vimPlugins; [
-      (nvim-treesitter.withPlugins (p: [
-        p.nix
-      ]))
-    ];
+    data = null;
     extraPackages = with pkgs; [
       nixd
       nixfmt
@@ -132,9 +153,6 @@
     lazy = true;
     data = with pkgs.vimPlugins; [
       lazydev-nvim
-      (nvim-treesitter.withPlugins (p: [
-        p.lua
-      ]))
     ];
     extraPackages = with pkgs; [
       lua-language-server
@@ -156,11 +174,6 @@
     data = with pkgs.vimPlugins; [
       render-markdown-nvim
       zk-nvim
-      (nvim-treesitter.withPlugins (p: [
-        p.markdown
-        p.markdown_inline
-        p.comment
-      ]))
     ];
   };
 
@@ -168,9 +181,6 @@
     lazy = false;
     data = with pkgs.vimPlugins; [
       SchemaStore-nvim
-      (nvim-treesitter.withPlugins (p: [
-        p.yaml
-      ]))
     ];
     extraPackages = [
       pkgs.yaml-language-server
@@ -181,9 +191,6 @@
     lazy = false;
     data = with pkgs.vimPlugins; [
       SchemaStore-nvim
-      (nvim-treesitter.withPlugins (p: [
-        p.json
-      ]))
     ];
     extraPackages = with pkgs; [
       vscode-json-languageserver
