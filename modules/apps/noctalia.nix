@@ -15,99 +15,106 @@
       };
     };
 
-    homeManager = {
-      imports = [
-        inputs.noctalia.homeModules.default
-      ];
-      programs.noctalia = {
-        enable = true;
-        settings = {
-          shell = {
-            font_family = "Maple Mono NF";
-            lang = "en_GB";
-            polkit_agent = true;
-            session.actions = [
-              {
-                action = "lock";
-                shortcut = "L";
-              }
-              {
-                action = "logout";
-                shortcut = "E";
-              }
-              {
-                action = "suspend";
-                shortcut = "S";
-              }
-              {
-                action = "reboot";
-                shortcut = "R";
-              }
-              {
-                action = "shutdown";
-                shortcut = "D";
-              }
-            ];
-          };
-          theme = {
-            mode = "dark";
-            source = "community";
-            community_palette = "Kanagawa Dragon";
-          };
-          bar = {
-            main = {
+    homeManager =
+      { config, ... }:
+      {
+        imports = [
+          inputs.noctalia.homeModules.default
+        ];
+        programs.noctalia = {
+          enable = true;
+          settings = {
+            shell = {
+              font_family = "Maple Mono NF";
+              lang = "en_GB";
+              polkit_agent = true;
+              session.actions = [
+                {
+                  action = "lock";
+                  shortcut = "L";
+                }
+                {
+                  action = "logout";
+                  shortcut = "E";
+                }
+                {
+                  action = "suspend";
+                  shortcut = "S";
+                }
+                {
+                  action = "reboot";
+                  shortcut = "R";
+                }
+                {
+                  action = "shutdown";
+                  shortcut = "D";
+                }
+              ];
+              screenshot = {
+                save_to_file = true;
+                directory = "${config.xdg.userDirs.pictures}/Screenshots";
+                filename_pattern = "screenshot_%Y%m%d_%H%M%S";
+              };
+            };
+            theme = {
+              mode = "dark";
+              source = "community";
+              community_palette = "Kanagawa Dragon";
+            };
+            bar = {
+              main = {
+                enabled = true;
+                position = "top";
+                background_opacity = 0.80;
+                widget_spacing = 6;
+                margin_ends = 120;
+                start = [
+                  "launcher"
+                  "spacer"
+                  "wallpaper"
+                  "spacer"
+                  "workspaces"
+                  "spacer"
+                  "active_window"
+                ];
+                center = [ "clock" ];
+                end = [
+                  "media"
+                  "spacer"
+                  "tray"
+                  "spacer"
+                  "notifications"
+                  "volume"
+                  "keyboard_layout"
+                  "session"
+                ];
+              };
+            };
+            notification = {
+              enable_daemon = true;
+              position = "top_right";
+            };
+            weather = {
               enabled = true;
-              position = "top";
-              background_opacity = 0.80;
-              widget_spacing = 6;
-              margin_ends = 120;
-              start = [
-                "launcher"
-                "spacer"
-                "wallpaper"
-                "spacer"
-                "workspaces"
-                "spacer"
-                "active_window"
-              ];
-              center = [ "clock" ];
-              end = [
-                "media"
-                "spacer"
-                "tray"
-                "spacer"
-                "notifications"
-                "volume"
-                "keyboard_layout"
-                "session"
-              ];
+              address = "Dammam, SA";
+              unit = "metric";
             };
-          };
-          notification = {
-            enable_daemon = true;
-            position = "top_right";
-          };
-          weather = {
-            enabled = true;
-            address = "Dammam, SA";
-            unit = "metric";
-          };
-          lockscreen = {
-            blurred_desktop = true;
-          };
-          widget = {
-            clock = {
-              format = "{:%H:%M} - {:%b %e %a}";
+            lockscreen = {
+              blurred_desktop = true;
             };
-            volume = {
-              show_label = false;
-            };
-            media = {
-              hide_when_no_media = true;
+            widget = {
+              clock = {
+                format = "{:%H:%M} - {:%b %e %a}";
+              };
+              volume = {
+                show_label = false;
+              };
+              media = {
+                hide_when_no_media = true;
+              };
             };
           };
         };
       };
-    };
   };
 }

@@ -31,15 +31,14 @@ in
         "Mod+P".action.spawn = noctalia "panel-toggle session";
         "Mod+Alt+L".action.spawn = noctalia "session lock";
         "Mod+Alt+S".action.spawn = noctalia "session lock-and-suspend";
+        "Print".action.spawn = noctalia "screenshot-region";
+        "Ctrl+Print".action.spawn = noctalia "screenshot-fullscreen";
         "Mod+Q".action.close-window = { };
         "Mod+F".action.maximize-column = { };
         "Mod+Shift+F".action.fullscreen-window = { };
         "Mod+Shift+T".action.toggle-window-floating = { };
         "Mod+Shift+V".action.switch-focus-between-floating-and-tiling = { };
         "Mod+Shift+E".action.quit.skip-confirmation = true;
-        "Print".action.screenshot = { };
-        "Ctrl+Print".action.screenshot-screen = { };
-        "Alt+Print".action.screenshot-window = { };
         # Focus Navigation
         "Mod+H".action.focus-column-left = { };
         "Mod+J".action.focus-window-or-workspace-down = { };
