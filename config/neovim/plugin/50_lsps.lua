@@ -170,4 +170,102 @@ nixInfo.lze.load({
 			filetypes = { "toml" },
 		},
 	},
+	{
+		name = "gopls",
+		enabled_if = "go",
+		lsp = {
+			filetypes = { "go", "gomod", "gowork", "gotmpl" },
+			capabilities = {
+				textDocument = {
+					completion = {
+						completionItem = {
+							commitCharactersSupport = true,
+							deprecatedSupport = true,
+							documentationFormat = { "markdown", "plaintext" },
+							preselectSupport = true,
+							insertReplaceSupport = true,
+							labelDetailsSupport = true,
+							snippetSupport = true,
+							resolveSupport = {
+								properties = {
+									"edit",
+									"documentation",
+									"details",
+									"additionalTextEdits",
+								},
+							},
+						},
+						completionList = {
+							itemDefaults = {
+								"editRange",
+								"insertTextFormat",
+								"insertTextMode",
+								"data",
+							},
+						},
+						contextSupport = true,
+						dynamicRegistration = true,
+					},
+				},
+			},
+			settings = {
+				gopls = {
+					gofumpt = true,
+					vulncheck = "imports",
+					analyses = {
+						useany = true,
+					},
+					codelenses = {
+						generate = true, -- show the `go generate` lens.
+						gc_details = true, -- Show a code lens toggling the display of gc's choices.
+						test = true,
+						tidy = true,
+						vendor = true,
+						regenerate_cgo = true,
+						upgrade_dependency = true,
+					},
+					hints = vim.empty_dict(),
+					usePlaceholders = true,
+					completeUnimported = true,
+					staticcheck = true,
+					matcher = "Fuzzy",
+					semanticTokens = false,
+					semanticTokenTypes = {
+						comment = true,
+						["function"] = true,
+						keyword = true,
+						label = true,
+						macro = true,
+						method = true,
+						namespace = true,
+						number = true,
+						operator = true,
+						parameter = true,
+						string = true,
+						type = true,
+						typeParameter = true,
+						variable = true,
+					},
+					semanticTokenModifiers = {
+						defaultLibrary = true,
+						definition = true,
+						readonly = true,
+						-- gopls specifics
+						array = true,
+						bool = true,
+						chan = true,
+						format = true,
+						interface = true,
+						map = true,
+						number = true,
+						pointer = true,
+						signature = true,
+						slice = true,
+						string = true,
+						struct = true,
+					},
+				},
+			},
+		},
+	},
 })

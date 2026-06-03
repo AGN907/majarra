@@ -202,6 +202,17 @@
     ];
   };
 
+  config.specs.go = {
+    lazy = false;
+    data = null;
+    extraPackages = with pkgs; [
+      gopls
+      golangci-lint
+      gofumpt
+      gotestsum
+    ];
+  };
+
   config.specs.utils = {
     data = [
       {
