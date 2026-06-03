@@ -88,6 +88,10 @@ nixInfo.lze.load({
 		on_plugin = { "blink.cmp" },
 	},
 	{
+		"friendly-snippets",
+		auto_enable = true,
+	},
+	{
 		"blink.cmp",
 		auto_enable = true,
 		event = "DeferredUIEnter",
@@ -138,6 +142,9 @@ nixInfo.lze.load({
 						show_documentation = true,
 					},
 				},
+				snippets = {
+					preset = "mini_snippets",
+				},
 				completion = {
 					menu = {
 						draw = {
@@ -169,7 +176,7 @@ nixInfo.lze.load({
 					},
 				},
 				sources = {
-					default = { "lsp", "path", "buffer", "omni" },
+					default = { "lsp", "path", "snippets", "buffer", "omni" },
 					providers = {
 						path = {
 							score_offset = 50,
