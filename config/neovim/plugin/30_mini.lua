@@ -229,13 +229,6 @@ nixInfo.lze.load({
 		end,
 	},
 	{
-		"mini.pick",
-		event = "BufEnter",
-		after = function()
-			require("mini.pick").setup()
-		end,
-	},
-	{
 		"mini.files",
 		event = "VimEnter",
 		after = function()
@@ -270,6 +263,7 @@ nixInfo.lze.load({
 	{
 		"mini.icons",
 		lazy = false,
+		dep_of = { "fzf-lua" },
 		after = function()
 			local ext3_blocklist = { scm = true, txt = true, yml = true }
 			local ext4_blocklist = { json = true, yaml = true }

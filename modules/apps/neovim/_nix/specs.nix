@@ -101,8 +101,8 @@
       mini-bufremove
       mini-files
       mini-sessions
-      mini-pick
       mini-tabline
+      fzf-lua
       tiny-inline-diagnostic-nvim
     ];
   };

@@ -83,6 +83,29 @@ nixInfo.lze.load({
 		end,
 	},
 	{
+		"fzf-lua",
+		after = function()
+			local fzf = require("fzf-lua")
+
+			fzf.setup({
+				git_icons = false,
+				winopts = {
+					height = 0.90, -- window height
+					width = 0.90, -- window width
+					preview = {
+						default = "bat",
+						border = "noborder",
+						---@type 'horizontal'|'vertical'|'flex'
+						layout = "vertical",
+						vertical = "up:70%", -- up|down:size -- preview goes above the list
+					},
+				},
+				fzf_opts = { ["--layout"] = "reverse-list" },
+			})
+			fzf.register_ui_select()
+		end,
+	},
+	{
 		"colorful-menu.nvim",
 		auto_enable = true,
 		on_plugin = { "blink.cmp" },
@@ -311,7 +334,7 @@ nixInfo.lze.load({
 		"zk-nvim",
 		after = function()
 			require("zk").setup({
-				picker = "minipick",
+				picker = "fzf_lua",
 				lsp = {},
 			})
 		end,
