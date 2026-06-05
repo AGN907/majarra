@@ -214,6 +214,16 @@
     ];
   };
 
+  config.specs.testing = {
+    lazy = false;
+    data = with pkgs.vimPlugins; [
+      neotest
+      plenary-nvim
+      nvim-nio
+      neotest-golang
+    ];
+  };
+
   config.specs.utils = {
     data = [
       {
