@@ -286,6 +286,18 @@ nixInfo.lze.load({
 	{
 		"tiny-inline-diagnostic.nvim",
 		after = function()
+			local diagnostic_signs = {
+				[vim.diagnostic.severity.ERROR] = "●",
+				[vim.diagnostic.severity.INFO] = "●",
+				[vim.diagnostic.severity.WARN] = "●",
+				[vim.diagnostic.severity.HINT] = "●",
+			}
+			local diagnostic_hl = {
+				[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+				[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+				[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+				[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+			}
 			require("tiny-inline-diagnostic").setup({
 				options = {
 					use_icons_from_diagnostic = false,
@@ -302,13 +314,26 @@ nixInfo.lze.load({
 					enabled = true,
 				},
 				signs = {
-					text = {
-						[vim.diagnostic.severity.ERROR] = "●",
-						[vim.diagnostic.severity.INFO] = "●",
-						[vim.diagnostic.severity.WARN] = "●",
-						[vim.diagnostic.severity.HINT] = "●",
-					},
+					text = diagnostic_signs,
 				},
+				status = {
+					format = function(counts)
+						local items = {}
+						for level, _ in ipairs(vim.diagnostic.severity) do
+							local count = counts[level] or 0
+							if count > 0 then
+								table.insert(
+									items,
+									("%%#%s#%s %s"):format(diagnostic_hl[level], diagnostic_signs[level], count)
+								)
+							end
+						end
+						return table.concat(items, " ")
+					end,
+				},
+			})
+		end,
+	},
 	{
 		"tiny-code-action",
 		after = function()
