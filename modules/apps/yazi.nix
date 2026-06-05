@@ -34,9 +34,6 @@
           shellWrapperName = "y";
           initLua = ''
             require("recycle-bin"):setup()
-            require("kdeconnect-yazi"):setup({
-              auto_select_single = true
-            })
           '';
           plugins = with pkgs.yaziPlugins; {
             inherit
@@ -45,7 +42,6 @@
               smart-paste
               recycle-bin
               ;
-            kdeconnect = inputs.kdeconnect-yazi;
           };
           settings = {
             mgr.mouse_events = [ ];
