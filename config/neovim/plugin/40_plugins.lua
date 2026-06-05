@@ -280,10 +280,28 @@ nixInfo.lze.load({
 		"tiny-inline-diagnostic.nvim",
 		after = function()
 			require("tiny-inline-diagnostic").setup({
-				preset = "minimal",
+				options = {
+					use_icons_from_diagnostic = false,
+					show_source = {
+						enabled = true,
+					},
+				},
 			})
 			vim.diagnostic.config({
+				underline = true,
+				update_in_insert = false,
 				virtual_text = false,
+				document_highlight = {
+					enabled = true,
+				},
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = "●",
+						[vim.diagnostic.severity.INFO] = "●",
+						[vim.diagnostic.severity.WARN] = "●",
+						[vim.diagnostic.severity.HINT] = "●",
+					},
+				},
 			})
 		end,
 	},
