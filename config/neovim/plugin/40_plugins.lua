@@ -7,6 +7,18 @@ nixInfo.lze.load({
 				terminal = {},
 				input = {},
 				rename = {},
+				statuscolumn = {
+					left = { "mark", "sign" },
+					right = { "git" },
+					folds = {
+						open = false,
+						git_hl = false,
+					},
+					git = {
+						patterns = { "MiniDiffSign" },
+					},
+					refresh = 50,
+				},
 				lazygit = {
 					configure = false,
 				},
@@ -235,18 +247,13 @@ nixInfo.lze.load({
 		auto_enable = true,
 		event = "FileType",
 		after = function()
-			require("lint").linters_by_ft = {
-				-- NOTE: download some linters
-				-- and configure them here
-				-- markdown = {'vale',},
-				-- javascript = { 'eslint' },
-				-- typescript = { 'eslint' },
-			}
+			require("lint").linters_by_ft = {}
 			_G.Config.new_autocmd("BufWritePost", nil, function()
 				require("lint").try_lint()
 			end)
 		end,
 	},
+
 	{
 		"which-key.nvim",
 		auto_enable = true,
@@ -349,6 +356,30 @@ nixInfo.lze.load({
 		end,
 	},
 	{
+		"neotest",
+		lazy = false,
+		enabled_if = "testing",
+		load = function(name)
+			require("lzextras").loaders.multi({
+				name,
+				"neotest-golang",
+				"plenary.nvim",
+				"nvim-nio",
+			})
+		end,
+		after = function()
+			local golang_config = {
+				go_test_args = { "-v", "-count=1" },
+				runner = "gotestsum",
+			}
+			require("neotest").setup({
+				adapters = {
+					require("neotest-golang")(golang_config),
+				},
+			})
+		end,
+	},
+	{
 		"zk-nvim",
 		after = function()
 			require("zk").setup({
@@ -369,6 +400,10 @@ nixInfo.lze.load({
 				},
 			})
 		end,
+	},
+	{
+		"SchemaStore.nvim",
+		auto_enable = true,
 	},
 	{
 		"trigger_colorscheme",
