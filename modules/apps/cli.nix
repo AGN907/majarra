@@ -24,6 +24,9 @@
           dysk
           dust
           devenv
+          imv
+          hl-log-viewer
+          just
         ];
 
         programs = {
