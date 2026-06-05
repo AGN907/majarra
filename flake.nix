@@ -38,6 +38,10 @@
       url = "github:BirdeeHub/lzextras";
       flake = false;
     };
+    plugins-tiny-code-action = {
+      url = "github:rachartier/tiny-code-action.nvim";
+      flake = false;
+    };
     plugins-zellij-vim = {
       url = "github:fresh2dev/zellij.vim";
       flake = false;

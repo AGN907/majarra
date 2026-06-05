@@ -653,6 +653,22 @@
         "type": "github"
       }
     },
+    "plugins-tiny-code-action": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777075455,
+        "narHash": "sha256-UF9zeO5Uujdt2MEwy2d2Lhk6JRnEN4vrEvYslv0/zaA=",
+        "owner": "rachartier",
+        "repo": "tiny-code-action.nvim",
+        "rev": "0d040ed81f7953118b81cd12681fcdfcac069803",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rachartier",
+        "repo": "tiny-code-action.nvim",
+        "type": "github"
+      }
+    },
     "plugins-zellij-vim": {
       "flake": false,
       "locked": {
@@ -684,6 +700,7 @@
         "noctalia": "noctalia",
         "plugins-lze": "plugins-lze",
         "plugins-lzextras": "plugins-lzextras",
+        "plugins-tiny-code-action": "plugins-tiny-code-action",
         "plugins-zellij-vim": "plugins-zellij-vim",
         "sops-nix": "sops-nix",
         "stylix": "stylix",

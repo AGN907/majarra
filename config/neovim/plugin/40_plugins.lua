@@ -309,6 +309,18 @@ nixInfo.lze.load({
 						[vim.diagnostic.severity.HINT] = "●",
 					},
 				},
+	{
+		"tiny-code-action",
+		after = function()
+			require("tiny-code-action").setup({
+				backend = "difftastic",
+				picker = "fzf-lua",
+				format_title = function(action)
+					if action.kind then
+						return string.format("%s (%s)", action.title, action.kind)
+					end
+					return string.format("%s (%s)", action.title, action.name)
+				end,
 			})
 		end,
 	},

@@ -104,6 +104,7 @@
       mini-tabline
       fzf-lua
       tiny-inline-diagnostic-nvim
+      config.nvim-lib.neovimPlugins.tiny-code-action
     ];
   };
 

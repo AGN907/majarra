@@ -15,6 +15,10 @@
       url = "github:fresh2dev/zellij.vim";
       flake = false;
     };
+    plugins-tiny-code-action = {
+      url = "github:rachartier/tiny-code-action.nvim";
+      flake = false;
+    };
   };
 
   nawa.apps._.neovim = {
