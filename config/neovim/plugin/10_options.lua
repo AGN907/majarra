@@ -49,7 +49,7 @@ vim.o.listchars = "extends:…,nbsp:␣,precedes:…,tab:> "
 -- Folds
 vim.o.foldlevel = 99 -- Fold nothing by default; set to 0 or 1 to fold
 vim.o.foldmethod = "indent" -- Fold based on indent level
-vim.o.foldnestmax = 4 -- Limit number of fold levels
+vim.o.foldnestmax = 15 -- Limit number of fold levels
 vim.o.foldtext = "" -- Show text under fold with its highlighting
 
 -- Editing
