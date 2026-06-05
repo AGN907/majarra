@@ -1,7 +1,7 @@
 {
   nawa.services._.immich = {
     nixos =
-      { config, pkgs, ... }:
+      { config, ... }:
       {
         sops.secrets."restic/immich" = { };
         sops.secrets.rclone = { };

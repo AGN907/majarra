@@ -194,7 +194,7 @@ local scroll_position_component = function()
 end
 
 local searchcount_component = function()
-	local ok, s_count = pcall(vim.fn.searchcount, (args or {}).options or { recompute = true })
+	local ok, s_count = pcall(vim.fn.searchcount, { recompute = true })
 	if not ok or s_count.current == nil or s_count.total == 0 then
 		return ""
 	end
