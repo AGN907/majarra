@@ -30,6 +30,7 @@ local set_hl_groups = function()
 		Fmt = { fg = colors.base04, bg = colors.base00 },
 		Bold = { fg = base.fg, bg = base.bg, bold = true },
 		Dim = { fg = hl("LineNr").fg, bg = base.bg },
+		ScrollPos = { fg = colors.base00, bg = colors.base0B },
 		MiniIconsAzure = { fg = hl("MiniIconsAzure").fg, bg = colors.base00 },
 		MiniIconsBlue = { fg = hl("MiniIconsBlue").fg, bg = colors.base00 },
 		MiniIconsCyan = { fg = hl("MiniIconsCyan").fg, bg = colors.base00 },
@@ -126,7 +127,6 @@ local file_name_component = function()
 		"%#StatusLineFileDir# " .. dir .. "/",
 		"%#StatusLineFileName#" .. filename,
 		"%#StatusLine" .. icon_hl .. "# " .. icon .. " ",
-		vim.bo.modified and "%#StatusLineFileModified#  " or "",
 		vim.bo.readonly and "%#StatusLineFileReadOnly#  " or "",
 	})
 end
@@ -147,6 +147,20 @@ local diff_component = function()
 	})
 end
 
+local fmt_component = function()
+	local formatters = require("conform").list_formatters_for_buffer(vim.api.nvim_get_current_buf())
+	if #formatters == 0 then
+		return ""
+	end
+
+	local fmt_name = formatters[1]
+
+	return table.concat({
+		"%#StatusLineFmt#",
+		string.format("fmt::%s ", fmt_name),
+	})
+end
+
 local lsp_component = function()
 	local clients = vim.lsp.get_clients({ bufnr = 0 })
 	if next(clients) == nil then
@@ -160,21 +174,8 @@ local lsp_component = function()
 
 	return table.concat({
 		"%#StatusLineLSP#",
-		string.format("lsp:: %s | ", table.concat(client_names, ",")),
-	})
-end
-
-local fmt_component = function()
-	local formatters = require("conform").list_formatters_for_buffer(vim.api.nvim_get_current_buf())
-	if #formatters == 0 then
-		return ""
-	end
-
-	local fmt_name = formatters[1]
-
-	return table.concat({
-		"%#StatusLineFmt#",
-		string.format("fmt::%s | ", fmt_name),
+		string.format("lsp:: %s ", table.concat(client_names, ",")),
+		fmt_component() == "" and "" or "| ",
 	})
 end
 
@@ -186,7 +187,10 @@ local diagnostic_status = function()
 end
 
 local scroll_position_component = function()
-	return "[%l:%c] "
+	return table.concat({
+		"%#StatusLineScrollPos#",
+		" %l:%c ",
+	})
 end
 
 local searchcount_component = function()
@@ -202,7 +206,12 @@ local searchcount_component = function()
 	local too_many = ">" .. s_count.maxcount
 	local current = s_count.current > s_count.maxcount and too_many or s_count.current
 	local total = s_count.total > s_count.maxcount and too_many or s_count.total
-	return current .. "/" .. total
+  return table.concat({
+    current,
+    "/",
+    total,
+    " "
+  })
 end
 
 function Statusline.active()
