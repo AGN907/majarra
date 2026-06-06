@@ -1,0 +1,192 @@
+{
+  "Validate: Required Input": {
+    "prefix": "valreq",
+    "body": [
+      "if ${1:input} == \"\" {",
+      "\t${2:fmt.Println(\"error: input is required\")}",
+      "}"
+    ],
+    "description": "Verify that an input string has been provided"
+  },
+  "Validate: Blank Text (Whitespace)": {
+    "prefix": "valblank",
+    "body": [
+      "if strings.TrimSpace(${1:input}) == \"\" {",
+      "\t${2:fmt.Println(\"error: input must not be blank\")}",
+      "}"
+    ],
+    "description": "Verify that a string isn't blank (whitespace only). Requires \"strings\" package."
+  },
+  "Validate: Min/Max Length (Bytes)": {
+    "prefix": "vallenbytes",
+    "body": [
+      "l := len(${1:input})",
+      "if l < ${2:5} || l > ${3:10} {",
+      "\t${4:fmt.Println(\"error: input must be between ${2:5} and ${3:10} bytes long\")}",
+      "}"
+    ],
+    "description": "Verify that a string contains a certain number of bytes"
+  },
+  "Validate: Min/Max Length (Characters)": {
+    "prefix": "vallenchars",
+    "body": [
+      "l := utf8.RuneCountInString(${1:input})",
+      "if l < ${2:5} || l > ${3:10} {",
+      "\t${4:fmt.Println(\"error: input must be between ${2:5} and ${3:10} characters long\")}",
+      "}"
+    ],
+    "description": "Verify that a string contains a certain number of characters (Runes). Requires \"unicode/utf8\" package."
+  },
+  "Validate: String Has Prefix": {
+    "prefix": "valprefix",
+    "body": [
+      "if !strings.HasPrefix(${1:input}, \"${2:prefix}\") {",
+      "\t${3:fmt.Println(\"error: input does not start with '${2:prefix}'\")}",
+      "}"
+    ],
+    "description": "Verify a string starts with a specific prefix. Requires \"strings\" package."
+  },
+  "Validate: String Has Suffix": {
+    "prefix": "valsuffix",
+    "body": [
+      "if !strings.HasSuffix(${1:input}, \"${2:suffix}\") {",
+      "\t${3:fmt.Println(\"error: input does not end with '${2:suffix}'\")}",
+      "}"
+    ],
+    "description": "Verify a string ends with a specific suffix. Requires \"strings\" package."
+  },
+  "Validate: String Contains": {
+    "prefix": "valcontains",
+    "body": [
+      "if !strings.Contains(${1:input}, \"${2:substring}\") {",
+      "\t${3:fmt.Println(\"error: input does not contain '${2:substring}'\")}",
+      "}"
+    ],
+    "description": "Verify a string contains a specific substring. Requires \"strings\" package."
+  },
+  "Validate: Unicode Character Range": {
+    "prefix": "valunicode",
+    "body": [
+      "var rxCyrillic = regexp.MustCompile(\"^\\\\([\\u0400-\\\\u04FF\\\\u0500-\\\\u052F]\\)+$\")",
+      "",
+      "if !rxCyrillic.MatchString(${1:input}) {",
+      "\t${2:fmt.Println(\"error: input must only contain Cyrillic characters\")}",
+      "}"
+    ],
+    "description": "Verify a string only contains characters in a certain unicode range."
+  },
+  "Validate: Email Address": {
+    "prefix": "valemail",
+    "body": [
+      "var rxEmail = regexp.MustCompile(\"^[a-zA-Z0-9.!#$%&'*+\\\\\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$\")",
+      "",
+      "if len(${1:email}) > 254 || !rxEmail.MatchString(${1:email}) {",
+      "\t${2:fmt.Println(\"error: invalid email address\")}",
+      "}"
+    ],
+    "description": "Sanity check email format and character limits. Requires \"regexp\" package."
+  },
+  "Validate: URL Absolute": {
+    "prefix": "valurl",
+    "body": [
+      "u, err := url.Parse(${1:input})",
+      "if err != nil {",
+      "\t${2:fmt.Println(\"error: invalid URL\")}",
+      "} else if u.Scheme == \"\" || u.Host == \"\" {",
+      "\t${3:fmt.Println(\"error: must be an absolute URL\")}",
+      "} else if u.Scheme != \"http\" && u.Scheme != \"https\" {",
+      "\t${4:fmt.Println(\"error: must begin with http or https\")}",
+      "}"
+    ],
+    "description": "Verify absolute HTTP/HTTPS URL syntax. Requires \"net/url\" package."
+  },
+  "Validate: Integer Bounds & Steps": {
+    "prefix": "valint",
+    "body": [
+      "n, err := strconv.Atoi(${1:input})",
+      "if err != nil {",
+      "\t${2:fmt.Println(\"error: must be an integer\")}",
+      "} else if n < ${3:0} || n > ${4:100}  {",
+      "\t${5:fmt.Printf(\"error: must be between ${3:0} and ${4:100}\")}",
+      "} else if n%${6:5} != 0 {",
+      "\t${7:fmt.Println(\"error: must be an multiple of ${6:5}\")}",
+      "}"
+    ],
+    "description": "Verify integer data string boundaries and steps. Requires \"strconv\" package."
+  },
+  "Validate: Float Bounds": {
+    "prefix": "valfloat",
+    "body": [
+      "n, err := strconv.ParseFloat(${1:input}, 64)",
+      "if err != nil {",
+      "\t${2:fmt.Println(\"error: must be a float\")}",
+      "} else if n < ${3:0} || n > ${4:1}  {",
+      "\t${5:fmt.Printf(\"error: must be between ${3:0} and ${4:1}\")}",
+      "}"
+    ],
+    "description": "Verify float constraints from a string. Requires \"strconv\" package."
+  },
+  "Validate: Date": {
+    "prefix": "valdate",
+    "body": [
+      "d, err := time.Parse(\"2006-01-02\", ${1:input})",
+      "if err != nil {",
+      "\t${2:fmt.Printf(\"error: invalid date\")}",
+      "} else if d.Year() != ${3:2017} {",
+      "\t${4:fmt.Printf(\"error: date is not within valid range\")}",
+      "}"
+    ],
+    "description": "Verify standard YYYY-MM-DD string format input. Requires \"time\" package."
+  },
+  "Validate: Datetime-Local With Location": {
+    "prefix": "valdatetime",
+    "body": [
+      "loc, err := time.LoadLocation(\"${2:Europe/Vienna}\")",
+      "if err != nil {",
+      "\t${3:// handle timezone load error}",
+      "}",
+      "",
+      "d, err := time.ParseInLocation(\"2006-01-02T15:04:05\", ${1:input}, loc)",
+      "if err != nil {",
+      "\t${4:fmt.Printf(\"error: invalid datetime\")}",
+      "} else if d.Year() != ${5:2017} {",
+      "\t${6:fmt.Printf(\"error: datetime is not within valid range\")}",
+      "}"
+    ],
+    "description": "Verify string formats against a specific IANA timezone. Requires \"time\" package."
+  },
+  "Validate: One-in-a-Set (Radio/Select)": {
+    "prefix": "valoneset",
+    "body": [
+      "set := map[string]bool{\"${2:wibble}\": true, \"${3:wobble}\": true, \"${4:wubble}\": true}",
+      "",
+      "if !set[${1:input}] {",
+      "\t${5:fmt.Printf(\"error: value does not match allowed options\")}",
+      "}"
+    ],
+    "description": "Verify an input string matches a value inside a pre-defined set."
+  },
+  "Validate: Many-in-a-Set (Slice elements)": {
+    "prefix": "valmanyset",
+    "body": [
+      "set := map[string]bool{\"${2:wibble}\": true, \"${3:wobble}\": true, \"${4:wubble}\": true}",
+      "",
+      "for _, f := range ${1:inputs} {",
+      "\tif !set[f] {",
+      "\t\t${5:fmt.Printf(\"error: slice contains unauthorized values\")}",
+      "\t\tbreak",
+      "\t}",
+      "}"
+    ],
+    "description": "Iterate over a slice of strings and check that all elements live inside the valid option set."
+  },
+  "Validate: Boolean Toggle/Checkbox": {
+    "prefix": "valbool",
+    "body": [
+      "if !${1:checked} {",
+      "\t${2:fmt.Println(\"error: choice must be selected/true\")}",
+      "}"
+    ],
+    "description": "Verify a standalone boolean state is true."
+  }
+}
