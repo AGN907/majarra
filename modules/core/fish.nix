@@ -8,6 +8,7 @@
     homeManager =
       { pkgs, ... }:
       {
+        stylix.targets.fish.enable = true;
         home.packages = with pkgs.fishPlugins; [
           colored-man-pages
           done

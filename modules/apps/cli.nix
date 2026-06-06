@@ -3,9 +3,12 @@
   nawa.apps._.cli.provides = {
     full.includes = with nawa.apps._.cli._; [
       base
+      rbw
+    ];
+    base.includes = with nawa.apps._.cli._; [
       atuin
       btop
-      rbw
+      bat
     ];
     base.homeManager =
       { pkgs, ... }:
@@ -40,17 +43,6 @@
             git = true;
             colors = "always";
             icons = "always";
-          };
-          bat = {
-            enable = true;
-            config = {
-              color = "always";
-            };
-            extraPackages = with pkgs.bat-extras; [
-              batdiff
-              batgrep
-              prettybat
-            ];
           };
           direnv = {
             enable = true;
@@ -131,6 +123,22 @@
 
         programs.rbw = {
           enable = true;
+        };
+      };
+    bat.homeManager =
+      { pkgs, ... }:
+      {
+        stylix.targets.bat.enable = true;
+        programs.bat = {
+          enable = true;
+          config = {
+            color = "always";
+          };
+          extraPackages = with pkgs.bat-extras; [
+            batdiff
+            batgrep
+            prettybat
+          ];
         };
       };
   };

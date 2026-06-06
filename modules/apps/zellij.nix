@@ -13,6 +13,8 @@
       }:
       let
         inherit (pkgs.stdenv.hostPlatform) system;
+        inherit (config.lib.file) mkOutOfStoreSymlink;
+        inherit (config.home) homeDirectory;
         inherit (config.lib.stylix) colors;
 
         sesh = pkgs.writeScriptBin "sesh" ''
@@ -96,24 +98,6 @@
           }
         '';
 
-        stylixTheme = ''
-          themes {
-            stylix {
-              bg "#${colors.base01}"
-              fg "#${colors.base05}"
-              red "#${colors.base08}"
-              green "#${colors.base0E}"
-              blue "#${colors.base0D}"
-              yellow "#${colors.base0A}"
-              magenta "#${colors.base0E}"
-              orange "#${colors.base09}"
-              cyan "#${colors.base0C}"
-              black "#${colors.base00}"
-              white "#${colors.base07}"
-            }
-          }
-        '';
-
         layoutDefault = ''
           layout {
               ${statusbar}
@@ -131,16 +115,14 @@
           })
         ];
 
+        stylix.targets.zellij.enable = true;
         home.packages = [
           sesh
         ];
 
         xdg.configFile = {
-          "zellij/config.kdl".text = ''
-              ${stylixTheme}
-
-            ${builtins.readFile ../../config/zellij/config.kdl}
-          '';
+          "zellij/config.kdl".source =
+            mkOutOfStoreSymlink "${homeDirectory}/majarra/config/zellij/config.kdl";
           "zellij/layouts/default.kdl".text = layoutDefault;
         };
 

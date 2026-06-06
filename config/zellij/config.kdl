@@ -1,5 +1,3 @@
-theme "stylix"
-
 pane_frames false
 simplified_ui true
 default_shell "fish"

@@ -62,23 +62,11 @@
           ];
         };
       };
-    homeManager =
-      { config, lib, ... }:
-      let
-        mkEnable = cond: lib.mkIf cond { enable = true; };
-      in
-      {
-        stylix.targets = {
-          qt.enable = true;
-          gtk.enable = true;
-          fish = mkEnable config.programs.fish.enable;
-          zellij = mkEnable config.programs.zellij.enable;
-          yazi = mkEnable config.programs.yazi.enable;
-          starship = mkEnable config.programs.starship.enable;
-          bat = mkEnable config.programs.bat.enable;
-          lazygit = mkEnable config.programs.lazygit.enable;
-          vicinae = mkEnable config.services.vicinae.enable;
-        };
+    homeManager = {
+      stylix.targets = {
+        qt.enable = true;
+        gtk.enable = true;
       };
+    };
   };
 }

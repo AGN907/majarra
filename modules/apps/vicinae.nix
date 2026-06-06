@@ -25,6 +25,8 @@
         inherit (config.stylix) fonts;
       in
       {
+        stylix.targets.vicinae.enable = true;
+
         imports = [ inputs.vicinae.homeManagerModules.default ];
         services.vicinae = {
           enable = true;

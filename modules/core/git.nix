@@ -8,6 +8,8 @@
     {
       sops.secrets.git = { };
 
+      stylix.targets.lazygit.enable = true;
+
       programs = {
         git = {
           enable = true;

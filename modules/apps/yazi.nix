@@ -21,6 +21,8 @@
     homeManager =
       { pkgs, ... }:
       {
+        stylix.targets.yazi.enable = true;
+
         home.packages = with pkgs; [
           trash-cli
           ouch
