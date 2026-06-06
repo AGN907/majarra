@@ -78,7 +78,6 @@
           bat = mkEnable config.programs.bat.enable;
           lazygit = mkEnable config.programs.lazygit.enable;
           vicinae = mkEnable config.services.vicinae.enable;
-          noctalia-shell = mkEnable config.programs.noctalia-shell.enable;
         };
       };
   };
