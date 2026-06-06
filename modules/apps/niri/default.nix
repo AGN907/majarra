@@ -83,7 +83,7 @@
           layout = {
             border = {
               enable = true;
-              width = 2;
+              width = 1;
             };
             shadow = {
               softness = 30;
