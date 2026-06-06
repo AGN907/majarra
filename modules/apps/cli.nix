@@ -4,7 +4,7 @@
     full.includes = with nawa.apps._.cli._; [
       base
       atuin
-      bottom
+      btop
       rbw
     ];
     base.homeManager =
@@ -111,54 +111,15 @@
           };
         };
       };
-    bottom.homeManager =
-      { config, ... }:
-      {
-        programs.bottom = {
-          enable = true;
-          settings = {
-            process_memory_as_value = true;
-            styles = with config.lib.stylix.colors.withHashtag; {
-              table.header.colour = base04;
-              cpu = {
-                all_cpu_colour = base05;
-                avg_cpu_colour = base08;
-
-                # CPU Core Palette (Cycle through colourss)
-                cpu_core_colours = [
-                  base08 # Red
-                  base09 # Orange
-                  base0A # Yellow
-                  base0B # Green
-                  base0C # Cyan
-                  base0D # Blue
-                  base0E # Purple
-                  base0F # Brown/Dark Red
-                ];
-              };
-              ram = {
-                ram_colour = base0B;
-                swap_colour = base09;
-                arc_colour = base0C;
-                gpu_colours = [
-                  base0C
-                  base0D
-                ];
-              };
-              widgets = {
-                border_colour = base03;
-                highlighted_border_colour = base0D;
-                text_colour = base05;
-                selected_text_colour = base00;
-                selected_bg_colour = base0D;
-              };
-              graphs = {
-                graph_colour = base02;
-              };
-            };
-          };
+    btop.homeManager = {
+      stylix.targets.btop.enable = true;
+      programs.btop = {
+        enable = true;
+        settings = {
+          vim_keys = true;
         };
       };
+    };
     rbw.homeManager =
       { pkgs, ... }:
       {
