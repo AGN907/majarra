@@ -62,7 +62,7 @@
               position = 101;
             };
           };
-          keyboardShortcutsVersion = 18;
+          keyboardShortcutsVersion = 19;
           keyboardShortcuts = [
             {
               id = "zen-compact-mode-toggle";
