@@ -28,6 +28,9 @@
               font_family = "Maple Mono NF";
               lang = "en_GB";
               polkit_agent = true;
+              panel = {
+                transparency_mode = "glass";
+              };
               session.actions = [
                 {
                   action = "lock";
@@ -38,7 +41,7 @@
                   shortcut = "E";
                 }
                 {
-                  action = "suspend";
+                  action = "lock_and_suspend";
                   shortcut = "S";
                 }
                 {
