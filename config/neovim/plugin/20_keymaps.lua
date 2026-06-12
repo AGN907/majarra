@@ -79,6 +79,7 @@ nmap_leader("fr", "<Cmd>FzfLua resume<CR>", "Resume")
 nmap_leader("fR", '<Cmd>FzfLua lsp_references<CR>', "References (LSP)")
 nmap_leader("fs", '<Cmd>FzfLua lsp_live_workspace_symbols<CR>', "Symbols workspace (live)")
 nmap_leader("fS", '<Cmd>FzfLua lsp_document_symbols<CR>', "Symbols document")
+nmap_leader("fm", '<Cmd>FzfLua git_status<CR>', "Git status")
 
 local git_log_cmd = [[Git log --pretty=format:\%h\ \%as\ │\ \%s --topo-order]]
 local git_log_buf_cmd = git_log_cmd .. " --follow -- %"
