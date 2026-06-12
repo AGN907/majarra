@@ -23,7 +23,6 @@
       url = "github:Deepak22903/kdeconnect-send.yazi";
       flake = false;
     };
-    niri.url = "github:sodiboo/niri-flake";
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";

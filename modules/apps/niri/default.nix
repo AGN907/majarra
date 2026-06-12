@@ -1,106 +1,112 @@
 {
+  self,
   inputs,
   nawa,
   ...
 }:
 {
-  flake-file.inputs.niri.url = "github:sodiboo/niri-flake";
-
   nawa.apps._.niri.includes = [
     nawa.apps._.noctalia
     nawa.apps._.vicinae
   ];
 
   nawa.apps._.niri = {
-    nixos =
-      { pkgs, lib, ... }:
-      {
-        imports = [
-          # Enable binary cache, home module, stylix, and etc.
-          inputs.niri.nixosModules.niri
-        ];
-        nixpkgs.overlays = [
-          inputs.niri.overlays.niri
-        ];
+    nixos = { pkgs, lib, ... }: {
+      programs.niri = {
+        enable = true;
+        package = self.packages.${pkgs.stdenv.hostPlatform.system}.niri;
+        useNautilus = false;
+      };
 
-        programs.niri = {
-          enable = true;
-          package = pkgs.niri-unstable;
-        };
-        services.gnome.gnome-keyring.enable = lib.mkForce false;
-        systemd.user.services.niri-flake-polkit.enable = lib.mkForce false;
+      environment.systemPackages = with pkgs; [
+        wl-clipboard-rs
+        xwayland-satellite
+      ];
 
-        xdg.portal = {
-          enable = true;
-          xdgOpenUsePortal = true;
-          config.common.default = "*";
-          extraPortals = with pkgs; [
-            xdg-desktop-portal-gtk
-            xdg-desktop-portal-gnome
+      services.gnome.gnome-keyring.enable = lib.mkForce false;
+
+      xdg.portal = {
+        enable = true;
+        xdgOpenUsePortal = true;
+        config.common.default = "*";
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-gtk
+          xdg-desktop-portal-gnome
+        ];
+        config.niri = {
+          default = lib.mkDefault [
+            "gtk"
+            "gnome"
           ];
-          config.niri = {
-            default = [
-              "gtk"
-              "gnome"
-            ];
-            "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
-            "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
-          };
+          "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+          "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
         };
       };
-    homeManager =
-      { pkgs, ... }:
-      {
-        home.packages =
-          with pkgs;
-          [
-            wl-clipboard-rs
-          ]
-          ++ [
-            inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.xwayland-satellite-unstable
+    };
+  };
+
+  perSystem =
+    {
+      pkgs,
+      lib,
+      ...
+    }:
+    {
+      packages.niri = inputs.wrappers.wrappers.niri.wrap {
+        inherit pkgs;
+
+        settings = {
+          binds = import ./_bindings.nix { inherit lib; };
+          window-rules = import ./_rules.nix;
+          layer-rules = [
+            {
+              matches = [ { namespace = "^noctalia-backdrop"; } ];
+              place-within-backdrop = true;
+            }
           ];
-        programs.niri.settings = {
           outputs."HDMI-A-1" = {
-            mode = {
-              width = 1920;
-              height = 1080;
-              refresh = 60.000;
-            };
+            mode = "1920x1080@60.00";
             scale = 1.0;
-            position = {
-              x = 1280;
-              y = 0;
+            position = _: {
+              props = {
+                x = 1280;
+                y = 0;
+              };
             };
           };
-          spawn-at-startup = [
-            { command = [ "noctalia" ]; }
-          ];
-          prefer-no-csd = true;
+          spawn-at-startup =
+            let
+              command = cmd: lib.lists.flatten [ cmd ];
+            in
+            [
+              (command "noctalia")
+              (command "zen-beta")
+            ];
           input.keyboard.xkb = {
             layout = "us,ara";
             options = "grp:alt_shift_toggle";
           };
           layout = {
             border = {
-              enable = true;
               width = 1;
             };
             shadow = {
               softness = 30;
               spread = 5;
               color = "#0007";
-              offset = {
-                x = 0;
-                y = 5;
+              offset = _: {
+                props = {
+                  x = 0;
+                  y = 5;
+                };
               };
             };
-            focus-ring = {
-              enable = false;
-            };
+            focus-ring.off = _: { };
             preset-column-widths = [
-              { proportion = 0.33333; }
-              { proportion = 0.5; }
-              { proportion = 0.66667; }
+              { proportion = 1.0; }
+              { proportion = 1.0 / 2.0; }
+              { proportion = 1.0 / 3.0; }
+              { proportion = 1.0 / 4.0; }
             ];
             default-column-width = {
               proportion = 0.5;
@@ -108,77 +114,11 @@
             background-color = "transparent";
             gaps = 8;
           };
-          window-rules = [
-            {
-              geometry-corner-radius = {
-                bottom-left = 4.0;
-                bottom-right = 4.0;
-                top-left = 4.0;
-                top-right = 4.0;
-              };
-              clip-to-geometry = true;
-              tiled-state = true;
-              draw-border-with-background = false;
-            }
-            {
-              matches = [
-                {
-                  app-id = "zen.*";
-                }
-              ];
-              default-column-width = {
-                proportion = 1.0;
-              };
-            }
-            # Floating windows
-            {
-              matches = [
-                {
-                  app-id = "zen.*";
-                  title = "^Picture-in-Picture$";
-                }
-                {
-                  app-id = "zen.*";
-                  title = "^Library$";
-                }
 
-                {
-                  app-id = "zen.*";
-                  title = ".*popup.*";
-                }
-                {
-                  app-id = "zen.*";
-                  title = ".*Authentication.*";
-                }
-                {
-                  app-id = "zen.*";
-                  title = ".*Login.*";
-                }
-                {
-                  app-id = "zen.*";
-                  title = ".*Security.*";
-                }
-                {
-                  app-id = "^xdg-desktop-portal$";
-                }
-                {
-                  app-id = "zen.*";
-                  title = "Sign In - Google Accounts — Zen Browser";
-                }
-                {
-                  title = "Yazi.*";
-                }
-              ];
-              open-floating = true;
-            }
-          ];
-          layer-rules = [
-            {
-              matches = [ { namespace = "^noctalia-overview.*"; } ];
-              place-within-backdrop = true;
-            }
-          ];
+          xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
+          prefer-no-csd = true;
+          hotkey-overlay.skip-at-startup = true;
         };
       };
-  };
+    };
 }

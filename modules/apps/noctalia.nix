@@ -101,6 +101,9 @@
             lockscreen = {
               blurred_desktop = true;
             };
+            backdrop = {
+              enabled = true;
+            };
             widget = {
               clock = {
                 format = "{:%H:%M} - {:%b %e %a}";
