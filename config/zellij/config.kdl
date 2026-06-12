@@ -18,13 +18,6 @@ plugins {
 keybinds clear-defaults=true {
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
-        bind "Alt g" {
-            Run "lazygit" {
-                floating true
-                close_on_exit true
-            };
-            SwitchToMode "Normal";
-        }
     }
     pane {
         bind "left" { MoveFocus "left"; }
