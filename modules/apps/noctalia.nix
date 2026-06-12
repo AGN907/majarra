@@ -3,7 +3,7 @@
   ...
 }:
 {
-  flake-file.inputs.noctalia.url = "github:noctalia-dev/noctalia-shell/v5";
+  flake-file.inputs.noctalia.url = "github:noctalia-dev/noctalia-shell";
 
   nawa.apps._.noctalia = {
     nixos = {
@@ -96,7 +96,6 @@
             };
             weather = {
               enabled = true;
-              address = "Dammam, SA";
               unit = "metric";
             };
             lockscreen = {

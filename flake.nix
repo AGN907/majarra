@@ -29,7 +29,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
-    noctalia.url = "github:noctalia-dev/noctalia-shell/v5";
+    noctalia.url = "github:noctalia-dev/noctalia-shell";
     plugins-lze = {
       url = "github:BirdeeHub/lze";
       flake = false;
