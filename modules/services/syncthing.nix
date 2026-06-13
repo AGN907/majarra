@@ -28,8 +28,9 @@
               };
               folders = {
                 "~/Documents/second-brain" = {
-                  id = "second-brain";
+                  id = "n2uey-f9lgk";
                   devices = [ "alioth" ];
+                  ignorePatterns = [ ".zk" ];
                 };
                 "~/Music" = {
                   id = "music";

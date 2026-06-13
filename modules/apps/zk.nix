@@ -6,7 +6,7 @@
         inherit (config.lib.file) mkOutOfStoreSymlink;
         inherit (config.home) homeDirectory;
 
-        zkNotebookDir = "${homeDirectory}/Documents/notebook";
+        zkNotebookDir = "${homeDirectory}/Documents/second-brain";
         zkConfigDir = "${homeDirectory}/majarra/config/zk";
       in
       {
