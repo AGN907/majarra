@@ -39,6 +39,7 @@
             zellij attach "$SESSION_TITLE"
           else
             # if not, create a new session 
+            cd $ZOXIDE_RESULT
             zellij attach -c "$SESSION_TITLE"
           fi
         '';
