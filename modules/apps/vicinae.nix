@@ -38,6 +38,12 @@
             };
           };
           settings = {
+            favorites = [
+              "clipboard:history"
+              "@agn907/bitwarden-rbw:search-vault"
+              "@knoopx/vicinae-extension-nix-0:options"
+              "@knoopx/vicinae-extension-nix-0:home-manager-options"
+            ];
             font = {
               normal = {
                 size = 12;
