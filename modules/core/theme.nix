@@ -6,7 +6,7 @@
 
   nawa.core._.theme = {
     nixos =
-      { pkgs, lib, ... }:
+      { pkgs, ... }:
       {
         imports = [ inputs.stylix.nixosModules.stylix ];
 
@@ -40,9 +40,15 @@
           };
           icons = {
             enable = true;
-            package = pkgs.papirus-icon-theme;
-            dark = "Papirus-Dark";
-            light = "Papirus-Light";
+            package = pkgs.tela-circle-icon-theme;
+            dark = "Tela-circle";
+            light = "Tela-circle";
+          };
+          opacity = {
+            applications = 0.90;
+            desktop = 0.80;
+            popups = 0.80;
+            terminal = 0.85;
           };
 
           targets = {
