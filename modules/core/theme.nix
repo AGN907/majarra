@@ -6,14 +6,14 @@
 
   nawa.core._.theme = {
     nixos =
-      { pkgs, ... }:
+      { pkgs, lib, ... }:
       {
         imports = [ inputs.stylix.nixosModules.stylix ];
 
         stylix = {
           enable = true;
           autoEnable = false;
-          base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa-dragon.yaml";
+          base16Scheme = "${pkgs.base16-schemes}/share/themes/mountain.yaml";
           polarity = "dark";
           fonts = {
             serif = {
