@@ -4,11 +4,10 @@
     clip-to-geometry = true;
     tiled-state = true;
     draw-border-with-background = false;
-
-    opacity = 0.85;
     background-effect = {
       blur = true;
     };
+    opacity = 0.90;
   }
   {
     matches = [
@@ -21,13 +20,6 @@
     };
 
     opacity = 1.0;
-  }
-  {
-    matches = [
-      {
-        app-id = "org.wezfurlong.wezterm";
-      }
-    ];
   }
   # Floating windows
   {
