@@ -98,21 +98,21 @@ nixInfo.lze.load({
 		},
 	},
 	{
-		name = "svelte",
+		"svelte",
 		enabled_if = "typescript",
 		lsp = {
 			filetypes = { "svelte" },
 		},
 	},
 	{
-		name = "zk",
+		"zk",
 		enabled_if = "markdown",
 		lsp = {
 			filetypes = { "markdown" },
 		},
 	},
 	{
-		name = "yamlls",
+		"yamlls",
 		enabled_if = "yaml",
 		lsp = {
 			filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.helm-values" },
@@ -134,7 +134,7 @@ nixInfo.lze.load({
 		},
 	},
 	{
-		name = "jsonls",
+		"jsonls",
 		enabled_if = "json",
 		lsp = {
 			filetypes = { "json", "jsonc" },
@@ -147,8 +147,8 @@ nixInfo.lze.load({
 					schemas = require("schemastore").json.schemas({
 						select = {
 							"package.json",
-              "tsconfig.json",
-              "Biome Formatter Config",
+							"tsconfig.json",
+							"Biome Formatter Config",
 						},
 						extra = {
 							{
@@ -164,14 +164,14 @@ nixInfo.lze.load({
 		},
 	},
 	{
-		name = "tombi",
+		"tombi",
 		enabled_if = "toml",
 		lsp = {
 			filetypes = { "toml" },
 		},
 	},
 	{
-		name = "gopls",
+		"gopls",
 		enabled_if = "go",
 		lsp = {
 			filetypes = { "go", "gomod", "gowork", "gotmpl" },
