@@ -4,6 +4,10 @@
   nawa,
   ...
 }:
+let
+  # TODO: There's most be a better way to pass stylix colors to perSystem
+  stylixColors = self.nixosConfigurations.alkaid.config.lib.stylix.colors.withHashtag;
+in
 {
   nawa.apps._.niri.includes = [
     nawa.apps._.noctalia
@@ -89,6 +93,8 @@
           layout = {
             border = {
               width = 1;
+              active-color = stylixColors.base0D;
+              inactive-color = stylixColors.base03;
             };
             shadow = {
               softness = 30;
