@@ -78,19 +78,20 @@
                 start = [
                   "launcher"
                   "spacer"
-                  "wallpaper"
-                  "spacer"
                   "workspaces"
                   "spacer"
                   "active_window"
                 ];
-                center = [ "clock" ];
+                center = [
+                  "wallpaper"
+                  "clock"
+                  "notifications"
+                ];
                 end = [
                   "media"
                   "spacer"
                   "tray"
                   "spacer"
-                  "notifications"
                   "volume"
                   "keyboard_layout"
                   "session"
