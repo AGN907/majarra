@@ -9,6 +9,7 @@
       {
         pkgs,
         config,
+        lib,
         ...
       }:
       let
@@ -39,8 +40,15 @@
             zellij attach "$SESSION_TITLE"
           else
             # if not, create a new session 
-            cd $ZOXIDE_RESULT
-            zellij attach -c "$SESSION_TITLE"
+            LAYOUT=$(${lib.getExe pkgs.gum} choose "default" "dev" --header "Choose a layout for new session:")
+
+            if [[ -z "$LAYOUT" ]]; then
+              echo "No layout selected, aborting"
+              exit 0
+            fi
+
+            cd "$ZOXIDE_RESULT"
+            zellij --layout "$LAYOUT" attach -c "$SESSION_TITLE"
           fi
         '';
 
@@ -108,6 +116,27 @@
               }
           }
         '';
+
+        layoutDev = ''
+          layout {
+            tab name="code" focus=true {
+              pane {
+                command "nvim"
+                args "."
+              }
+            }
+
+            tab name="exec" {
+              pane split_direction="vertical" {
+                pane {
+                  name "main"
+                }
+              }
+            }
+
+            ${statusbar}
+          }
+        '';
       in
       {
         nixpkgs.overlays = [
@@ -125,6 +154,7 @@
           "zellij/config.kdl".source =
             mkOutOfStoreSymlink "${homeDirectory}/majarra/config/zellij/config.kdl";
           "zellij/layouts/default.kdl".text = layoutDefault;
+          "zellij/layouts/dev.kdl".text = layoutDev;
         };
 
         programs.zellij.enable = true;
