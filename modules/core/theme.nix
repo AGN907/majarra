@@ -16,6 +16,12 @@
           base16Scheme = "${pkgs.base16-schemes}/share/themes/mountain.yaml";
           polarity = "dark";
           fonts = {
+            sizes = {
+              applications = 14;
+              desktop = 12;
+              popups = 12;
+              terminal = 14;
+            };
             serif = {
               package = pkgs.dejavu_fonts;
               name = "DejaVu Serif";
