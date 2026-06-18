@@ -71,11 +71,6 @@
             mgr = {
               prepend_keymap = [
                 {
-                  on = [ "<C-s>" ];
-                  run = "plugin kdeconnect-send";
-                  desc = "Send selected files via KDE Connect";
-                }
-                {
                   on = [
                     "R"
                     "b"
