@@ -92,7 +92,7 @@
         sql
       ]
     );
-    extraPackages = [ pkgs.tree-sitter ];
+    runtimePkgs = [ pkgs.tree-sitter ];
   };
 
   config.specs.editor = {
@@ -138,7 +138,7 @@
       mini-git
       mini-diff
     ];
-    extraPackages = [
+    runtimePkgs = [
       pkgs.lazygit
     ];
   };
@@ -146,7 +146,7 @@
   # Languages Support
   config.specs.nix = {
     data = null;
-    extraPackages = with pkgs; [
+    runtimePkgs = with pkgs; [
       nixd
       nixfmt
     ];
@@ -156,7 +156,7 @@
     data = with pkgs.vimPlugins; [
       lazydev-nvim
     ];
-    extraPackages = with pkgs; [
+    runtimePkgs = with pkgs; [
       lua-language-server
       stylua
     ];
@@ -164,7 +164,7 @@
   config.specs.typescript = {
     lazy = false;
     data = null;
-    extraPackages = with pkgs; [
+    runtimePkgs = with pkgs; [
       vtsls
       biome
       svelte-language-server
@@ -182,7 +182,7 @@
   config.specs.yaml = {
     lazy = false;
     data = null;
-    extraPackages = [
+    runtimePkgs = [
       pkgs.yaml-language-server
     ];
   };
@@ -190,7 +190,7 @@
   config.specs.json = {
     lazy = false;
     data = null;
-    extraPackages = with pkgs; [
+    runtimePkgs = with pkgs; [
       vscode-json-languageserver
     ];
   };
@@ -198,7 +198,7 @@
   config.specs.toml = {
     lazy = false;
     data = null;
-    extraPackages = [
+    runtimePkgs = [
       pkgs.tombi
     ];
   };
@@ -206,7 +206,7 @@
   config.specs.go = {
     lazy = false;
     data = null;
-    extraPackages = with pkgs; [
+    runtimePkgs = with pkgs; [
       gopls
       golangci-lint
       gofumpt

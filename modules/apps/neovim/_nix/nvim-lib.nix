@@ -3,6 +3,7 @@
   wlib,
   lib,
   inputs,
+  options,
   ...
 }:
 {
@@ -43,23 +44,13 @@
       ];
   };
 
-  # This submodule modifies both levels of your specs
-  config.specMods =
-    {
-      # When this module is ran in an inner list,
-      # this will contain `config` of the parent spec
-      # and this will contain `options`
-      # otherwise they will be `null`
-      # and then config from this one, as normal
-      # and the other module arguments.
-      ...
-    }:
-    {
-      options.extraPackages = lib.mkOption {
-        type = lib.types.listOf wlib.types.stringable;
-        default = [ ];
-        description = "a extraPackages spec field to put packages to suffix to the PATH";
-      };
+  config.specMods = {
+    options.runtimePkgs = options.runtimePkgs // {
+      description = ''
+        A runtimePkgs spec field to put packages on the PATH
+        If the spec is disabled, this value will not be included in the resulting neovim derivation
+      '';
     };
-  config.extraPackages = config.specCollect (acc: v: acc ++ (v.extraPackages or [ ])) [ ];
+  };
+  config.runtimePkgs = config.specCollect (acc: v: acc ++ (v.runtimePkgs or [ ])) [ ];
 }
