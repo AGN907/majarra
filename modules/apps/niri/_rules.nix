@@ -2,12 +2,21 @@
   {
     geometry-corner-radius = 12;
     clip-to-geometry = true;
-    tiled-state = true;
     draw-border-with-background = false;
+    opacity = 0.90;
+  }
+  {
     background-effect = {
       blur = true;
     };
-    opacity = 0.90;
+  }
+  {
+    matches = [
+      {
+        app-id = "org.wezfurlong.wezterm";
+      }
+    ];
+    default-column-width = { };
   }
   {
     matches = [
@@ -25,39 +34,14 @@
   {
     matches = [
       {
-        app-id = "zen.*";
         title = "^Picture-in-Picture$";
       }
       {
         app-id = "zen.*";
         title = "^Library$";
       }
-
-      {
-        app-id = "zen.*";
-        title = ".*popup.*";
-      }
-      {
-        app-id = "zen.*";
-        title = ".*Authentication.*";
-      }
-      {
-        app-id = "zen.*";
-        title = ".*Login.*";
-      }
-      {
-        app-id = "zen.*";
-        title = ".*Security.*";
-      }
       {
         app-id = "^xdg-desktop-portal$";
-      }
-      {
-        app-id = "zen.*";
-        title = "Sign In - Google Accounts — Zen Browser";
-      }
-      {
-        title = "Yazi.*";
       }
     ];
     open-floating = true;

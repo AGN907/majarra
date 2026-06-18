@@ -39,11 +39,9 @@ in
         ];
         config.niri = {
           default = lib.mkDefault [
-            "gtk"
             "gnome"
+            "gtk"
           ];
-          "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
-          "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
         };
       };
     };
@@ -118,12 +116,18 @@ in
               proportion = 0.5;
             };
             background-color = "transparent";
-            gaps = 8;
+            gaps = 12;
+            struts = {
+              left = 12;
+              right = 12;
+              bottom = 12;
+            };
           };
 
           xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
           prefer-no-csd = true;
           hotkey-overlay.skip-at-startup = true;
+          debug.honor-xdg-activation-with-invalid-serial = { };
         };
       };
     };
