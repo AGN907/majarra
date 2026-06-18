@@ -23,6 +23,7 @@
             devenv hook fish | source
             ";
           shellAliases = {
+            "cd.." = "cd ..";
             # Git
             g = "git";
             ga = "git add";
