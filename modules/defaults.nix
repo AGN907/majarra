@@ -14,5 +14,7 @@
   };
 
   den.schema.user.includes = [ den._.mutual-provider ];
+  den.schema.flake-system.includes = [ den.aspects.flake ];
+
   _module.args.__findFile = den.lib.__findFile;
 }

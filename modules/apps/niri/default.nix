@@ -49,14 +49,14 @@ in
     };
   };
 
-  perSystem =
+  den.aspects.flake.packages =
     {
       pkgs,
       lib,
       ...
     }:
     {
-      packages.niri = inputs.wrappers.wrappers.niri.wrap {
+      niri = inputs.wrappers.wrappers.niri.wrap {
         inherit pkgs;
 
         settings = {
