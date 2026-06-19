@@ -24,6 +24,7 @@ _G.Config.leader_group_spec = {
 	{ "<leader>t", group = "+Test" },
 	{ "<leader>o", group = "+Other" },
 	{ "<leader>q", group = "+Quickfix" },
+	{ "<leader>z", group = "+Zk" },
 }
 
 -- Helpers for a more concise `<Leader>` mappings.
@@ -120,6 +121,7 @@ nmap_leader("sn", "<Cmd>lua " .. session_new .. "<CR>", "New")
 nmap_leader("sr", '<Cmd>lua MiniSessions.select("read")<CR>', "Read")
 nmap_leader("sR", "<Cmd>lua MiniSessions.restart()<CR>", "Restart")
 nmap_leader("sw", "<Cmd>lua MiniSessions.write()<CR>", "Write current")
+nmap_leader("sq", "<Cmd>quit<CR>", "Quit")
 
 -- function ()
 --   Snacks.input.input({}, function(cmd) if cmd == nil then Snacks.terminal(cmd) end return end)
