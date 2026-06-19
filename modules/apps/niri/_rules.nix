@@ -27,8 +27,6 @@
     default-column-width = {
       proportion = 1.0;
     };
-
-    opacity = 1.0;
   }
   # Floating windows
   {

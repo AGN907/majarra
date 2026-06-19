@@ -20,6 +20,10 @@
         })
       ];
       home.sessionVariables.BROWSER = "zen-beta";
+      stylix.targets.zen-browser = {
+        enable = true;
+        profileNames = [ "default" ];
+      };
       programs.zen-browser = {
         enable = true;
         package = pkgs.zen-browser;
