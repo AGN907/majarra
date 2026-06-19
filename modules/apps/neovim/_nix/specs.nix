@@ -90,6 +90,8 @@
         php_only
         blade
         sql
+        html
+        diff
       ]
     );
     runtimePkgs = [ pkgs.tree-sitter ];
