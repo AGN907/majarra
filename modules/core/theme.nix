@@ -54,7 +54,7 @@
             applications = 0.90;
             desktop = 0.40;
             popups = 0.80;
-            terminal = 0.85;
+            terminal = 1.0;
           };
 
           targets = {
