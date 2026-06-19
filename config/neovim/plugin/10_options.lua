@@ -10,6 +10,9 @@ vim.o.shada = "'100,<50,s10,:1000,/100,@100,h" -- Limit ShaDa file (for startup)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- disable dbtext.vim
+vim.g.omni_sql_default_compl_type = "syntax"
+
 -- Enable all filetype plugins and syntax (if not enabled, for better startup)
 vim.cmd("filetype plugin indent on")
 if vim.fn.exists("syntax_on") ~= 1 then
