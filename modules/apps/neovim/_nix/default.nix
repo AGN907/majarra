@@ -14,7 +14,7 @@ inputs:
     ./specs.nix
   ];
 
-  config.settings.config_directory = "/home/agn/.config/nvim";
+  config.settings.config_directory = "/home/agn/majarra/config/neovim";
   config.settings.aliases = [
     "vi"
     "vim"

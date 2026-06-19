@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ self, inputs, ... }:
 {
   flake-file.inputs = {
     wrappers.url = "github:BirdeeHub/nix-wrapper-modules";
@@ -26,30 +26,31 @@
       environment.variables.EDITOR = "vim";
     };
     homeManager =
-      { config, lib, ... }:
-      let
-        inherit (config.lib.file) mkOutOfStoreSymlink;
-
-        homeDirectory = config.home.homeDirectory;
-        nvimConfig = "${homeDirectory}/majarra/config/neovim";
-      in
       {
-        imports = [ inputs.wrappers.homeModules.neovim ];
-        wrappers.neovim = {
-          enable = true;
-          imports = [ (import ./_nix inputs) ];
-          _module.args.stylixColors =
-            let
-              raw = config.lib.stylix.colors.withHashtag or { };
-            in
-            lib.filterAttrs (_: v: builtins.isString v) raw;
-        };
-        xdg.configFile = {
-          "nvim" = {
-            source = mkOutOfStoreSymlink nvimConfig;
-            recursive = true;
-          };
-        };
+        system,
+        ...
+      }:
+      {
+        home.packages = [
+          self.packages.${system}.nvim
+        ];
       };
+  };
+
+  den.aspects.flake.packages = { pkgs, lib, ... }: {
+    nvim = (
+      inputs.wrappers.lib.evalPackage {
+        inherit pkgs;
+        imports = [
+          inputs.wrappers.wrapperModules.neovim
+          (import ./_nix inputs)
+        ];
+        _module.args.stylixColors =
+          let
+            raw = self.nixosConfigurations.alkaid.config.lib.stylix.colors.withHashtag or { };
+          in
+          lib.filterAttrs (_: v: builtins.isString v) raw;
+      }
+    );
   };
 }
