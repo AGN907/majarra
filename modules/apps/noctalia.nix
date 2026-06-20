@@ -135,101 +135,99 @@
               in
               {
                 dark = with colors.withHashtag; {
-                  mPrimary = base0B; # #8a9a7b
-                  mOnPrimary = base00; # #181616
-                  mSecondary = base0C; # #8ea4a2
-                  mOnSecondary = base00; # #181616
-                  mTertiary = base08; # #c4746e
-                  mOnTertiary = base00; # #181616
-                  mError = base08; # #c4746e
-                  mOnError = base00; # #181616
-                  mSurface = base00; # #181616
-                  mOnSurface = base05; # #c5c9c5
-                  mHover = base02; # #393836
-                  mOnHover = base05; # #c5c9c5
-                  mSurfaceVariant = base01; # #282727
-                  mOnSurfaceVariant = base06; # #c8c093
-                  mOutline = base03; # #625e5a
-                  mShadow = base00; # #181616
-
+                  mPrimary = base0D;
+                  mOnPrimary = base00;
+                  mSecondary = base0E;
+                  mOnSecondary = base00;
+                  mTertiary = base0C;
+                  mOnTertiary = base00;
+                  mError = base08;
+                  mOnError = base00;
+                  mSurface = base00;
+                  mOnSurface = base05;
+                  mHover = base0C;
+                  mOnHover = base00;
+                  mSurfaceVariant = base01;
+                  mOnSurfaceVariant = base05;
+                  mOutline = base03;
+                  mShadow = base00;
                   terminal = {
-                    background = base00; # #181616
-                    foreground = base05; # #c5c9c5
-                    cursor = base05; # #c5c9c5
-                    cursorText = base00; # #181616
-                    selectionBg = base05; # #c5c9c5
-                    selectionFg = base00; # #181616
+                    background = base00;
+                    foreground = base05;
+                    cursor = base00;
+                    cursorText = base05;
+                    selectionBg = base00;
+                    selectionFg = base05;
 
                     normal = {
-                      black = base01; # #282727
-                      red = base08; # #c4746e
-                      green = base0B; # #8a9a7b
-                      yellow = base0A; # #c4b28a
-                      blue = base0D; # #8ba4b0
-                      magenta = base0E; # #a292a3
-                      cyan = base0C; # #8ea4a2
-                      white = base05; # #c5c9c5
+                      black = base00;
+                      red = base08;
+                      green = base0B;
+                      yellow = base0A;
+                      blue = base0D;
+                      magenta = base0E;
+                      cyan = base0C;
+                      white = base05;
                     };
 
                     bright = {
-                      black = base03; # #625e5a
-                      red = base08; # #c4746e
-                      green = base0B; # #8a9a7b
-                      yellow = base09; # #b6927b
-                      blue = base0D; # #8ba4b0
-                      magenta = base0E; # #a292a3
-                      cyan = base0C; # #8ea4a2
-                      white = base06; # #c8c093
+                      black = base01;
+                      red = base08;
+                      green = base0B;
+                      yellow = base09;
+                      blue = base0D;
+                      magenta = base0E;
+                      cyan = base0C;
+                      white = base04;
                     };
                   };
                 };
 
                 light = with colors.withHashtag; {
-                  mPrimary = base0B; # #8a9a7b
-                  mOnPrimary = base05; # #c5c9c5
-                  mSecondary = base0C; # #8ea4a2
-                  mOnSecondary = base05; # #c5c9c5
-                  mTertiary = base08; # #c4746e
-                  mOnTertiary = base05; # #c5c9c5
-                  mError = base08; # #c4746e
-                  mOnError = base05; # #c5c9c5
-                  mSurface = base05; # #c5c9c5
-                  mOnSurface = base00; # #181616
-                  mHover = base06; # #c8c093
-                  mOnHover = base00; # #181616
-                  mSurfaceVariant = base06; # #c8c093
-                  mOnSurfaceVariant = base00; # #181616
-                  mOutline = base0B; # #8a9a7b
-                  mShadow = base04; # #737c73
-
+                  mPrimary = base0D;
+                  mOnPrimary = base00;
+                  mSecondary = base0E;
+                  mOnSecondary = base00;
+                  mTertiary = base0C;
+                  mOnTertiary = base00;
+                  mError = base08;
+                  mOnError = base00;
+                  mSurface = base00;
+                  mOnSurface = base05;
+                  mHover = base0C;
+                  mOnHover = base00;
+                  mSurfaceVariant = base01;
+                  mOnSurfaceVariant = base04;
+                  mOutline = base03;
+                  mShadow = base00;
                   terminal = {
-                    background = base05; # #c5c9c5
-                    foreground = base00; # #181616
-                    cursor = base00; # #181616
-                    cursorText = base05; # #c5c9c5
-                    selectionBg = base00; # #181616
-                    selectionFg = base05; # #c5c9c5
+                    background = base00;
+                    foreground = base05;
+                    cursor = base00;
+                    cursorText = base05;
+                    selectionBg = base00;
+                    selectionFg = base05;
 
                     normal = {
-                      black = base05; # #c5c9c5
-                      red = base08; # #c4746e
-                      green = base0B; # #8a9a7b
-                      yellow = base0A; # #c4b28a
-                      blue = base0D; # #8ba4b0
-                      magenta = base0E; # #a292a3
-                      cyan = base0C; # #8ea4a2
-                      white = base00; # #181616
+                      black = base00;
+                      red = base08;
+                      green = base0B;
+                      yellow = base0A;
+                      blue = base0D;
+                      magenta = base0E;
+                      cyan = base0C;
+                      white = base05;
                     };
 
                     bright = {
-                      black = base04; # #737c73
-                      red = base08; # #c4746e
-                      green = base0B; # #8a9a7b
-                      yellow = base09; # #b6927b
-                      blue = base0D; # #8ba4b0
-                      magenta = base0E; # #a292a3
-                      cyan = base0C; # #8ea4a2
-                      white = base01; # #282727
+                      black = base01;
+                      red = base08;
+                      green = base0B;
+                      yellow = base09;
+                      blue = base0D;
+                      magenta = base0E;
+                      cyan = base0C;
+                      white = base04;
                     };
                   };
                 };
