@@ -148,12 +148,17 @@ local diff_component = function()
 end
 
 local fmt_component = function()
-	local formatters = require("conform").list_formatters_for_buffer(vim.api.nvim_get_current_buf())
+	local is_loaded, conform = pcall(require, "conform")
+	if not is_loaded then
+		return ""
+	end
+
+	local formatters = conform.list_formatters_for_buffer(vim.api.nvim_get_current_buf())
 	if #formatters == 0 then
 		return ""
 	end
 
-	local fmt_name = formatters[1]
+	local fmt_name = formatters[1] or "unknown"
 
 	return table.concat({
 		"%#StatusLineFmt#",
@@ -206,12 +211,12 @@ local searchcount_component = function()
 	local too_many = ">" .. s_count.maxcount
 	local current = s_count.current > s_count.maxcount and too_many or s_count.current
 	local total = s_count.total > s_count.maxcount and too_many or s_count.total
-  return table.concat({
-    current,
-    "/",
-    total,
-    " "
-  })
+	return table.concat({
+		current,
+		"/",
+		total,
+		" ",
+	})
 end
 
 function Statusline.active()

@@ -91,6 +91,25 @@ nixInfo.lze.h.lsp.set_ft_fallback(function(name)
 	end
 end)
 
+nixInfo.lze.load({
+	{
+		"trigger_colorscheme",
+		event = "VimEnter",
+		load = function()
+			vim.schedule(function()
+				vim.cmd.colorscheme(nixInfo("default", "info", "colorscheme"))
+			end)
+		end,
+	},
+	{
+		"trigger_statusline",
+		load = function()
+			vim.opt.statusline =
+				"%{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.Statusline.active() : v:lua.Statusline.inactive()%}"
+		end,
+	},
+})
+
 _G.Config = {}
 
 local gr = vim.api.nvim_create_augroup("custom-config", {})

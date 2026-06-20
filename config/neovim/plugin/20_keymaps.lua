@@ -131,17 +131,6 @@ local input_cmd_terminal =
 nmap_leader(".", "<Cmd>lua Snacks.terminal()<CR>", "Open terminal")
 nmap_leader(",", "<Cmd>lua " .. input_cmd_terminal .. "<CR>", "Run command in terminal")
 
--- Tests
-nmap_leader("tf", "<Cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "Run file")
-nmap_leader("ta", "<Cmd>lua require('neotest').run.attach()<CR>", "Attach")
-nmap_leader("tA", "<Cmd>lua require('neotest').run.run(vim.uv.cwd())<CR>", "Run all files")
-nmap_leader("tn", "<Cmd>lua require('neotest').run.run()<CR>", "Run nearest")
-nmap_leader("tl", "<Cmd>lua require('neotest').run.run_last()<CR>", "Run last")
-nmap_leader("ts", "<Cmd>lua require('neotest').summary.toggle()<CR>", "Summary")
-nmap_leader("to", "<Cmd>lua require('neotest').output.open({ enter = true, auto_close = true })<CR>", "Output")
-nmap_leader("tO", "<Cmd>lua require('neotest').output_panel.toggle()<CR>", "Output panel (toggle)")
-nmap_leader("tt", "<Cmd>lua require('neotest').run.stop()<CR>", "Terminate")
-
 -- Quickfix
 nmap_leader("qq", "<Cmd>lua require('quicker').toggle()<CR>", "Toggle quickfix")
 nmap_leader("ql", "<Cmd>lua require('quicker').toggle({ loclist = true })<CR>", "Toggle loclist")

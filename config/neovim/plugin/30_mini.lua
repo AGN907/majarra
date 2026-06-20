@@ -14,21 +14,21 @@ nixInfo.lze.load({
 	},
 	{
 		"mini.notify",
-		lazy = false,
+		event = "UIEnter",
 		after = function()
 			require("mini.notify").setup()
 		end,
 	},
 	{
 		"mini.extra",
-		lazy = false,
+    dep_of = {"mini.ai"},
 		after = function()
 			require("mini.extra").setup()
 		end,
 	},
 	{
 		"mini.ai",
-		on_plugin = "which-key.nvim",
+		on_plugin = { "which-key.nvim", "mini.extra" },
 		after = function()
 			local ai = require("mini.ai")
 			ai.setup({
@@ -121,20 +121,21 @@ nixInfo.lze.load({
 	},
 	{
 		"mini.align",
+		keys = { "ga", "gA" },
 		after = function()
 			require("mini.align").setup()
 		end,
 	},
 	{
-		"mini.move",
-		event = "BufEnter",
+    "mini.move",
+		keys = { "<M-h>", "<M-j>", "<M-k>", "<M-l>" },
 		after = function()
 			require("mini.move").setup()
 		end,
 	},
 	{
 		"mini.tabline",
-		event = "BufEnter",
+		event = "UIEnter",
 		after = function()
 			require("mini.tabline").setup({
 				format = function(buf_id, label)
@@ -146,13 +147,14 @@ nixInfo.lze.load({
 	},
 	{
 		"mini.jump",
-		event = "BufEnter",
+		keys = { "f", "F", "t", "T" },
 		after = function()
 			require("mini.jump").setup()
 		end,
 	},
 	{
 		"mini.operators",
+		keys = { "g=", "gx", "gm", "gr", "(", ")" },
 		after = function()
 			require("mini.operators").setup()
 
@@ -168,41 +170,40 @@ nixInfo.lze.load({
 	},
 	{
 		"mini.bufremove",
-		event = "BufEnter",
+		event = { "BufDelete" },
 		after = function()
 			require("mini.bufremove").setup()
 		end,
 	},
 	{
 		"mini.bracketed",
-		event = "BufEnter",
+		keys = { "[", "]" },
 		after = function()
 			require("mini.bracketed").setup()
 		end,
 	},
 	{
 		"mini.animate",
+		event = { "BufReadPre", "BufNewFile" },
 		after = function()
 			require("mini.animate").setup()
 		end,
 	},
 	{
-		"mini.comment",
-		event = "BufEnter",
-		after = function()
-			require("mini.comment").setup()
-		end,
+	  "mini.comment",
+	  keys = { "gc", "gcc" },
+	  after = function() require("mini.comment").setup() end,
 	},
 	{
 		"mini-git",
-		event = "BufEnter",
+		event = { "BufReadPre", "BufNewFile" },
 		after = function()
 			require("mini.git").setup()
 		end,
 	},
 	{
 		"mini.diff",
-		event = "BufEnter",
+		event = { "BufReadPre", "BufNewFile" },
 		after = function()
 			require("mini.diff").setup({
 				view = {
@@ -218,6 +219,7 @@ nixInfo.lze.load({
 	},
 	{
 		"mini.indentscope",
+		event = { "BufReadPre", "BufNewFile" },
 		after = function()
 			local indentscope = require("mini.indentscope")
 			indentscope.setup()
@@ -225,7 +227,6 @@ nixInfo.lze.load({
 	},
 	{
 		"mini.files",
-		event = "VimEnter",
 		after = function()
 			require("mini.files").setup({
 				windows = {
@@ -238,19 +239,19 @@ nixInfo.lze.load({
 	},
 	{
 		"mini.surround",
-		event = "BufEnter",
+		keys = { "sa", "sd", "sr", "sf", "sF", "sh" },
 		after = function()
 			require("mini.surround").setup()
 		end,
 	},
 	{
-		"mini.sessions",
-		after = function()
-			require("mini.sessions").setup()
-		end,
+	  "mini.sessions",
+	  event = "VimEnter",
+	  after = function() require("mini.sessions").setup() end,
 	},
 	{
 		"mini.splitjoin",
+		keys = {"gS"},
 		after = function()
 			require("mini.splitjoin").setup()
 		end,
@@ -288,6 +289,7 @@ nixInfo.lze.load({
 	},
 	{
 		"mini.snippets",
+		event = "InsertEnter",
 		after = function()
 			local latex_patterns = { "latex/**/*.json", "**/latex.json" }
 			local lang_patterns = {

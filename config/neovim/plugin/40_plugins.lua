@@ -46,7 +46,7 @@ nixInfo.lze.load({
 	},
 	{
 		"nvim-treesitter",
-		lazy = false,
+		event = { "BufReadPre", "BufNewFile" },
 		auto_enable = true,
 		after = function()
 			---@param buf integer
@@ -88,6 +88,7 @@ nixInfo.lze.load({
 	},
 	{
 		"nvim-lspconfig",
+		event = { "BufReadPre", "BufNewFile" },
 		auto_enable = true,
 		lsp = function(plugin)
 			vim.lsp.config(plugin.name, plugin.lsp or {})
@@ -96,6 +97,7 @@ nixInfo.lze.load({
 	},
 	{
 		"fzf-lua",
+		cmd = { "FzfLua" },
 		after = function()
 			local fzf = require("fzf-lua")
 
@@ -124,12 +126,13 @@ nixInfo.lze.load({
 	},
 	{
 		"friendly-snippets",
+		event = "InsertEnter",
 		auto_enable = true,
 	},
 	{
 		"blink.cmp",
 		auto_enable = true,
-		event = "DeferredUIEnter",
+		event = "InsertEnter",
 		after = function(_)
 			require("blink.cmp").setup({
 				keymap = {
@@ -226,6 +229,8 @@ nixInfo.lze.load({
 	},
 	{
 		"conform.nvim",
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
 		auto_enable = true,
 		after = function()
 			local conform = require("conform")
@@ -244,8 +249,8 @@ nixInfo.lze.load({
 	},
 	{
 		"nvim-lint",
+		event = { "BufReadPost", "BufWritePost" },
 		auto_enable = true,
-		event = "FileType",
 		after = function()
 			require("lint").linters_by_ft = {}
 			_G.Config.new_autocmd("BufWritePost", nil, function()
@@ -272,7 +277,7 @@ nixInfo.lze.load({
 	},
 	{
 		"zellij-vim",
-		lazy = false,
+		event = "DeferredUIEnter",
 		after = function()
 			vim.g.zellij_navigator_no_default_mappings = 1
 			if os.getenv("ZELLIJ") then
@@ -285,6 +290,7 @@ nixInfo.lze.load({
 	},
 	{
 		"tiny-inline-diagnostic.nvim",
+		event = "LspAttach",
 		after = function()
 			local diagnostic_signs = {
 				[vim.diagnostic.severity.ERROR] = "●",
@@ -336,6 +342,7 @@ nixInfo.lze.load({
 	},
 	{
 		"tiny-code-action",
+		event = { "LspAttach" },
 		after = function()
 			require("tiny-code-action").setup({
 				backend = "difftastic",
@@ -371,6 +378,7 @@ nixInfo.lze.load({
 	},
 	{
 		"quicker.nvim",
+		ft = { "qf" },
 		after = function()
 			require("quicker").setup({
 				keys = {
@@ -394,7 +402,21 @@ nixInfo.lze.load({
 	},
 	{
 		"neotest",
-		lazy = false,
+		keys = {
+			{ "<leader>tf", "<Cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", desc = "Run file" },
+			{ "<leader>ta", "<Cmd>lua require('neotest').run.attach()<CR>", desc = "Attach" },
+			{ "<leader>tf", "<Cmd>lua require('neotest').run.run(vim.uv.cwd())<CR>", desc = "Run all files" },
+			{ "<leader>tl", "<Cmd>lua require('neotest').run.run_last()<CR>", desc = "Run last" },
+			{ "<leader>tn", "<Cmd>lua require('neotest').run.run()<CR>", desc = "Run nearest" },
+			{
+				"<leader>to",
+				"<Cmd>lua require('neotest').output.open({ enter = true, auto_close = true })<CR>",
+				desc = "Output",
+			},
+			{ "<leader>tO", "<Cmd>lua require('neotest').output_panel.toggle()<CR>", desc = "Output panel (toggle)" },
+			{ "<leader>ts", "<Cmd>lua require('neotest').summary.toggle()<CR>", desc = "Summary" },
+			{ "<leader>tt", "<Cmd>lua require('neotest').run.stop()<CR>", desc = "Terminate" },
+		},
 		enabled_if = "testing",
 		load = function(name)
 			require("lzextras").loaders.multi({
@@ -418,6 +440,7 @@ nixInfo.lze.load({
 	},
 	{
 		"zk-nvim",
+		keys = { "<leader>zn", "<leader>zo", "<leader>zf", "<leader>zt" },
 		after = function()
 			require("zk").setup({
 				picker = "fzf_lua",
@@ -427,6 +450,7 @@ nixInfo.lze.load({
 	},
 	{
 		"render-markdown.nvim",
+		ft = "markdown",
 		after = function()
 			require("render-markdown").setup({
 				render_modes = { "n", "c", "t" },
@@ -440,22 +464,8 @@ nixInfo.lze.load({
 	},
 	{
 		"SchemaStore.nvim",
+		ft = { "json", "yaml" },
+		on_plugin = { "yamlls" },
 		auto_enable = true,
-	},
-	{
-		"trigger_colorscheme",
-		event = "VimEnter",
-		load = function()
-			vim.schedule(function()
-				vim.cmd.colorscheme(nixInfo("default", "info", "colorscheme"))
-			end)
-		end,
-	},
-	{
-		"trigger_statusline",
-		load = function()
-			vim.opt.statusline =
-				"%{%(nvim_get_current_win()==#g:actual_curwin || &laststatus==3) ? v:lua.Statusline.active() : v:lua.Statusline.inactive()%}"
-		end,
 	},
 })
