@@ -1,5 +1,6 @@
 local colors = nixInfo({}, "info", "colors")
-Statusline = {}
+local space = "%="
+
 local hl = function(group)
 	return vim.api.nvim_get_hl(0, {
 		name = group,
@@ -40,14 +41,15 @@ local set_hl_groups = function()
 		MiniIconsPurple = { fg = hl("MiniIconsPurple").fg, bg = colors.base00 },
 		MiniIconsRed = { fg = hl("MiniIconsRed").fg, bg = colors.base00 },
 		MiniIconsYellow = { fg = hl("MiniIconsYellow").fg, bg = colors.base00 },
+		Recording = { fg = colors.base0D, bg = "NONE" },
 	}) do
-		group = "StatusLine" .. group
+		group = "St" .. group
 		vim.api.nvim_set_hl(0, group, opts)
 		opts.fg, opts.bg = opts.bg, opts.fg
 		vim.api.nvim_set_hl(0, group .. "Inverted", opts)
 	end
 
-	vim.api.nvim_set_hl(0, "StatusLineToNorm", { fg = colors.base05, bg = colors.base00 })
+	vim.api.nvim_set_hl(0, "StBase", { bg = "NONE" })
 end
 
 Config.new_autocmd("ColorScheme", nil, set_hl_groups, "Re-apply statusline highlights on colorscheme change")
@@ -74,10 +76,10 @@ local mode_component = function()
 	local mode = mode_settings[vim.fn.mode()] or {}
 
 	return table.concat({
-		"%#StatusLineMode" .. mode.hl .. "Inverted#",
-		"%#StatusLineMode" .. mode.hl .. "# " .. mode.name,
-		" %#StatusLineMode" .. mode.hl .. "Inverted#",
-		"%#StatusLineToNorm#",
+		"%#StMode" .. mode.hl .. "Inverted#",
+		"%#StMode" .. mode.hl .. "# " .. mode.name,
+		" %#StMode" .. mode.hl .. "Inverted#",
+		"%#StBase#",
 	})
 end
 
@@ -90,7 +92,7 @@ local git_branch_component = function()
 	local branch = vim.split(summary, " ")[1]
 
 	return table.concat({
-		"%#StatusLineGit#",
+		"%#StGit#",
 		"  " .. branch,
 		" ",
 	})
@@ -123,11 +125,11 @@ local file_name_component = function()
 	local icon, icon_hl = require("mini.icons").get("extension", filename)
 
 	return table.concat({
-		"%#StatusLineToNorm#",
-		"%#StatusLineFileDir# " .. dir .. "/",
-		"%#StatusLineFileName#" .. filename,
-		"%#StatusLine" .. icon_hl .. "# " .. icon .. " ",
-		vim.bo.readonly and "%#StatusLineFileReadOnly#  " or "",
+		"%#StBase#",
+		"%#StFileDir# " .. dir .. "/",
+		"%#StFileName#" .. filename,
+		"%#St" .. icon_hl .. "# " .. icon .. " ",
+		vim.bo.readonly and "%#StFileReadOnly#  " or "",
 	})
 end
 
@@ -140,10 +142,10 @@ local diff_component = function()
 	local add, change, delete = summary.add or 0, summary.change or 0, summary.delete or 0
 
 	return table.concat({
-		"%#StatusLineDiffAdd# " .. (add > 0 and "+" .. add or "") .. " ",
-		"%#StatusLineDiffChange#" .. (change > 0 and "~" .. change or "") .. " ",
-		"%#StatusLineDiffDelete#" .. (delete > 0 and "-" .. delete or "") .. " ",
-		"%#StatusLineToNorm#",
+		"%#StDiffAdd# " .. (add > 0 and "+" .. add or "") .. " ",
+		"%#StDiffChange#" .. (change > 0 and "~" .. change or "") .. " ",
+		"%#StDiffDelete#" .. (delete > 0 and "-" .. delete or "") .. " ",
+		"%#StBase#",
 	})
 end
 
@@ -161,7 +163,7 @@ local fmt_component = function()
 	local fmt_name = formatters[1] or "unknown"
 
 	return table.concat({
-		"%#StatusLineFmt#",
+		"%#StFmt#",
 		string.format("fmt::%s ", fmt_name),
 	})
 end
@@ -178,7 +180,7 @@ local lsp_component = function()
 	end
 
 	return table.concat({
-		"%#StatusLineLSP#",
+		"%#StLSP#",
 		string.format("lsp:: %s ", table.concat(client_names, ",")),
 		fmt_component() == "" and "" or "| ",
 	})
@@ -187,13 +189,13 @@ end
 local diagnostic_status = function()
 	return table.concat({
 		vim.diagnostic.status(),
-		"%#StatusLineToNorm# ",
+		"%#StBase# ",
 	})
 end
 
 local scroll_position_component = function()
 	return table.concat({
-		"%#StatusLineScrollPos#",
+		"%#StScrollPos#",
 		" %l:%c ",
 	})
 end
@@ -219,14 +221,43 @@ local searchcount_component = function()
 	})
 end
 
-function Statusline.active()
+local blink_icon = true
+local blink_timer = nil
+local function macro_component()
+	local is_rec = vim.fn.reg_recording()
+	if is_rec == "" then
+		if blink_timer then
+			blink_timer:stop()
+			blink_timer:close()
+			blink_timer = nil
+		end
+		return ""
+	end
+	if not blink_timer then
+		blink_timer = vim.uv.new_timer()
+		blink_timer:start(
+			0,
+			500,
+			vim.schedule_wrap(function()
+				blink_icon = not blink_icon
+				vim.cmd("redrawstatus")
+			end)
+		)
+	end
+	local icon = blink_icon and "" or " "
+	return "%#StRecording#" .. icon .. "%#StBase#" .. " @" .. is_rec
+end
+
+function _G.Statusline_active()
 	return table.concat({
-		"%#StatusLineToNorm#",
+		"%#StBase# ",
 		mode_component(),
 		git_branch_component(),
 		file_name_component(),
 		diff_component(),
-		"%=",
+		space,
+		macro_component(),
+		space,
 		diagnostic_status(),
 		lsp_component(),
 		fmt_component(),
@@ -235,6 +266,10 @@ function Statusline.active()
 	})
 end
 
-function Statusline.inactive()
-	return " %t"
+function _G.Statusline_inactive()
+	return table.concat({
+		"%#StBase#",
+		file_name_component(),
+		space,
+	})
 end

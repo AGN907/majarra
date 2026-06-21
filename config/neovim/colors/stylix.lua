@@ -34,6 +34,8 @@ for group, opts in pairs({
 	DiagnosticSignOk = { fg = hl("DiagnosticSignOk").fg, bg = colors.base00 },
 	DiagnosticSignWarn = { fg = hl("DiagnosticSignWarn").fg, bg = colors.base00 },
 
+	Statusline = { fg = hl("Statusline").fg, bg = "NONE" },
+
 	WhichKeySeparator = { fg = hl("WhichKeySeparator").fg, bg = colors.base00 },
 
 	MiniDiffSignAdd = { fg = hl("MiniDiffSignAdd").fg, bg = colors.base00 },
