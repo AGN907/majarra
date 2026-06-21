@@ -170,7 +170,12 @@ nixInfo.lze.load({
 	},
 	{
 		"mini.bufremove",
-		event = { "BufDelete" },
+		keys = {
+			{ "<leader>bd", "<Cmd>lua MiniBufremove.delete()<CR>", "Delete" },
+			{ "<leader>bD", "<Cmd>lua MiniBufremove.delete(0, true)<CR>", "Delete!" },
+			{ "<leader>bw", "<Cmd>lua MiniBufremove.wipeout(0, true)<CR>", "Wipeout" },
+			{ "<leader>bW", "<Cmd>lua MiniBufremove.wipeout()<CR>", "Wipeout!" },
+		},
 		after = function()
 			require("mini.bufremove").setup()
 		end,
