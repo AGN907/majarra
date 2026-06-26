@@ -60,6 +60,7 @@ in
         settings = {
           binds = import ./_bindings.nix { inherit lib; };
           window-rules = import ./_rules.nix;
+          animations = import ./_animations.nix;
           layer-rules = [
             {
               matches = [ { namespace = "^noctalia-backdrop"; } ];
