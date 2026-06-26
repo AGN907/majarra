@@ -31,7 +31,8 @@ local set_hl_groups = function()
 		Fmt = { fg = colors.base04, bg = colors.base00 },
 		Bold = { fg = base.fg, bg = base.bg, bold = true },
 		Dim = { fg = hl("LineNr").fg, bg = base.bg },
-		ScrollPos = { fg = colors.base00, bg = colors.base0B },
+		ScrollPos = { fg = colors.base04, bg = "NONE" },
+		Recording = { fg = colors.base0D, bg = "NONE" },
 		MiniIconsAzure = { fg = hl("MiniIconsAzure").fg, bg = colors.base00 },
 		MiniIconsBlue = { fg = hl("MiniIconsBlue").fg, bg = colors.base00 },
 		MiniIconsCyan = { fg = hl("MiniIconsCyan").fg, bg = colors.base00 },
@@ -41,7 +42,6 @@ local set_hl_groups = function()
 		MiniIconsPurple = { fg = hl("MiniIconsPurple").fg, bg = colors.base00 },
 		MiniIconsRed = { fg = hl("MiniIconsRed").fg, bg = colors.base00 },
 		MiniIconsYellow = { fg = hl("MiniIconsYellow").fg, bg = colors.base00 },
-		Recording = { fg = colors.base0D, bg = "NONE" },
 	}) do
 		group = "St" .. group
 		vim.api.nvim_set_hl(0, group, opts)
@@ -156,15 +156,12 @@ local fmt_component = function()
 	end
 
 	local formatters = conform.list_formatters_for_buffer(vim.api.nvim_get_current_buf())
-	if #formatters == 0 then
-		return ""
-	end
 
 	local fmt_name = formatters[1] or "unknown"
 
 	return table.concat({
 		"%#StFmt#",
-		string.format("fmt::%s ", fmt_name),
+		string.format("%s ", fmt_name),
 	})
 end
 
@@ -180,23 +177,17 @@ local lsp_component = function()
 	end
 
 	return table.concat({
-		"%#StLSP#",
-		string.format("lsp:: %s ", table.concat(client_names, ",")),
+		"%#StLSP# ",
+		string.format("%s ", table.concat(client_names, ",")),
 		fmt_component() == "" and "" or "| ",
 	})
 end
 
 local diagnostic_status = function()
 	return table.concat({
+		" ",
 		vim.diagnostic.status(),
-		"%#StBase# ",
-	})
-end
-
-local scroll_position_component = function()
-	return table.concat({
-		"%#StScrollPos#",
-		" %l:%c ",
+		"%#StBase#",
 	})
 end
 
@@ -235,14 +226,16 @@ local function macro_component()
 	end
 	if not blink_timer then
 		blink_timer = vim.uv.new_timer()
-		blink_timer:start(
-			0,
-			500,
-			vim.schedule_wrap(function()
-				blink_icon = not blink_icon
-				vim.cmd("redrawstatus")
-			end)
-		)
+		if blink_timer ~= nil then
+			blink_timer:start(
+				0,
+				500,
+				vim.schedule_wrap(function()
+					blink_icon = not blink_icon
+					vim.cmd("redrawstatus")
+				end)
+			)
+		end
 	end
 	local icon = blink_icon and "" or " "
 	return "%#StRecording#" .. icon .. "%#StBase#" .. " @" .. is_rec
@@ -252,17 +245,16 @@ function _G.Statusline_active()
 	return table.concat({
 		"%#StBase# ",
 		mode_component(),
-		git_branch_component(),
 		file_name_component(),
-		diff_component(),
+		lsp_component(),
+		fmt_component(),
+		diagnostic_status(),
 		space,
 		macro_component(),
 		space,
-		diagnostic_status(),
-		lsp_component(),
-		fmt_component(),
-		scroll_position_component(),
 		searchcount_component(),
+		diff_component(),
+		git_branch_component(),
 	})
 end
 
