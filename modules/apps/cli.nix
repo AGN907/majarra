@@ -27,7 +27,6 @@
           dysk
           dust
           devenv
-          imv
           hl-log-viewer
           just
         ];
@@ -53,6 +52,7 @@
             enable = true;
             settings.updates.auto_update = true;
           };
+          imv.enable = true;
         };
       };
     atuin.homeManager =
