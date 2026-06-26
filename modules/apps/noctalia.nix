@@ -148,64 +148,16 @@
                   mHover = base0C;
                   mOnHover = base00;
                   mSurfaceVariant = base01;
-                  mOnSurfaceVariant = base05;
-                  mOutline = base03;
-                  mShadow = base00;
-                  terminal = {
-                    background = base00;
-                    foreground = base05;
-                    cursor = base00;
-                    cursorText = base05;
-                    selectionBg = base00;
-                    selectionFg = base05;
-
-                    normal = {
-                      black = base00;
-                      red = base08;
-                      green = base0B;
-                      yellow = base0A;
-                      blue = base0D;
-                      magenta = base0E;
-                      cyan = base0C;
-                      white = base05;
-                    };
-
-                    bright = {
-                      black = base01;
-                      red = base08;
-                      green = base0B;
-                      yellow = base09;
-                      blue = base0D;
-                      magenta = base0E;
-                      cyan = base0C;
-                      white = base04;
-                    };
-                  };
-                };
-
-                light = with colors.withHashtag; {
-                  mPrimary = base0D;
-                  mOnPrimary = base00;
-                  mSecondary = base0E;
-                  mOnSecondary = base00;
-                  mTertiary = base0C;
-                  mOnTertiary = base00;
-                  mError = base08;
-                  mOnError = base00;
-                  mSurface = base00;
-                  mOnSurface = base05;
-                  mHover = base0C;
-                  mOnHover = base00;
-                  mSurfaceVariant = base01;
                   mOnSurfaceVariant = base04;
                   mOutline = base03;
                   mShadow = base00;
+
                   terminal = {
                     background = base00;
                     foreground = base05;
-                    cursor = base00;
-                    cursorText = base05;
-                    selectionBg = base00;
+                    cursor = base05;
+                    cursorText = base00;
+                    selectionBg = base02;
                     selectionFg = base05;
 
                     normal = {
@@ -220,14 +172,14 @@
                     };
 
                     bright = {
-                      black = base01;
+                      black = base03;
                       red = base08;
                       green = base0B;
-                      yellow = base09;
+                      yellow = base0A;
                       blue = base0D;
                       magenta = base0E;
                       cyan = base0C;
-                      white = base04;
+                      white = base07;
                     };
                   };
                 };
