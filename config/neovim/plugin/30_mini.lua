@@ -21,7 +21,7 @@ nixInfo.lze.load({
 	},
 	{
 		"mini.extra",
-    dep_of = {"mini.ai"},
+		dep_of = { "mini.ai" },
 		after = function()
 			require("mini.extra").setup()
 		end,
@@ -127,7 +127,7 @@ nixInfo.lze.load({
 		end,
 	},
 	{
-    "mini.move",
+		"mini.move",
 		keys = { "<M-h>", "<M-j>", "<M-k>", "<M-l>" },
 		after = function()
 			require("mini.move").setup()
@@ -195,9 +195,11 @@ nixInfo.lze.load({
 		end,
 	},
 	{
-	  "mini.comment",
-	  keys = { "gc", "gcc" },
-	  after = function() require("mini.comment").setup() end,
+		"mini.comment",
+		keys = { "gc", "gcc" },
+		after = function()
+			require("mini.comment").setup()
+		end,
 	},
 	{
 		"mini-git",
@@ -250,13 +252,15 @@ nixInfo.lze.load({
 		end,
 	},
 	{
-	  "mini.sessions",
-	  event = "VimEnter",
-	  after = function() require("mini.sessions").setup() end,
+		"mini.sessions",
+		event = "VimEnter",
+		after = function()
+			require("mini.sessions").setup()
+		end,
 	},
 	{
 		"mini.splitjoin",
-		keys = {"gS"},
+		keys = { "gS" },
 		after = function()
 			require("mini.splitjoin").setup()
 		end,
