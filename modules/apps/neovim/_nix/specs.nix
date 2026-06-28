@@ -92,6 +92,7 @@
         sql
         html
         diff
+        proto
       ]
     );
     runtimePkgs = [ pkgs.tree-sitter ];
