@@ -20,5 +20,9 @@ inputs:
     "vim"
   ];
 
-  config.settings.colorscheme = "kanso-zen";
+  config.hosts = {
+    node.nvim-host.enable = false;
+    python3.nvim-host.enable = false;
+    ruby.nvim-host.enable = false;
+  };
 }
