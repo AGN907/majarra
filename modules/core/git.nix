@@ -36,6 +36,7 @@
           enable = true;
           settings = {
             git = {
+              overrideGpg = true;
               pagers = [
                 {
                   pager = "delta --dark --paging=never";
