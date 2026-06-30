@@ -22,7 +22,15 @@ nixInfo.lze.load({
 				lazygit = {
 					configure = false,
 				},
+				words = {},
 			})
+
+			vim.keymap.set("n", "]]", function()
+				Snacks.words.jump(vim.v.count1)
+			end, { desc = "Next reference" })
+			vim.keymap.set("n", "[[", function()
+				Snacks.words.jump(-vim.v.count1)
+			end, { desc = "Prev reference" })
 
 			Config.new_autocmd("User", "MiniFilesActionRename", function(event)
 				Snacks.rename.on_rename_file(event.data.from, event.data.to)
