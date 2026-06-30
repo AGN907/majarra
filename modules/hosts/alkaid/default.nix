@@ -8,6 +8,7 @@
       desktop
       services._.paperless-ngx
       services._.immich
+      services._.adguard-home
     ];
 
     nixos = {
