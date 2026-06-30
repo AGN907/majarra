@@ -27,10 +27,10 @@
         };
         delta = {
           enable = true;
+          enableGitIntegration = true;
         };
         difftastic = {
           enable = true;
-          git.enable = true;
         };
         lazygit = {
           enable = true;
