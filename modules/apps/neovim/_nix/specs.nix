@@ -66,35 +66,38 @@
   };
 
   config.specs.treesitter = {
-    data = pkgs.vimPlugins.nvim-treesitter.withPlugins (
-      p: with p; [
-        lua
-        nix
-        markdown
-        markdown_inline
-        comment
-        json
-        yaml
-        toml
-        typescript
-        svelte
-        go
-        gomod
-        gosum
-        gotmpl
-        gitcommit
-        gitignore
-        kdl
-        just
-        php
-        php_only
-        blade
-        sql
-        html
-        diff
-        proto
-      ]
-    );
+    data = with pkgs.vimPlugins; [
+      nvim-treesitter-textobjects
+      (nvim-treesitter.withPlugins (
+        p: with p; [
+          lua
+          nix
+          markdown
+          markdown_inline
+          comment
+          json
+          yaml
+          toml
+          typescript
+          svelte
+          go
+          gomod
+          gosum
+          gotmpl
+          gitcommit
+          gitignore
+          kdl
+          just
+          php
+          php_only
+          blade
+          sql
+          html
+          diff
+          proto
+        ]
+      ))
+    ];
     runtimePkgs = [ pkgs.tree-sitter ];
   };
 

@@ -87,6 +87,9 @@ nixInfo.lze.load({
 		end,
 	},
 	{
+		"nvim-treesitter-textobjects",
+	},
+	{
 		"nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		auto_enable = true,
