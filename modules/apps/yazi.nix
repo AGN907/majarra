@@ -44,6 +44,7 @@
               smart-paste
               recycle-bin
               ;
+            kdeconnect-send = inputs.kdeconnect-yazi;
           };
           settings = {
             mgr.mouse_events = [ ];
@@ -92,6 +93,11 @@
                   on = "p";
                   run = "plugin smart-paste";
                   desc = "Paste into the hovered directory or CWD";
+                }
+                {
+                  on = "<C-s>";
+                  run = "plugin kdeconnect-send";
+                  desc = "Send selected files via KDE Connect";
                 }
               ];
             };
