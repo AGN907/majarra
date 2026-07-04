@@ -27,6 +27,7 @@
       mini-extra
       mini-notify
       mini-icons
+      mini-input
       mini-misc
       snacks-nvim
       which-key-nvim

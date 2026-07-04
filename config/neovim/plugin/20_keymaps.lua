@@ -110,7 +110,8 @@ nmap_leader("lt", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", "Type definition
 xmap_leader("la", "<Cmd>lua vim.lsp.buf.code_action()<CR>", "Actions")
 xmap_leader("lf", formatting_cmd, "Format selection")
 
-local session_new = 'MiniSessions.write(vim.fn.input("Session name: "))'
+local session_new =
+	'MiniSessions.write(MiniInput.get({prompt = "Session name", init_keys = { vim.fn.fnamemodify(vim.fn.getcwd(), ":t") }}))'
 
 nmap_leader("sd", '<Cmd>lua MiniSessions.select("delete")<CR>', "Delete")
 nmap_leader("sn", "<Cmd>lua " .. session_new .. "<CR>", "New")
@@ -119,9 +120,6 @@ nmap_leader("sR", "<Cmd>lua MiniSessions.restart()<CR>", "Restart")
 nmap_leader("sw", "<Cmd>lua MiniSessions.write()<CR>", "Write current")
 nmap_leader("sq", "<Cmd>quit<CR>", "Quit")
 
--- function ()
---   Snacks.input.input({}, function(cmd) if cmd == nil then Snacks.terminal(cmd) end return end)
--- end
 local input_cmd_terminal =
 	"Snacks.input.input({}, function(cmd) if cmd ~= nil then Snacks.terminal(cmd) end return end)"
 nmap_leader(".", "<Cmd>lua Snacks.terminal()<CR>", "Open terminal")

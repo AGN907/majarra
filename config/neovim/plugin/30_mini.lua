@@ -350,6 +350,12 @@ nixInfo.lze.load({
 		end,
 	},
 	{
+		"mini.input",
+		after = function()
+			require("mini.input").setup()
+		end,
+	},
+	{
 		"mini.misc",
 		lazy = false,
 		after = function()
