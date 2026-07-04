@@ -415,8 +415,8 @@ nixInfo.lze.load({
 		"neotest",
 		keys = {
 			{ "<leader>tf", "<Cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", desc = "Run file" },
+      { "<leader>tF", "<Cmd>lua require('neotest').run.run(vim.uv.cwd())<CR>", desc = "Run all files" },
 			{ "<leader>ta", "<Cmd>lua require('neotest').run.attach()<CR>", desc = "Attach" },
-			{ "<leader>tf", "<Cmd>lua require('neotest').run.run(vim.uv.cwd())<CR>", desc = "Run all files" },
 			{ "<leader>tl", "<Cmd>lua require('neotest').run.run_last()<CR>", desc = "Run last" },
 			{ "<leader>tn", "<Cmd>lua require('neotest').run.run()<CR>", desc = "Run nearest" },
 			{

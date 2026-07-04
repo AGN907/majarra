@@ -115,7 +115,8 @@ local session_new =
 
 nmap_leader("sd", '<Cmd>lua MiniSessions.select("delete")<CR>', "Delete")
 nmap_leader("sn", "<Cmd>lua " .. session_new .. "<CR>", "New")
-nmap_leader("sr", '<Cmd>lua MiniSessions.select("read")<CR>', "Read")
+nmap_leader("sr", '<Cmd>lua MiniSessions.read(vim.fn.fnamemodify(vim.fn.getcwd(), ":t"))<CR>', "Read")
+nmap_leader("ss", '<Cmd>lua MiniSessions.select("read")<CR>', "Select")
 nmap_leader("sR", "<Cmd>lua MiniSessions.restart()<CR>", "Restart")
 nmap_leader("sw", "<Cmd>lua MiniSessions.write()<CR>", "Write current")
 nmap_leader("sq", "<Cmd>quit<CR>", "Quit")
