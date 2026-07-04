@@ -298,9 +298,9 @@ nixInfo.lze.load({
 				local buf_id = args.data.buf_id
 				vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id })
 
-				vim.keymap.set("n", "g~", set_cwd, { buffer = b, desc = "Set cwd" })
-				vim.keymap.set("n", "gX", ui_open, { buffer = b, desc = "OS open" })
-				vim.keymap.set("n", "gy", yank_path, { buffer = b, desc = "Yank path" })
+				vim.keymap.set("n", "g~", set_cwd, { buffer = buf_id, desc = "Set cwd" })
+				vim.keymap.set("n", "gX", ui_open, { buffer = buf_id, desc = "OS open" })
+				vim.keymap.set("n", "gy", yank_path, { buffer = buf_id, desc = "Yank path" })
 
 				map_split(buf_id, "<C-s>", "belowright horizontal")
 				map_split(buf_id, "<C-v>", "belowright vertical")
