@@ -13,7 +13,7 @@
         stylix = {
           enable = true;
           autoEnable = false;
-          base16Scheme = "${pkgs.base16-schemes}/share/themes/mountain.yaml";
+          base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa-dragon.yaml";
           polarity = "dark";
           fonts = {
             sizes = {
@@ -52,7 +52,7 @@
           };
           opacity = {
             applications = 0.90;
-            desktop = 0.40;
+            desktop = 0.80;
             popups = 0.80;
             terminal = 1.0;
           };
