@@ -24,6 +24,9 @@
         imports = [
           inputs.noctalia.homeModules.default
         ];
+
+        stylix.targets.noctalia.enable = true;
+
         programs.noctalia = {
           enable = true;
           settings = {
@@ -62,11 +65,6 @@
                 filename_pattern = "screenshot_%Y%m%d_%H%M%S";
               };
             };
-            theme = {
-              mode = "dark";
-              source = "custom";
-              custom_palette = "stylix";
-            };
             bar = {
               main = {
                 enabled = true;
@@ -92,26 +90,41 @@
                   "spacer"
                   "tray"
                   "spacer"
-                  "volume"
-                  "keyboard_layout"
+                  "group:g1"
                   "session"
                 ];
+                capsule_group = [
+                  {
+                    id = "g1";
+                    fill = "surface_variant";
+                    members = [
+                      "network"
+                      "volume"
+                      "keyboard_layout"
+                    ];
+                    padding = 8;
+                    opacity = opacity.desktop;
+                  }
+                ];
               };
+            };
+            audio = {
+              enable_overdrive = true;
             };
             notification = {
               enable_daemon = true;
               position = "top_right";
-              background_opacity = opacity.popups;
-            };
-            osd = {
-              background_opacity = opacity.popups;
             };
             weather = {
               enabled = true;
               unit = "metric";
             };
+            location = {
+              address = "Dammam, SA";
+            };
             lockscreen = {
               blurred_desktop = true;
+              blur_intensity = 0.80;
             };
             backdrop = {
               enabled = true;
@@ -126,64 +139,13 @@
               media = {
                 hide_when_no_media = true;
               };
-            };
-          };
-          customPalettes = {
-            stylix =
-              let
-                inherit (config.lib.stylix) colors;
-              in
-              {
-                dark = with colors.withHashtag; {
-                  mPrimary = base0D;
-                  mOnPrimary = base00;
-                  mSecondary = base0E;
-                  mOnSecondary = base00;
-                  mTertiary = base0C;
-                  mOnTertiary = base00;
-                  mError = base08;
-                  mOnError = base00;
-                  mSurface = base00;
-                  mOnSurface = base05;
-                  mHover = base0C;
-                  mOnHover = base00;
-                  mSurfaceVariant = base01;
-                  mOnSurfaceVariant = base04;
-                  mOutline = base03;
-                  mShadow = base00;
-
-                  terminal = {
-                    background = base00;
-                    foreground = base05;
-                    cursor = base05;
-                    cursorText = base00;
-                    selectionBg = base02;
-                    selectionFg = base05;
-
-                    normal = {
-                      black = base00;
-                      red = base08;
-                      green = base0B;
-                      yellow = base0A;
-                      blue = base0D;
-                      magenta = base0E;
-                      cyan = base0C;
-                      white = base05;
-                    };
-
-                    bright = {
-                      black = base03;
-                      red = base08;
-                      green = base0B;
-                      yellow = base0A;
-                      blue = base0D;
-                      magenta = base0E;
-                      cyan = base0C;
-                      white = base07;
-                    };
-                  };
-                };
+              network = {
+                show_label = false;
               };
+              keyboard_layout = {
+                show_label = false;
+              };
+            };
           };
         };
       };
