@@ -79,7 +79,7 @@ local mode_component = function()
 		"%#StMode" .. mode.hl .. "Inverted#",
 		"%#StMode" .. mode.hl .. "# " .. mode.name,
 		" %#StMode" .. mode.hl .. "Inverted#",
-		"%#StBase#",
+		"%#StBase# ",
 	})
 end
 
@@ -157,7 +157,7 @@ local fmt_component = function()
 
 	local formatters = conform.list_formatters_for_buffer(vim.api.nvim_get_current_buf())
 
-	local fmt_name = formatters[1] or "unknown"
+	local fmt_name = formatters[1] or ""
 
 	return table.concat({
 		"%#StFmt#",
