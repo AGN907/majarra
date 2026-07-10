@@ -121,7 +121,7 @@ nixInfo.lze.load({
 						default = "bat",
 						border = "noborder",
 						---@type 'horizontal'|'vertical'|'flex'
-						layout = "vertical",
+						layout = "flex",
 						vertical = "up:70%", -- up|down:size -- preview goes above the list
 					},
 				},
