@@ -90,12 +90,12 @@
                   "spacer"
                   "tray"
                   "spacer"
-                  "group:g1"
+                  "group:group1"
                   "session"
                 ];
                 capsule_group = [
                   {
-                    id = "g1";
+                    id = "group1";
                     fill = "surface_variant";
                     members = [
                       "network"
@@ -124,7 +124,7 @@
             };
             lockscreen = {
               blurred_desktop = true;
-              blur_intensity = 0.80;
+              blur_intensity = 0.20;
             };
             backdrop = {
               enabled = true;
