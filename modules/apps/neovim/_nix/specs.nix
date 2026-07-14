@@ -96,6 +96,7 @@
           html
           diff
           proto
+          dart
         ]
       ))
     ];

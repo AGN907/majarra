@@ -268,4 +268,10 @@ nixInfo.lze.load({
 			},
 		},
 	},
+	{
+		"dartls",
+		lsp = {
+			filetypes = { "dart" },
+		},
+	},
 })
