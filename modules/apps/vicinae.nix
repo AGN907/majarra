@@ -19,16 +19,12 @@
       };
     };
     homeManager =
-      { config, pkgs, ... }:
-      let
-        system = pkgs.stdenv.hostPlatform.system;
-        inherit (config.stylix) fonts;
-      in
+      { system, ... }:
       {
         stylix.targets.vicinae.enable = true;
 
         imports = [ inputs.vicinae.homeManagerModules.default ];
-        services.vicinae = {
+        programs.vicinae = {
           enable = true;
           systemd = {
             enable = true;
@@ -44,12 +40,6 @@
               "@knoopx/vicinae-extension-nix-0:options"
               "@knoopx/vicinae-extension-nix-0:home-manager-options"
             ];
-            font = {
-              normal = {
-                size = 12;
-                family = fonts.monospace.name;
-              };
-            };
           };
           extensions = with inputs.vicinae-extensions.packages.${system}; [
             nix
