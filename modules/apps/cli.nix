@@ -100,7 +100,7 @@
               "workspace"
               "directory"
             ];
-            dotfiles.enabled = true;
+            dotfiles.enabled = false;
           };
         };
       };
