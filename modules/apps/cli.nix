@@ -30,6 +30,8 @@
           devenv
           hl-log-viewer
           just
+          gomi
+          chafa
         ];
 
         programs = {
@@ -53,7 +55,6 @@
             enable = true;
             settings.updates.auto_update = true;
           };
-          imv.enable = true;
         };
       };
     atuin.homeManager =
@@ -138,7 +139,6 @@
           extraPackages = with pkgs.bat-extras; [
             batdiff
             batgrep
-            prettybat
           ];
         };
       };
