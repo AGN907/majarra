@@ -3,9 +3,10 @@
   imports = [
     (inputs.flake-file.flakeModules.dendritic or { })
     (inputs.den.flakeModules.dendritic or { })
+    (inputs.den.namespace "nawa" true)
+    inputs.treefmt-nix.flakeModule
   ];
 
-  # other inputs may be defined at a module using them.
   flake-file.inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     den.url = "github:vic/den";
@@ -18,5 +19,6 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 }

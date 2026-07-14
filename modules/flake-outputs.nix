@@ -8,6 +8,38 @@
   perSystem =
     { pkgs, ... }:
     {
+      packages = {
+        vm = pkgs.writeShellApplication {
+          name = "vm";
+          text =
+            let
+              host = inputs.self.nixosConfigurations.alkaid.config;
+            in
+            ''
+              ${host.system.build.vm}/bin/run-${host.networking.hostName}-vm "$@"
+            '';
+        };
+      };
+
+      treefmt = {
+        projectRootFile = ".envrc";
+        programs = {
+          nixfmt.enable = true;
+          deadnix.enable = true;
+          nixf-diagnose.enable = true;
+        };
+        settings.global.excludes = [
+          "flake.lock"
+          ".envrc"
+          # Ignore cause of removing __findFile cause nixd complaining its not used
+          "*/agn.nix"
+          "*/profiles.nix"
+
+          "**/.gitignore"
+          "*/secrets/*"
+        ];
+      };
+
       devShells.default =
         let
           inherit (pkgs.stdenvNoCC.targetPlatform) system;
