@@ -9,79 +9,41 @@
   };
 
   nawa.apps._.zen.homeManager =
-    { pkgs, ... }:
+    { pkgs, system, ... }:
     {
       imports = [
         inputs.zen-browser.homeModules.beta
       ];
+
       nixpkgs.overlays = [
         (_final: _prev: {
           zen-browser = inputs.zen-browser.packages.x86_64-linux.default;
         })
       ];
-      home.sessionVariables.BROWSER = "zen-beta";
+
       stylix.targets.zen-browser = {
         enable = true;
         profileNames = [ "default" ];
       };
+
       programs.zen-browser = {
         enable = true;
         package = pkgs.zen-browser;
         setAsDefaultBrowser = true;
         enablePrivateDesktopEntry = true;
-        profiles.default = {
-          settings = {
-            "zen.workspaces.continue-where-left-off" = true;
-            "zen.view.compact.hide-tabbar" = true;
-            "zen.urlbar.behavior" = "float";
-            "zen.welcome-screen.seen" = true;
-          };
-          mods = [
-            "253a3a74-0cc4-47b7-8b82-996a64f030d5" # Floating History
-            "7190e4e9-bead-4b40-8f57-95d852ddc941" # Tab title fixes
-          ];
-          spacesForce = true;
-          spaces = {
-            "General" = {
-              id = "e966bffb-71b3-4d48-96b7-d53cb75da363";
-              position = 1000;
-              icon = "🏠";
-            };
-            "Work" = {
-              id = "e87b512a-8f0b-406c-b759-c466ee38b0c7";
-              position = 2000;
-              icon = "💼";
-            };
-            "Learning" = {
-              id = "6fbf0424-cf43-4a81-9f8c-d293da231f11";
-              position = 3000;
-              icon = "book";
-            };
-          };
-          pinsForce = true;
-          pins = {
-            "Github" = {
-              id = "48e8a119-5a14-4826-9545-91c8e8dd3bf6";
-              url = "https://github.com";
-              position = 101;
-            };
-          };
-          keyboardShortcutsVersion = 19;
-          keyboardShortcuts = [
-            {
-              id = "zen-compact-mode-toggle";
-              key = "c";
-              modifiers = {
-                control = true;
-                alt = true;
-              };
+        nativeMessagingHosts = [
+          (pkgs.writeTextDir "lib/mozilla/native-messaging-hosts/com.vicinae.vicinae.json" (
+            builtins.toJSON {
+              name = "com.vicinae.vicinae";
+              description = "Vicinae Native Messaging Host";
+              path = "${inputs.vicinae.packages.${system}.default}/libexec/vicinae/vicinae-browser-link";
+              type = "stdio";
+              allowed_extensions = [ "firefox@vicinae.com" ];
             }
-            {
-              id = "key_quitApplication";
-              disabled = true;
-            }
-          ];
-        };
+          ))
+        ];
+        policies = import ./_polices.nix;
+        profiles.default = import ./_profile-default.nix { inherit pkgs; };
       };
 
       # Open files with the browser
