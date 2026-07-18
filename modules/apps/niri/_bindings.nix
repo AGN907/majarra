@@ -17,7 +17,7 @@ in
     "wezterm"
   ];
   "Mod+B".spawn = [
-    "zen-beta"
+    "zen-twilight"
   ];
   "Mod+Comma".spawn = noctalia "settings-toggle";
   "Mod+S".spawn = noctalia "panel-toggle control-center";

@@ -3,21 +3,22 @@ let
 in
 {
   AllowFileSelectionDialogs = true;
-  AppAutoUpdate = false;
   AutofilAddressEnabled = false;
   AutofilCreditCardEnabled = false;
   BackgroundAppUpdate = false;
   BlockAboutAddons = false;
   BlockAboutConfig = false;
   BlockAboutProfiles = false;
-  DisableAppUpdate = true;
   DisableFirefoxAccounts = true;
   DisableFirefoxScreenshots = true;
   DisableFormHistory = true;
-  DisableTelemetry = true;
   DisablePocket = true;
   DontCheckDefaultBrowser = true;
   NoDefaultBookmarks = true;
+  SanitizeOnShutdown = {
+    FormData = true;
+    Cache = true;
+  };
   HardwareAcceleration = true;
   ManualAppUpdateOnly = true;
   OfferToSaveLogins = false;

@@ -39,17 +39,11 @@
   "extensions.screenshots.disabled" = true;
   "extensions.pocket.enabled" = false;
 
-  "extensions.getAddons.cache.enabled" = false;
-  "extensions.getAddons.showPane" = false;
   "extensions.htmlaboutaddons.recommendations.enabled" = false;
 
   "extensions.ui.sitepermission.hidden" = true;
   "extensions.ui.locale.hidden" = true;
   "extensions.allowPrivateBrowsingByDefault" = true;
-
-  # Stops any potential conflict with Nix/Home Manager installing extensions.
-  "extensions.autoDisableScopes" = 0;
-  "extensions.enabledScopes" = 15;
 
   "extensions.formautofill.available" = "off";
   "extensions.formautofill.addresses.enabled" = false;
@@ -58,11 +52,6 @@
   "extensions.formautofill.heuristics.enabled" = false;
 
   # Privacy, Security
-  "dom.security.https_only_mode" = true;
-  "dom.security.https_only_mode_ever_enabled" = true;
-
-  "privacy.globalprivacycontrol.enabled" = true;
-  "privacy.globalprivacycontrol.functionality.enabled" = true;
   "privacy.query_stripping.enabled" = true;
   "privacy.query_stripping.enabled.pbmode" = true;
   "privacy.donottrackheader.enabled" = true;
@@ -79,19 +68,8 @@
   "dom.block_multiple_popups" = true;
   "privacy.popups.disable_from_plugins" = 3;
 
-  "privacy.sanitize.sanitizeOnShutdown" = true;
-  "privacy.clearOnShutdown.cache" = false;
-  "privacy.clearOnShutdown.cookies" = false;
-  "privacy.clearOnShutdown.downloads" = false;
-  "privacy.clearOnShutdown.formdata" = true;
-  "privacy.clearOnShutdown.history" = false;
-  "privacy.clearOnShutdown.offlineApps" = false;
-  "privacy.clearOnShutdown.sessions" = false;
-  "privacy.clearOnShutdown.siteSettings" = false;
-
   # Login / autofill
   "signon.rememberSignons" = false;
-  "browser.formfill.enable" = false;
 
   # Performance, Media
   "gfx.webrender.all" = true; # Force enable GPU acceleration

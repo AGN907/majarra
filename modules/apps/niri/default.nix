@@ -83,7 +83,7 @@ in
             in
             [
               (command "noctalia")
-              (command "zen-beta")
+              (command "zen-twilight")
             ];
           input.keyboard.xkb = {
             layout = "us,ara";
