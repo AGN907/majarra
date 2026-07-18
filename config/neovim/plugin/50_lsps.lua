@@ -112,58 +112,6 @@ nixInfo.lze.load({
 		},
 	},
 	{
-		"yamlls",
-		enabled_if = "yaml",
-		lsp = {
-			filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.helm-values" },
-			---@type lspconfig.settings.yamlls
-			settings = {
-				yaml = {
-					schemaStore = {
-						enable = false,
-						url = "",
-					},
-					schemas = require("schemastore").yaml.schemas({
-						select = {
-							"docker-compose.yml",
-							"GitHub Action",
-						},
-					}),
-				},
-			},
-		},
-	},
-	{
-		"jsonls",
-		enabled_if = "json",
-		lsp = {
-			filetypes = { "json", "jsonc" },
-			---@type lspconfig.settings.jsonls
-			settings = {
-				json = {
-					validate = {
-						enable = true,
-					},
-					schemas = require("schemastore").json.schemas({
-						select = {
-							"package.json",
-							"tsconfig.json",
-							"Biome Formatter Config",
-						},
-						extra = {
-							{
-								description = "Shadcn-svelte registry schema",
-								fileMatch = "registry.json",
-								name = "registry.json",
-								url = "https://shadcn-svelte.com/schema/registry.json",
-							},
-						},
-					}),
-				},
-			},
-		},
-	},
-	{
 		"tombi",
 		enabled_if = "toml",
 		lsp = {
@@ -272,6 +220,18 @@ nixInfo.lze.load({
 		"dartls",
 		lsp = {
 			filetypes = { "dart" },
+		},
+	},
+	{
+		"jsonls",
+		lsp = {
+			filetypes = { "json", "jsonc" },
+		},
+	},
+	{
+		"yamlls",
+		lsp = {
+			filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.helm-values" },
 		},
 	},
 })

@@ -475,8 +475,5 @@ nixInfo.lze.load({
 	},
 	{
 		"SchemaStore.nvim",
-		ft = { "json", "yaml" },
-		on_plugin = { "yamlls" },
-		auto_enable = true,
 	},
 })
