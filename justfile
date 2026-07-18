@@ -12,8 +12,8 @@ boot host=hostname *args:
   {{hostname}} boot {{args}}
 write:
   nix run .#write-flake
-update:
-  nix flake update
+update *args:
+  nix flake update {{args}}
 vm:
   nix run .#vm
 add-secret:
