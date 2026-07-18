@@ -23,6 +23,14 @@
       {
         stylix.targets.vicinae.enable = true;
 
+        home.file.".mozilla/native-messaging-hosts/com.vicinae.vicinae.json".text = builtins.toJSON {
+          name = "com.vicinae.vicinae";
+          description = "Vicinae Native Messaging Host";
+          path = "${inputs.vicinae.packages.${system}.default}/libexec/vicinae/vicinae-browser-link";
+          type = "stdio";
+          allowed_extensions = [ "firefox@vicinae.com" ];
+        };
+
         imports = [ inputs.vicinae.homeManagerModules.default ];
         programs.vicinae = {
           enable = true;
@@ -45,6 +53,11 @@
             nix
             aria2-manager
             github
+            firefox
+            niri
+            timer
+            nerdfont-search
+            player-pilot
           ];
         };
       };
