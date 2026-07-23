@@ -56,9 +56,9 @@
           default_tab_template {
               pane size=2 borderless=true {
                   plugin location="file://${pkgs.zjstatus}/bin/zjstatus.wasm" {
-                      format_left   "{mode} #[fg=#${colors.base01}]| #[fg=#${colors.base04}] {session}"
+                      format_left   "{mode} #[fg=#${colors.base01}]| #[fg=#${colors.base04}]  {session}"
                       format_center "{tabs}"
-                      format_right  ""
+                      format_right  "{command_git_branch}"
 
                       format_space  ""
                       format_hide_on_overlength "true"
@@ -92,6 +92,11 @@
                       tab_floating_indicator   " 󰉈"
 
                       tab_separator           "#[fg=#${colors.base01}] | "
+
+                      command_git_branch_command  "git rev-parse --abbrev-ref HEAD"
+                      command_git_branch_format  "#[fg=#${colors.base0D}]  {stdout}"
+                      command_git_branch_interval "10"
+                      command_git_branch_rendermode "static"
                   }
               }
               children
@@ -110,14 +115,14 @@
 
         layoutDev = ''
           layout {
-            tab name="code" focus=true {
+            tab name="edit" focus=true {
               pane {
                 command "nvim"
                 args "."
               }
             }
 
-            tab name="exec" {
+            tab name="run" {
               pane split_direction="vertical" {
                 pane {
                   name "main"
