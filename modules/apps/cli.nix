@@ -32,6 +32,7 @@
           just
           gomi
           chafa
+          playerctl
         ];
 
         programs = {
