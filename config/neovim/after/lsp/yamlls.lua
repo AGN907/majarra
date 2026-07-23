@@ -11,6 +11,7 @@ return {
 					"docker-compose.yml",
 					"GitHub Action",
           "pubspec.yaml",
+          "sqlc configuration",
 				},
 			}),
 		},
