@@ -10,9 +10,7 @@
 
   nawa.apps._.zen.homeManager =
     {
-      config,
       pkgs,
-      system,
       ...
     }:
     {
