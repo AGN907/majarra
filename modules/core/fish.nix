@@ -12,55 +12,44 @@
         home.packages = with pkgs.fishPlugins; [
           colored-man-pages
           done
-          fish-you-should-use
           pkgs.libnotify
+          fzf-fish
+          git-abbr
         ];
         programs.fish = {
           enable = true;
           interactiveShellInit = "
             set fish_greeting
-            set -g fish_key_bindings fish_vi_key_bindings
+            fish_vi_key_bindings
+
             devenv hook fish | source
             ";
-          shellAliases = {
-            "cd.." = "cd ..";
-            # Git
-            g = "git";
-            ga = "git add";
-            gaa = "git add --all";
-            gb = "git branch";
-            gbd = "git branch --delete";
-            gco = "git checkout";
-            gcb = "git checkout -b";
-            gc = "git commit --verbose";
-            gcm = "git commit --verbose --message";
-            "gca!" = "git commit --verbose --amend";
-            gd = "git diff";
-            gdca = "git diff --cached";
-            gds = "git diff --staged";
-            glgg = "git log --graph";
-            glgga = "git log --graph --decorate --all";
-            gm = "git merge";
-            gma = "git merge --abort";
-            gmc = "git merge --continue";
-            gms = "git merge --squash";
-            gl = "git pull";
-            gpr = "git pull --rebase";
-            gp = "git push";
-            gpd = "git push --dry-run";
-            grf = "git reflog";
-            gra = "git remote add";
-            grh = "git reset";
-            gru = "git reset --";
-            grhh = "git reset --hard";
-            grhs = "git reset --soft";
-            grs = "git restore";
-            gsh = "git show";
-            gs = "git status";
-
-            # Bat
+          shellAbbrs = {
+            vim = "nvim";
+            cd = "z";
+            cdi = "zi";
             cat = "bat";
-
+            ls = "eza";
+            la = "eza -a";
+            lla = "eza -la";
+            tree = "eza --tree";
+            rm = "gomi";
+            jc = "just --choose";
+            tldrf = ''tldr --list | fzf --preview "tldr {1} --color" --preview-window=right,70% | xargs tldr'';
+          };
+          functions = {
+            fish_command_not_found = ''
+              if contains $argv[1] $__command_not_found_confirmed_commands
+                or ${pkgs.gum}/bin/gum confirm --selected.background=2 "Run using comma?"
+                if not contains $argv[1] $__command_not_found_confirmed_commands
+                  set -ga __fish_run_with_comma_commands $argv[1]
+                end
+                comma -- $argv
+                return 0
+              else
+                __fish_default_command_not_found_handler $argv
+              end
+            '';
           };
         };
       };
