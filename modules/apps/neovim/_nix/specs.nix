@@ -97,6 +97,7 @@
           diff
           proto
           dart
+          sql
         ]
       ))
     ];
