@@ -9,7 +9,7 @@
     ];
 
     desktop.includes = [
-      <nawa/services/kdeconnect>
+      <nawa/services/localsend>
       <nawa/services/ssh/server>
       <nawa/workstation>
     ];

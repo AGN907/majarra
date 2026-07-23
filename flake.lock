@@ -331,22 +331,6 @@
         "type": "github"
       }
     },
-    "kdeconnect-yazi": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1778561924,
-        "narHash": "sha256-pfvmjQw8m/0yUdCK+TW0mvZDWAfyx1skmPjvWSTvk00=",
-        "owner": "Deepak22903",
-        "repo": "kdeconnect-send.yazi",
-        "rev": "06674d12779bd7243793bb29cf0a5f1273467d3d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Deepak22903",
-        "repo": "kdeconnect-send.yazi",
-        "type": "github"
-      }
-    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -639,7 +623,6 @@
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "import-tree": "import-tree",
-        "kdeconnect-yazi": "kdeconnect-yazi",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
         "noctalia": "noctalia",

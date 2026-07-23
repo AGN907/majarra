@@ -82,6 +82,7 @@ in
               command = cmd: lib.lists.flatten [ cmd ];
             in
             [
+              (command "localsend_app")
               (command "noctalia")
               (command "zen-twilight")
             ];
