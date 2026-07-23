@@ -19,7 +19,6 @@ local set_hl_groups = function()
 		ModeInsert = { fg = colors.base00, bg = hl("DiffAdded").fg, bold = true },
 		ModeCommand = { fg = colors.base00, bg = hl("Number").fg, bold = true },
 		ModeReplace = { fg = colors.base00, bg = hl("Constant").fg, bold = true },
-		Git = { fg = colors.base0D, bg = colors.base01 },
 		FileDir = { fg = colors.base04, bg = colors.base00 },
 		FileName = { fg = colors.base05, bg = colors.base00, bold = true },
 		FileModified = { fg = colors.base06, bg = colors.base00 },
@@ -31,7 +30,8 @@ local set_hl_groups = function()
 		Fmt = { fg = colors.base04, bg = colors.base00 },
 		Bold = { fg = base.fg, bg = base.bg, bold = true },
 		Dim = { fg = hl("LineNr").fg, bg = base.bg },
-		ScrollPos = { fg = colors.base04, bg = "NONE" },
+    Position  = { fg = colors.base06, bg = "NONE"},
+		Search = { fg = colors.base01, bg = colors.base0D },
 		Recording = { fg = colors.base0D, bg = "NONE" },
 		MiniIconsAzure = { fg = hl("MiniIconsAzure").fg, bg = colors.base00 },
 		MiniIconsBlue = { fg = hl("MiniIconsBlue").fg, bg = colors.base00 },
@@ -83,21 +83,6 @@ local mode_component = function()
 	})
 end
 
-local git_branch_component = function()
-	local summary = vim.b.minigit_summary_string
-	if summary == nil then
-		return " "
-	end
-
-	local branch = vim.split(summary, " ")[1]
-
-	return table.concat({
-		"%#StGit#",
-		"  " .. branch,
-		" ",
-	})
-end
-
 local file_name_component = function()
 	local path = vim.fn.expand("%f")
 	if path == "" then
@@ -110,12 +95,9 @@ local file_name_component = function()
 	local parts = vim.split(path, "/", { plain = true })
 	if #parts == 1 then
 		filename = parts[1]
-	elseif #parts == 2 then
-		filename = parts[#parts - 1] .. "/" .. parts[#parts]
-		dir = parts[#parts - 1]
 	else
-		filename = parts[#parts]
-		dir = parts[#parts - 2] .. "/" .. parts[#parts - 1]
+		filename = "/" .. parts[#parts]
+		dir = parts[#parts - 1]
 	end
 
 	if vim.bo.buftype == "terminal" then
@@ -158,6 +140,9 @@ local fmt_component = function()
 	local formatters = conform.list_formatters_for_buffer(vim.api.nvim_get_current_buf())
 
 	local fmt_name = formatters[1] or ""
+  if fmt_name == "" then
+    return ""
+  end
 
 	return table.concat({
 		"%#StFmt#",
@@ -179,7 +164,7 @@ local lsp_component = function()
 	return table.concat({
 		"%#StLSP# ",
 		string.format("%s ", table.concat(client_names, ",")),
-		fmt_component() == "" and "" or "| ",
+    fmt_component() == "" and "" or "| "
 	})
 end
 
@@ -191,25 +176,11 @@ local diagnostic_status = function()
 	})
 end
 
-local searchcount_component = function()
-	local ok, s_count = pcall(vim.fn.searchcount, { recompute = true })
-	if not ok or s_count.current == nil or s_count.total == 0 then
-		return ""
-	end
-
-	if s_count.incomplete == 1 then
-		return "?/?"
-	end
-
-	local too_many = ">" .. s_count.maxcount
-	local current = s_count.current > s_count.maxcount and too_many or s_count.current
-	local total = s_count.total > s_count.maxcount and too_many or s_count.total
-	return table.concat({
-		current,
-		"/",
-		total,
-		" ",
-	})
+local function position_component()
+  return table.concat({
+    "%#StPosition#",
+    "[%P %l:%c]",
+  })
 end
 
 local blink_icon = true
@@ -246,15 +217,15 @@ function _G.Statusline_active()
 		"%#StBase# ",
 		mode_component(),
 		file_name_component(),
-		lsp_component(),
-		fmt_component(),
-		diagnostic_status(),
+    diff_component(),
 		space,
 		macro_component(),
-		space,
-		searchcount_component(),
-		diff_component(),
-		git_branch_component(),
+    space,
+    "%S",
+    diagnostic_status(),
+    lsp_component(),
+    fmt_component(),
+    position_component(),
 	})
 end
 
