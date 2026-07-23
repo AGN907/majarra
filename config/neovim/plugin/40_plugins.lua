@@ -240,7 +240,7 @@ nixInfo.lze.load({
 	},
 	{
 		"conform.nvim",
-		event = { "BufWritePre" },
+		event = { "BufWinEnter" },
 		cmd = { "ConformInfo" },
 		auto_enable = true,
 		after = function()
